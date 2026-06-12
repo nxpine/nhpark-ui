@@ -1,0 +1,49 @@
+.customer-panel {
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.customer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.customer-header button {
+  border: none;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+
+.customer-header button[disabled] {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.customer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.customer-item {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.error {
+  color: #b91c1c;
+}

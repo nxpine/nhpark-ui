@@ -1,0 +1,28 @@
+<section class="customer-panel">
+  <div class="customer-header">
+    <h2>Customers</h2>
+    <button type="button" (click)="loadCustomers()" [disabled]="loading">Refresh</button>
+  </div>
+
+  @if (loading) {
+    <p>Loading customers...</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && customers.length === 0 && !errorMessage) {
+    <p>No customers were returned by the API.</p>
+  }
+
+  @if (customers.length > 0) {
+    <ul class="customer-list">
+      @for (customer of customers; track customer.id ?? customer.name) {
+        <li class="customer-item">
+          <strong>{{ customer.name ?? 'Unnamed customer' }}</strong>         
+        </li>
+      }
+    </ul>
+  }
+</section>
