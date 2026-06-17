@@ -1,6 +1,14 @@
 {
-  "/api": {
+  "/api/customer": {
     "target": "http://localhost:8081",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  },
+  "/api/address": {
+    "target": "http://localhost:8082",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {

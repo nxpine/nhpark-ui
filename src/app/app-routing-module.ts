@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CustomerComponent } from './customer/customer';
 import { HomeComponent } from './home/home';
+import { AddressComponent } from './address/address';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'customer', component: CustomerComponent },
+  { path: 'address', component: AddressComponent },
   { path: '**', redirectTo: '' },
 ];
 

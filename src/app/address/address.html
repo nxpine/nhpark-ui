@@ -1,0 +1,43 @@
+<section class="address-panel">
+  <div class="address-header">
+    <h2>Addresses</h2>
+    <button type="button" (click)="loadAddresses()" [disabled]="loading">Refresh</button>
+  </div>
+
+  @if (loading) {
+    <p>Loading addresses...</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && addresses.length === 0 && !errorMessage) {
+    <p>No addresses were returned by the API.</p>
+  }
+
+  @if (addresses.length > 0) {
+    <table class="address-table">
+      <thead class="address-table-header" style="background-color: bl; color: white;">
+        <tr> 
+          <th>Street</th>
+          <th>City</th>
+          <th>Province</th>
+          <th>Postal Code</th>
+          <th>Country</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (address of addresses; track address.id) {
+          <tr>
+            <td>{{ address.street ?? 'no street exists' }}</td>
+            <td>{{ address.city ?? 'no city exists' }}</td>
+            <td>{{ address.province ?? 'no province exists' }}</td>
+            <td>{{ address.postalCode ?? 'no postal code exists' }}</td>
+            <td>{{ address.country ?? 'no country exists' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>
