@@ -1,0 +1,44 @@
+<section class="customer-panel">
+  <div class="customer-header">
+    <h2>Customers</h2>
+    <button type="button" (click)="loadCustomers()" [disabled]="loading">Refresh</button>
+  </div>
+
+  @if (loading) {
+    <p>Loading customers...</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && customers.length === 0 && !errorMessage) {
+    <p>No customers were returned by the API.</p>
+  }
+
+  @if (customers.length > 0) {
+    <table class="customer-table">
+      <thead class="customer-table-header" style="background-color: bl; color: white;">
+        <tr> 
+          <th>Name</th>
+          <th>Email</th>
+          <th>Date of Birth</th>
+          <th>Gender</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (customer of customers; track customer.id ?? customer.name) {
+          <tr>
+            <td>{{ customer.name ?? 'Unnamed customer' }}</td>
+            <td>{{ customer.email ?? 'no email exists' }}</td>
+            <td>{{ customer.dob ?? 'no date of birth exists' }}</td>
+            <td>{{ customer.gender ?? 'no gender exists' }}</td>
+            <td>{{ customer.age ?? 'no age exists' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>
+

@@ -1,0 +1,75 @@
+.customer-panel {
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* HEADER */
+.customer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.customer-header button {
+  border: none;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+}
+
+.customer-header button[disabled] {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* ERROR */
+.error {
+  color: #303ac1;
+}
+
+/* ========================= */
+/* TABLE BASE STYLE (SHARED) */
+/* ========================= */
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+/* CELL STYLE */
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* STRIPED ROWS */
+tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+/* ========================= */
+/* CUSTOMER TABLE */
+/* ========================= */
+.customer-table {
+  margin-bottom: 2rem;
+}
+
+.customer-table-header {
+  background-color: #1d4ed8; /* blue */
+  color: white;
+}
+
+/* OPTIONAL: section titles */
+h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
