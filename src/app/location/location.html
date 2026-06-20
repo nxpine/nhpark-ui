@@ -1,0 +1,42 @@
+<section class="customer-panel">
+  <div class="customer-header">
+    <h2>Locations</h2>
+    <button type="button" (click)="loadLocation()" [disabled]="loading">Refresh</button>
+  </div>
+
+  @if (loading) {
+    <p>Loading locations...</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && location.length === 0 && !errorMessage) {
+    <p>No locations were returned by the API.</p>
+  }
+
+  @if (location.length > 0) {
+    <table class="customer-table">
+      <thead class="customer-table-header" style="background-color: bl; color: white;">
+        <tr> 
+          <th>Name</th>
+          <th>Email</th>
+          <th>Date of Birth</th>
+          <th>Gender</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (loc of location; track loc.locationId ?? loc.locationDescription) {
+          <tr>
+            <td>{{ loc.locationDescription ?? 'Unnamed location' }}</td>
+            <td>{{ loc.addressId ?? 'no address ID exists' }}</td>
+            <td>{{ loc.customerId ?? 'no customer ID exists' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>
+
