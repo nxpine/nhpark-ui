@@ -1,9 +1,10 @@
-<section class="customer-panel">
-  <div class="customer-header">
+<section class="location-panel">
+  <div class="location-header">
     <h2>Locations</h2>
-    <button type="button" (click)="loadLocation()" [disabled]="loading">Refresh</button>
+    <button type="button" (click)="loadLocation()" [disabled]="loading">
+      Refresh
+    </button>
   </div>
-
   @if (loading) {
     <p>Loading locations...</p>
   }
@@ -17,26 +18,45 @@
   }
 
   @if (location.length > 0) {
-    <table class="customer-table">
-      <thead class="customer-table-header" style="background-color: bl; color: white;">
-        <tr> 
-          <th>Name</th>
-          <th>Email</th>
-          <th>Date of Birth</th>
-          <th>Gender</th>
-          <th>Age</th>
+    <table class="location-table">
+      <thead>
+        <tr>
+          <th>Location</th>
+          <th>Address ID</th>
+          <th>Customer ID</th>
         </tr>
       </thead>
+
       <tbody>
-        @for (loc of location; track loc.locationId ?? loc.locationDescription) {
+        @for (loc of location; track loc.locationId) {
           <tr>
-            <td>{{ loc.locationDescription ?? 'Unnamed location' }}</td>
-            <td>{{ loc.addressId ?? 'no address ID exists' }}</td>
-            <td>{{ loc.customerId ?? 'no customer ID exists' }}</td>
+           <td>
+             <a
+             href="javascript:void(0)"
+             class="location-link"
+             (click)="openLocation(loc)" >
+       {{ loc.locationDescription ?? 'Unnamed location' }}
+          </a>
+           </td>
+            <td>
+              {{ loc.addressId ?? 'N/A' }}
+            </td>
+             <td>
+              {{ loc.customerId ?? 'N/A' }}
+            </td>
           </tr>
         }
       </tbody>
     </table>
   }
-</section>
 
+  <!-- Optional: Selected location details panel -->
+  @if (selectedLocation) {
+    <div class="location-details">
+      <h3>Location Details</h3>
+      <p><strong>Description:</strong> {{ selectedLocation.locationDescription }}</p>
+      <p><strong>Address ID:</strong> {{ selectedLocation.addressId }}</p>
+      <p><strong>Customer ID:</strong> {{ selectedLocation.customerId }}</p>
+    </div>
+  }
+</section>

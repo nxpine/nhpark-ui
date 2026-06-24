@@ -9,14 +9,16 @@ import { LocationService, Location } from '../location-service';
   styleUrls: ['./location.scss']
 })
 export class LocationComponent implements OnInit {
-saveLocation() {
-throw new Error('Method not implemented.');
-}
 
   location: Location[] = [];
   loading = false;
   errorMessage = '';
-newLoc: any;
+
+  // 👇 for clicked location (details panel / popup / etc.)
+  selectedLocation: Location | null = null;
+
+  // optional (you currently have this unused)
+  newLoc: any;
 
   constructor(
     private readonly locationService: LocationService,
@@ -43,11 +45,12 @@ newLoc: any;
       )
       .subscribe({
         next: (data) => {
+
           const payload = Array.isArray(data)
             ? data
-            : ((data as { items?: Location[]; data?: Location[] })?.items ??
-               (data as { items?: Location[]; data?: Location[] })?.data ??
-               []);
+            : (data as any)?.items ??
+              (data as any)?.data ??
+              [];
 
           this.location = Array.isArray(payload) ? payload : [];
 
@@ -61,5 +64,16 @@ newLoc: any;
           this.errorMessage = 'Unable to load locations from /api/location.';
         }
       });
+  }
+
+  // ⭐ CLICK HANDLER FOR HYPERLINK
+  openLocation(loc: Location): void {
+    console.log('Clicked location:', loc);
+    this.selectedLocation = loc;
+  }
+
+  //  remove this later (it breaks runtime if accidentally called)
+  saveLocation() {
+    throw new Error('Method not implemented.');
   }
 }

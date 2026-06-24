@@ -13,6 +13,9 @@ export interface Location {
   providedIn: 'root',
 })
 export class LocationService {
+  getLocationById(id: number) {
+    throw new Error('Method not implemented.');
+  }
 
   private readonly apiUrl = '/api/location';
 

@@ -1,7 +1,9 @@
 <section class="address-panel">
   <div class="address-header">
     <h2>Addresses</h2>
-    <button type="button" (click)="loadAddresses()" [disabled]="loading">Refresh</button>
+    <button type="button" (click)="loadAddresses()" [disabled]="loading">
+      Refresh
+    </button>
   </div>
 
   @if (loading) {
@@ -18,8 +20,8 @@
 
   @if (addresses.length > 0) {
     <table class="address-table">
-      <thead class="address-table-header" style="background-color: bl; color: white;">
-        <tr> 
+      <thead style="background-color: #333; color: white">
+        <tr>
           <th>Street</th>
           <th>City</th>
           <th>Province</th>
@@ -27,10 +29,16 @@
           <th>Country</th>
         </tr>
       </thead>
+
       <tbody>
-        @for (address of addresses; track address.id) {
+        @for (address of addresses; track address.id ?? address.street) {
           <tr>
-            <td>{{ address.street ?? 'no street exists' }}</td>
+            <td>
+              <a href="javascript:void(0)" (click)="loadAddressById(address.id ?? 0)">
+                {{ address.street ?? 'No street exists' }}
+              </a>
+            </td>
+
             <td>{{ address.city ?? 'no city exists' }}</td>
             <td>{{ address.province ?? 'no province exists' }}</td>
             <td>{{ address.postalCode ?? 'no postal code exists' }}</td>
@@ -40,4 +48,49 @@
       </tbody>
     </table>
   }
+
+  <!-- DETAILS -->
+  @if (selectedAddress) {
+    <div class="address-details">
+      <h3>Address Details</h3>
+
+      <p><strong>Street:</strong> {{ selectedAddress.street ?? 'No street provided' }}</p>
+      <p><strong>City:</strong> {{ selectedAddress.city ?? 'No city provided' }}</p>
+      <p><strong>Postal Code:</strong> {{ selectedAddress.postalCode ?? 'No postal code exists' }}</p>
+      <p><strong>Country:</strong> {{ selectedAddress.country ?? 'No country exists' }}</p>
+
+      <button type="button" (click)="clearSelection()">Close</button>
+    </div>
+  }
+
+  <!-- CREATE FORM -->
+  <div class="address-form">
+    <h3>Create Address</h3>
+
+    <form (ngSubmit)="createAddress(newAddress)">
+      
+      <div>
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street" [(ngModel)]="newAddress.street" required />
+      </div>
+
+      <div>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" [(ngModel)]="newAddress.city" required />
+      </div>
+
+      <div>
+        <label for="postalCode">Postal Code:</label>
+        <input type="text" id="postalCode" name="postalCode" [(ngModel)]="newAddress.postalCode" required />
+      </div>
+
+      <div>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" [(ngModel)]="newAddress.country" required />
+      </div>
+
+      <button type="submit">Create Address</button>
+    </form>
+  </div>
+
 </section>
