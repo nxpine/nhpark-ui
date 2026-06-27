@@ -11,15 +11,12 @@ import { LocationService, Location } from '../location-service';
 export class LocationComponent implements OnInit {
 
   location: Location[] = [];
+  selectedLocation: Location | null = null; // Stores the single fetched location
+  newLocation: Location = {} as Location; // Optional, currently unused
+  updatedLocation: Location = {} as Location; // Optional, currently unused
   loading = false;
   errorMessage = '';
-
-  // 👇 for clicked location (details panel / popup / etc.)
-  selectedLocation: Location | null = null;
-
-  // optional (you currently have this unused)
-  newLoc: any;
-
+ 
   constructor(
     private readonly locationService: LocationService,
     private readonly cdr: ChangeDetectorRef
@@ -45,35 +42,135 @@ export class LocationComponent implements OnInit {
       )
       .subscribe({
         next: (data) => {
-
           const payload = Array.isArray(data)
             ? data
-            : (data as any)?.items ??
-              (data as any)?.data ??
-              [];
+            : ((data as { items?: Location[]; data?: Location[] })?.items ??
+              (data as { items?: Location[]; data?: Location[] })?.data ??
+              []);
 
+
+          console.log('LOCATION DATA', data, 'NORMALIZED', payload);
           this.location = Array.isArray(payload) ? payload : [];
-
-          console.log('LOCATION DATA', data);
-          console.log('NORMALIZED', payload);
           console.log('LOCATION STATE', this.location);
         },
-
         error: (err) => {
           console.error('LOCATION ERROR', err);
           this.errorMessage = 'Unable to load locations from /api/location.';
+        },
+        complete: () => {
+          console.log('LOCATION COMPLETE', this.loading, this.location);
         }
       });
   }
 
-  // ⭐ CLICK HANDLER FOR HYPERLINK
-  openLocation(loc: Location): void {
-    console.log('Clicked location:', loc);
-    this.selectedLocation = loc;
+  // New feature method
+loadLocationById(id: number): void {
+  this.loading = true;
+  this.errorMessage = '';
+  this.selectedLocation = null; // Clear previous selection
+
+  this.locationService
+    .getLocationById(id)
+    .pipe(
+      take(1),
+      finalize(() => {
+        this.loading = false;
+        console.log('LOCATION BY ID FINALIZE', this.loading);
+        this.cdr.markForCheck();
+      }),
+    )
+    .subscribe({
+      next: (location: Location) => {
+        console.log('LOCATION BY ID DATA', location);
+        this.selectedLocation = location;
+        this.updatedLocation = { ...location }; // copy for editing
+      },
+      error: (err) => {
+        console.error('LOCATION BY ID ERROR', err);
+        this.errorMessage = `Unable to load location with ID ${id}.`;
+      },
+    });
+}
+
+  // create new location
+  createLocation(newLocation: any): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.locationService.createLocation(newLocation).pipe(
+      take(1),
+      finalize(() => {
+        this.loading = false;
+        console.log('CREATE LOCATION FINALIZE', this.loading);
+        this.cdr.markForCheck();
+      })
+    )
+    .subscribe({
+      next: (createdLocation: Location) => {
+        console.log('CREATED LOCATION DATA', createdLocation);
+        this.loadLocation(); // Refresh the list after creation
+      },
+      error: (err) => {
+        console.error('CREATE LOCATION ERROR', err);
+        this.errorMessage = 'Unable to create location.';
+      }
+    });
   }
 
-  //  remove this later (it breaks runtime if accidentally called)
-  saveLocation() {
-    throw new Error('Method not implemented.');
+    // update location
+  updateLocation(id: number, updatedLocation: Location): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.locationService
+      .updateLocation(id, updatedLocation)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          console.log('UPDATE LOCATION FINALIZE', this.loading);
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: (updatedLocation: Location) => {
+          console.log('UPDATED LOCATION DATA', updatedLocation);
+        },
+        error: (err) => {
+          console.error('UPDATE LOCATION ERROR', err);
+          this.errorMessage = 'Unable to update location.';
+        },
+      });
   }
+  deleteLocation(id: number): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.locationService
+      .deleteLocation(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          console.log('DELETE LOCATION FINALIZE', this.loading);
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          console.log('Location deleted successfully');
+          this.loadLocation(); 
+        },
+        error: (err) => {
+          console.error('Error deleting location', err);
+          this.errorMessage = 'Unable to delete location.';
+        }
+      });
+  }
+  //  CLICK HANDLER FOR HYPERLINK
+  clearSelection(): void {
+    this.selectedLocation = null;
+    this.cdr.markForCheck();
+  }
+
 }

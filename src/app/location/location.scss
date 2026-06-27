@@ -1,135 +1,149 @@
 /* PAGE BACKGROUND */
-.location-page {
-  padding: 25px;
-  background: #f4f6f9;
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-/* PANEL */
 .location-panel {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  color: #222;
 }
 
-/* HEADER */
+/* Header */
 .location-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .location-header h2 {
-  margin: 0;
-  font-size: 22px;
-  color: #293e53;
-}
-
-/* BUTTON */
-.location-header button {
-  background: #2b7eb6;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s ease;
-  font-weight: 500;
-}
-
-.location-header button:hover {
-  background: #2980b9;
-}
-
-.location-header button:disabled {
-  background: #a5b4c7;
-  cursor: not-allowed;
-}
-
-/* ERROR */
-.error {
-  background: #ffe5e5;
-  color: #b00020;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 10px 0;
-}
-
-/* TABLE WRAPPER */
-.table-wrapper {
-  overflow-x: auto;
-}
-
-/* TABLE */
-.location-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  border-radius: 10px;
-  overflow: hidden;
-  background: white;
-}
-
-/* TABLE HEADER */
-.location-table thead {
-  background: #2c3e50;
-}
-
-.location-table th {
-  color: white;
-  padding: 12px;
-  text-align: left;
-  cursor: pointer;
-  user-select: none;
+  font-size: 24px;
   font-weight: 600;
 }
 
-/* TABLE ROWS */
-.location-table td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
-  color: #333;
-}
-
-/* ROW HOVER */
-.location-table tbody tr:hover {
-  background: #f8f9fa;
+.location-header button {
+  padding: 8px 14px;
+  border: none;
+  background: #23259c;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
   transition: 0.2s ease;
 }
 
-/* ALWAYS UNDERLINED LINK (IMPORTANT CHANGE) */
-.location-link {
-  color: #3498db;
-  text-decoration: underline; /* always visible */
-  cursor: pointer;
+.location-header button:hover {
+  background: #333;
+}
+
+.location-header button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+/* Messages */
+.error {
+  color: #d93025;
+  background: #ffecec;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* Table */
+.location-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.location-table th,
+.location-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.location-table th {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.location-table tbody tr:hover {
+  background: #f7f7f7;
+}
+
+.location-table a {
+  color: #007bff;
+  text-decoration: underline;
   font-weight: 500;
+  cursor: pointer;
 }
 
-.location-link:hover {
-  color: #2980b9;
-  text-decoration: underline; /* keep underline always */
+.location-table a:hover {
+  color: #0056b3;
 }
 
-/* SORT ARROWS */
-.location-table th span {
-  margin-left: 6px;
-  font-size: 12px;
-  opacity: 0.9;
-}
-
-/* DETAILS PANEL */
+/* Details Card */
 .location-details {
   margin-top: 20px;
   padding: 16px;
+  background: #f9f9f9;
+  border-left: 4px solid #000;
+  border-radius: 8px;
+}
+
+/* Forms */
+.location-form {
+  margin-top: 25px;
+  padding: 20px;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-.location-details h3 {
-  margin-top: 0;
-  color: #293e53;
+.location-form h3 {
+  margin-bottom: 15px;
+}
+
+.location-form form {
+  display: grid;
+  gap: 12px;
+}
+
+.location-form label {
+  font-size: 14px;
+  margin-bottom: 4px;
+  display: block;
+  color: #444;
+}
+
+.location-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.location-form input:focus {
+  border-color: #000;
+}
+
+/* Submit buttons */
+.location-form button {
+  padding: 10px;
+  border: none;
+  background: #242292;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.location-form button:hover {
+  background: #333;
 }

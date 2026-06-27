@@ -27,6 +27,7 @@
           <th>Province</th>
           <th>Postal Code</th>
           <th>Country</th>
+          <th>Phone Number</th>
         </tr>
       </thead>
 
@@ -43,6 +44,10 @@
             <td>{{ address.province ?? 'no province exists' }}</td>
             <td>{{ address.postalCode ?? 'no postal code exists' }}</td>
             <td>{{ address.country ?? 'no country exists' }}</td>
+            <td>{{ address.phone ?? 'no phone exists' }}</td>
+            <td>
+              <button type="button" (click)="deleteAddress(address.id ?? 0)">Delete</button>              
+            </td>
           </tr>
         }
       </tbody>
@@ -51,15 +56,16 @@
 
   <!-- DETAILS -->
   @if (selectedAddress) {
-    <div class="address-details">
+    <div class="selected-address">
       <h3>Address Details</h3>
 
       <p><strong>Street:</strong> {{ selectedAddress.street ?? 'No street provided' }}</p>
       <p><strong>City:</strong> {{ selectedAddress.city ?? 'No city provided' }}</p>
+      <p><strong>Province:</strong> {{ selectedAddress.province ?? 'No province provided' }}</p>
       <p><strong>Postal Code:</strong> {{ selectedAddress.postalCode ?? 'No postal code exists' }}</p>
       <p><strong>Country:</strong> {{ selectedAddress.country ?? 'No country exists' }}</p>
+      <p><strong>Phone Number:</strong> {{ selectedAddress.phone ?? 'No phone exists' }}</p>
 
-      <button type="button" (click)="clearSelection()">Close</button>
     </div>
   }
 
@@ -68,29 +74,162 @@
     <h3>Create Address</h3>
 
     <form (ngSubmit)="createAddress(newAddress)">
-      
+
       <div>
         <label for="street">Street:</label>
-        <input type="text" id="street" name="street" [(ngModel)]="newAddress.street" required />
+        <input
+          type="text"
+          id="street"
+          name="street"
+          [(ngModel)]="newAddress.street"
+          required
+        />
       </div>
 
       <div>
         <label for="city">City:</label>
-        <input type="text" id="city" name="city" [(ngModel)]="newAddress.city" required />
+        <input
+          type="text"
+          id="city"
+          name="city"
+          [(ngModel)]="newAddress.city"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="province">Province:</label>
+        <input
+          type="text"
+          id="province"
+          name="province"
+          [(ngModel)]="newAddress.province"
+          required
+        />
       </div>
 
       <div>
         <label for="postalCode">Postal Code:</label>
-        <input type="text" id="postalCode" name="postalCode" [(ngModel)]="newAddress.postalCode" required />
+        <input
+          type="text"
+          id="postalCode"
+          name="postalCode"
+          [(ngModel)]="newAddress.postalCode"
+          required
+        />
       </div>
 
       <div>
         <label for="country">Country:</label>
-        <input type="text" id="country" name="country" [(ngModel)]="newAddress.country" required />
+        <input
+          type="text"
+          id="country"
+          name="country"
+          [(ngModel)]="newAddress.country"
+          required
+        />
       </div>
 
+      <div>
+     <label for="update-phoneNumber">Phone Number:</label>
+    <input
+     type="text"
+      id="update-phoneNumber"
+      name="update-phoneNumber"
+      [(ngModel)]="updatedAddress.phone"
+      required
+  />
+</div>
+
+      <div>
+        <label for="customerId">Customer ID:</label>
+        <input
+          type="number"
+          id="customerId"
+          name="customerId"
+          [(ngModel)]="newAddress.customerId"
+          required
+        />
+      </div>
       <button type="submit">Create Address</button>
     </form>
   </div>
 
+  <!-- UPDATE FORM -->
+  @if (updatedAddress) {
+    <div class="address-form">
+      <h3>Update Address</h3>
+
+      <form (ngSubmit)="updateAddress(updatedAddress.id!, updatedAddress)">
+
+        <div>
+          <label for="update-street">Street:</label>
+          <input
+            type="text"
+            id="update-street"
+            name="update-street"
+            [(ngModel)]="updatedAddress.street"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="update-city">City:</label>
+          <input
+            type="text"
+            id="update-city"
+            name="update-city"
+            [(ngModel)]="updatedAddress.city"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="update-province">Province:</label>
+          <input
+            type="text"
+            id="update-province"
+            name="update-province"
+            [(ngModel)]="updatedAddress.province"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="update-postalCode">Postal Code:</label>
+          <input
+            type="text"
+            id="update-postalCode"
+            name="update-postalCode"
+            [(ngModel)]="updatedAddress.postalCode"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="update-country">Country:</label>
+          <input
+            type="text"
+            id="update-country"
+            name="update-country"
+            [(ngModel)]="updatedAddress.country"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="update-phone">Phone Number:</label>
+          <input
+            type="text"
+            id="update-phone"
+            name="update-phone"
+            [(ngModel)]="updatedAddress.phone"
+            required
+          />
+        </div>
+
+        <button type="submit">Update Address</button>
+      </form>
+    </div>
+  }
 </section>

@@ -12,6 +12,8 @@ export class AddressComponent implements OnInit {
   addresses: Address[] = [];
   selectedAddress: Address | null = null;
   newAddress: Address = {} as Address;
+  updatedAddress: Address = {} as Address;
+  country: string = '';
   loading = false;
   errorMessage = '';
 
@@ -48,10 +50,14 @@ export class AddressComponent implements OnInit {
 
           console.log('ADDRESS DATA', data, 'NORMALIZED', payload);
           this.addresses = Array.isArray(payload) ? payload : [];
+          console.log('ADDRESS STATE', this.loading, this.addresses);
         },
         error: (err) => {
           console.error('ADDRESS ERROR', err);
           this.errorMessage = 'Unable to load addresses from /api/address.';
+        },
+        complete: () => {
+          console.log('ADDRESS COMPLETE', this.loading, this.addresses);
         },
       });
   }
@@ -75,6 +81,7 @@ export class AddressComponent implements OnInit {
         next: (address: Address) => {
           console.log('ADDRESS BY ID DATA', address);
           this.selectedAddress = address;
+          this.updatedAddress = { ...address };
         },
         error: (err) => {
           console.error('ADDRESS BY ID ERROR', err);
@@ -82,32 +89,86 @@ export class AddressComponent implements OnInit {
         },
       });
   }
-// create new address
+
   createAddress(newAddress: Address): void {
-      this.loading = true;
-      this.errorMessage = '';
-      
-      this.addressService['createAddress'](newAddress).pipe(
+    this.loading = true;
+    this.errorMessage = '';
+    
+    this.addressService
+      .createAddress(newAddress)
+      .pipe(
         take(1), 
         finalize(() => {
           this.loading = false;
           console.log('CREATE ADDRESS FINALIZE', this.loading);
           this.cdr.markForCheck();
-        })).subscribe({
-          next: (createdAddress: Address) => {
-            console.log('CREATED ADDRESS DATA', createdAddress);
-          },
-          error: (err: any) => {
-            console.error('CREATE ADDRESS ERROR', err);
-            this.errorMessage = 'Unable to create address.';
-          }
-        });
-  
-    }  
-  
-    // Optional helper to clear the detailed view
-    clearSelection(): void {
-      this.selectedAddress = null;
-      this.cdr.markForCheck();
-    }
+        })
+      )
+      .subscribe({
+        next: (createdAddress: Address) => {
+          console.log('CREATED ADDRESS DATA', createdAddress);
+          this.loadAddresses(); // Optional: Refresh list after creation
+        },
+        error: (err: any) => {
+          console.error('CREATE ADDRESS ERROR', err);
+          this.errorMessage = 'Unable to create address.';
+        }
+      });
+  }  
+
+  updateAddress(id: number, updatedAddress: Address): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.addressService
+      .updateAddress(id, updatedAddress)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          console.log('UPDATE ADDRESS FINALIZE', this.loading);
+          this.cdr.markForCheck();
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          console.log('UPDATED ADDRESS DATA', updatedAddress);
+        },
+        error: (err) => {
+          console.error('Error updating address', err);
+          this.errorMessage = 'Unable to update address.';
+        }
+      });
   }
+
+  deleteAddress(id: number): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.addressService
+      .deleteAddress(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          console.log('DELETE ADDRESS FINALIZE', this.loading);
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          console.log('Address deleted successfully');
+          this.loadAddresses(); 
+        },
+        error: (err) => {
+          console.error('Error deleting address', err);
+          this.errorMessage = 'Unable to delete address.';
+        }
+      });
+  } // <-- Fixed missing closing brace
+
+  clearSelection(): void {
+    this.selectedAddress = null;
+    this.cdr.markForCheck();
+  }
+}

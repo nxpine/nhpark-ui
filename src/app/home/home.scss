@@ -1,39 +1,74 @@
+/* Smooth, modern container with subtle gradient background */
 .home-page {
+  background: radial-gradient(circle at top right, #f8fafc, #e2e8f0);
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 2rem;
-  background: linear-gradient(135deg, #eff6ff, #f8fafc);
-}
-
-.card {
-  max-width: 420px;
-  width: 100%;
-  padding: 2rem;
-  border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-  text-align: center;
-}
-
-.card h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2rem;
-}
-
-.card p {
-  margin-bottom: 1rem;
-  color: #475569;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
   justify-content: center;
-  padding: 0.75rem 1rem;
-  border-radius: 999px;
-  background: #2563eb;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
+  align-items: center;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Polished card layout with clear borders */
+.card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+    0 20px 25px -5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0 0 8px 0;
+  font-size: 1.85rem;
+  color: #0f172a;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+p {
+  margin: 0 0 2rem 0;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Modern buttons with subtle shadows and hover animations */
+.pill {
+  display: block;
+  background-color: #2563eb;
+  color: white;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Remove margin on the last button */
+.pill:last-child {
+  margin-bottom: 0;
+}
+
+/* Hover and active states */
+.pill:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.25);
+}
+
+.pill:active {
+  transform: translateY(0);
+}
+

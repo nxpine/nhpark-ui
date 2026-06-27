@@ -10,6 +10,7 @@ export interface Customer {
   dob?: string;
   gender?: string;
   age?: number;
+  phoneNumber?: number;
 }
 
 @Injectable({
@@ -31,4 +32,13 @@ export class CustomerService {
   createCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.apiUrl, customer);
   }
+
+  updateCustomer(id: number, updatedCustomer: Customer) {
+    return this.http.patch<Customer>(`${this.apiUrl}/${id}`, updatedCustomer);
+  }
+  
+  deleteCustomer(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { getCurrentInjector } from '@angular/core/primitives/di';
 
 export interface Location {
   locationId?: number;
@@ -13,10 +14,6 @@ export interface Location {
   providedIn: 'root',
 })
 export class LocationService {
-  getLocationById(id: number) {
-    throw new Error('Method not implemented.');
-  }
-
   private readonly apiUrl = '/api/location';
 
   constructor(private readonly http: HttpClient) {}
@@ -24,5 +21,19 @@ export class LocationService {
   getLocations(): Observable<Location[]> {
     return this.http.get<Location[]>(this.apiUrl);
   }
-  
+
+  getLocationById(id: number): Observable<Location> {
+    return this.http.get<Location>(`${this.apiUrl}/${id}`);
+  }
+
+  createLocation(location: Location): Observable<Location> {
+    return this.http.post<Location>(this.apiUrl, location);
+  }
+
+  updateLocation(id: number, updatedLocation: Location): Observable<Location> {
+    return this.http.patch<Location>(`${this.apiUrl}/${id}`, updatedLocation);
+  }
+  deleteLocation(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
