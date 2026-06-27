@@ -1,0 +1,135 @@
+<section class="location-panel">
+  <div class="location-header">
+    <h2>Locations</h2>
+    <button type="button" (click)="loadLocation()" [disabled]="loading">Refresh</button>        
+  </div>
+
+  @if (loading) {
+    <p>Loading locations...</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && location.length === 0 && !errorMessage) {
+    <p>No locations were returned by the API.</p>
+  }
+
+  @if (location.length > 0) {
+    <table class="location-table">
+      <thead class="location-table-header" style="background-color: #000; color: white">
+        <tr>
+          <th>Description</th>
+          <th>Address ID</th>
+          <th>Customer ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (loc of location; track $index) {
+          <tr>
+            <td>
+              <!-- Fixed: Using your method openLocation(loc) to display details -->
+             <a href="javascript:void(0)" (click)="loadLocationById(loc.locationId!)">
+                <!--  Added safe navigation operator (?.) -->
+                {{ loc?.locationDescription ?? 'Unnamed location' }}
+              </a>
+            </td>
+            <td>{{ loc?.addressId ?? 'no address exists' }}</td>
+            <td>{{ loc?.customerId ?? 'no customer exists' }}</td>
+            <td>
+              <button type="button" (click)="deleteLocation(loc.locationId!)">Delete</button>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  @if (selectedLocation) {
+    <div class="location-details">
+      <h3>Location Details</h3>
+      <p><strong>Description:</strong> {{ selectedLocation?.locationDescription ?? 'Unnamed location' }}</p>
+      <p><strong>Address ID:</strong> {{ selectedLocation?.addressId ?? 'no address exists' }}</p>
+      <p><strong>Customer ID:</strong> {{ selectedLocation?.customerId ?? 'no customer exists' }}</p>
+    </div>
+  }
+
+  <!-- Create Location Form -->
+  <div class="location-form">
+    <h3>Create Location</h3>
+    <form (ngSubmit)="createLocation(newLocation)">
+      <div>
+        <label for="locationDescription">Location Description:</label>
+        <input 
+          type="text" 
+          id="locationDescription" 
+          name="locationDescription" 
+          [(ngModel)]="newLocation.locationDescription" 
+          required />
+      </div>
+      <div>
+        <label for="addressId">Address ID:</label>
+        <input 
+          type="number" 
+          id="addressId" 
+          name="addressId" 
+          [(ngModel)]="newLocation.addressId" 
+          required />
+      </div>
+      <div>
+        <label for="customerId">Customer ID:</label>
+        <input 
+          type="number" 
+          id="customerId" 
+          name="customerId" 
+          [(ngModel)]="newLocation.customerId" 
+          required />
+      </div>
+      <button type="submit">Create Location</button>
+    </form>
+  </div>
+
+  <!-- Update Location Form -->
+@if (updatedLocation) {
+  <div class="location-form">
+    <h3>Update Location</h3>
+    <form (ngSubmit)="updateLocation(updatedLocation.locationId!, updatedLocation)">
+      <div>
+        <label for="update-location-description">Location Description:</label>
+        <input
+          type="text"
+          id="update-location-description"
+          name="update-location-description"
+          [(ngModel)]="updatedLocation.locationDescription"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="update-address-id">Address ID:</label>
+        <input
+          type="number"
+          id="update-address-id"
+          name="update-address-id"
+          [(ngModel)]="updatedLocation.addressId"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="update-customer-id">Customer ID:</label>
+        <input
+          type="number"
+          id="update-customer-id"
+          name="update-customer-id"
+          [(ngModel)]="updatedLocation.customerId"
+          required
+        />
+      </div>
+
+      <button type="submit">Update Location</button>
+
+    </form>
+  </div>
+}
+</section>

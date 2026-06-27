@@ -1,5 +1,6 @@
-.address-panel {
-  max-width: 1100px;
+/* PAGE BACKGROUND */
+.location-panel {
+  max-width: 1000px;
   margin: 30px auto;
   padding: 24px;
   font-family: Arial, sans-serif;
@@ -7,38 +8,38 @@
 }
 
 /* Header */
-.address-header {
+.location-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.address-header h2 {
+.location-header h2 {
   font-size: 24px;
   font-weight: 600;
 }
 
-.address-header button {
+.location-header button {
   padding: 8px 14px;
   border: none;
-  background: #000;
+  background: #23259c;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.address-header button:hover {
+.location-header button:hover {
   background: #333;
 }
 
-.address-header button:disabled {
+.location-header button:disabled {
   background: #888;
   cursor: not-allowed;
 }
 
-/* Error message */
+/* Messages */
 .error {
   color: #d93025;
   background: #ffecec;
@@ -48,7 +49,7 @@
 }
 
 /* Table */
-.address-table {
+.location-table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
@@ -57,39 +58,36 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.address-table th,
-.address-table td {
+.location-table th,
+.location-table td {
   padding: 12px 14px;
   text-align: left;
   border-bottom: 1px solid #eee;
 }
 
-.address-table th {
-  font-size: 13px;
-  text-transform: uppercase;
+.location-table th {
+  font-size: 14px;
   letter-spacing: 0.5px;
-  background: #333;
-  color: #fff;
+  text-transform: uppercase;
 }
 
-.address-table tbody tr:hover {
+.location-table tbody tr:hover {
   background: #f7f7f7;
-  transition: 0.2s ease;
 }
 
-.address-table a {
+.location-table a {
   color: #007bff;
   text-decoration: underline;
   font-weight: 500;
   cursor: pointer;
 }
 
-.address-table a:hover {
+.location-table a:hover {
   color: #0056b3;
 }
 
-/* Selected Address Card */
-.selected-address {
+/* Details Card */
+.location-details {
   margin-top: 20px;
   padding: 16px;
   background: #f9f9f9;
@@ -97,23 +95,8 @@
   border-radius: 8px;
 }
 
-.selected-address button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  border: none;
-  background: #000;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.selected-address button:hover {
-  background: #333;
-}
-
 /* Forms */
-.address-form {
+.location-form {
   margin-top: 25px;
   padding: 20px;
   background: #fff;
@@ -121,51 +104,46 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-.address-form h3 {
+.location-form h3 {
   margin-bottom: 15px;
-  font-size: 18px;
 }
 
-/* Form layout */
-.address-form form {
+.location-form form {
   display: grid;
   gap: 12px;
 }
 
-/* Labels */
-.address-form label {
+.location-form label {
   font-size: 14px;
   margin-bottom: 4px;
   display: block;
   color: #444;
 }
 
-/* Inputs */
-.address-form input {
+.location-form input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   outline: none;
-  transition: 0.2s ease;
-  background: #fff;
+  transition: 0.2s;
 }
 
-.address-form input:focus {
+.location-form input:focus {
   border-color: #000;
 }
 
 /* Submit buttons */
-.address-form button {
+.location-form button {
   padding: 10px;
   border: none;
-  background: #2346b8;
+  background: #242292;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.address-form button:hover {
+.location-form button:hover {
   background: #333;
 }
