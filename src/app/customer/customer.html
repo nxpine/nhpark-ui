@@ -16,45 +16,50 @@
     <p>No customers were returned by the API.</p>
   }
 
-  @if (customers.length > 0) {
-    <table class="customer-table">
-      <thead class="customer-table-header">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Date of Birth</th>
-          <th>Gender</th>
-          <th>Age</th>
-          <th>Phone Number</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        @for (customer of customers; track customer.id ?? customer.name) {
+  @if (customers.length > 0 && selectedCustomer === null) {
+    <div>
+      <table class="customer-table">
+        <thead class="customer-table-header">
           <tr>
-            <td>
-              <a href="javascript:void(0)" (click)="loadCustomerById(customer.id ?? 0)">
-                {{ customer.name ?? 'Unnamed customer' }}
-              </a>
-            </td>
-
-            <td>{{ customer.email ?? 'no email exists' }}</td>
-            <td>{{ customer.dob ?? 'no date of birth exists' }}</td>
-            <td>{{ customer.gender ?? 'no gender exists' }}</td>
-            <td>{{ customer.age ?? 'no age exists' }}</td>
-            <td>{{ customer.phoneNumber ?? 'no phone exists' }}</td>
-            <td>
-              <button type="button" (click)="deleteCustomer(customer.id ?? 0)">Delete</button>              
-            </td>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          @for (customer of customers; track customer.id ?? customer.name) {
+            <tr>
+              <td>
+                <a href="javascript:void(0)" (click)="loadCustomerById(customer.id ?? 0)">
+                  {{ customer.name ?? 'Unnamed customer' }}
+                </a>
+              </td>
+
+              <td>{{ customer.email ?? 'no email exists' }}</td>
+              <td>{{ customer.dob ?? 'no date of birth exists' }}</td>
+              <td>{{ customer.gender ?? 'no gender exists' }}</td>
+              <td>{{ customer.age ?? 'no age exists' }}</td>
+              <td>{{ customer.phoneNumber ?? 'no phone exists' }}</td>
+              <td>
+                <button type="button" (click)="deleteCustomer(customer.id ?? 0)">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <div class="customer-actions">
+        <button type="button" (click)="showCreateCustomerForm()">Create</button>
+      </div>
+    </div>
   }
 
   <!-- CUSTOMER DETAILS -->
-  @if (selectedCustomer) {
+  @if (selectedCustomer && !updateCustomerFormVisible) {
     <div class="customer-details">
       <h3>Customer Details</h3>
 
@@ -63,17 +68,19 @@
       <p><strong>Date of Birth:</strong> {{ selectedCustomer.dob ?? 'no date of birth exists' }}</p>
       <p><strong>Gender:</strong> {{ selectedCustomer.gender ?? 'no gender exists' }}</p>
       <p><strong>Phone Number:</strong> {{ selectedCustomer.phoneNumber ?? 'no phone exists' }}</p>
-      
+      <div class="customer-actions">
+        <button type="button" (click)="showUpdateCustomerForm(selectedCustomer)">Edit</button>
+        <button type="button" (click)="deleteCustomer(selectedCustomer.id ?? 0)">Delete</button>
+      </div>
     </div>
   }
 
   <!-- CREATE CUSTOMER FORM -->
-  @if (selectedCustomer) {
+  @if (createCustomerFormVisible) {
     <div class="customer-form">
       <h3>Create Customer</h3>
 
       <form (ngSubmit)="createCustomer(newCustomer)">
-
         <div>
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" [(ngModel)]="newCustomer.name" required />
@@ -116,43 +123,68 @@
   }
 
   <!-- UPDATE CUSTOMER FORM -->
-  @if (updatedCustomer) {
+  @if (updateCustomerFormVisible) {
     <div class="customer-form">
       <h3>Update Customer</h3>
 
       <form (ngSubmit)="updateCustomer(updatedCustomer.id!, updatedCustomer)">
-
         <div>
           <label for="update-name">Name:</label>
-          <input type="text" id="update-name" name="update-name"
-                 [(ngModel)]="updatedCustomer.name" required />
+          <input
+            type="text"
+            id="update-name"
+            name="update-name"
+            [(ngModel)]="updatedCustomer.name"
+            required
+          />
         </div>
 
         <div>
           <label for="update-email">Email:</label>
-          <input type="email" id="update-email" name="update-email"
-                 [(ngModel)]="updatedCustomer.email" required />
+          <input
+            type="email"
+            id="update-email"
+            name="update-email"
+            [(ngModel)]="updatedCustomer.email"
+            required
+          />
         </div>
 
         <div>
           <label for="update-dob">Date of Birth:</label>
-          <input type="date" id="update-dob" name="update-dob"
-                 [(ngModel)]="updatedCustomer.dob" required />
+          <input
+            type="date"
+            id="update-dob"
+            name="update-dob"
+            [(ngModel)]="updatedCustomer.dob"
+            required
+          />
         </div>
 
         <div>
           <label for="update-gender">Gender:</label>
-          <input type="text" id="update-gender" name="update-gender"
-                 [(ngModel)]="updatedCustomer.gender" />
+          <input
+            type="text"
+            id="update-gender"
+            name="update-gender"
+            [(ngModel)]="updatedCustomer.gender"
+          />
         </div>
 
         <div>
           <label for="update-phoneNumber">Phone Number:</label>
-          <input type="text" id="update-phoneNumber" name="update-phoneNumber"
-                 [(ngModel)]="updatedCustomer.phoneNumber" required />
+          <input
+            type="text"
+            id="update-phoneNumber"
+            name="update-phoneNumber"
+            [(ngModel)]="updatedCustomer.phoneNumber"
+            required
+          />
         </div>
-
-        <button type="submit">Update Customer</button>
+        <div>
+                   <button type="button" class="back-btn" (click)="hideUpdateCustomerForm()">Back</button>
+          <button type="submit" class="save-btn">Save</button>
+        </div>
       </form>
     </div>
   }

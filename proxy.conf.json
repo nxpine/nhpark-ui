@@ -21,6 +21,14 @@
     "changeOrigin": true,
     "pathRewrite": {
       "^/api": ""
+      }
+  },
+  "/api/booking": {
+    "target": "http://localhost:8084",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
     }
   }
 }

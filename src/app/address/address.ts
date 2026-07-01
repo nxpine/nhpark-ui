@@ -9,11 +9,13 @@ import { finalize, take } from 'rxjs';
   styleUrl: './address.scss',
 })
 export class AddressComponent implements OnInit {
+
   addresses: Address[] = [];
   selectedAddress: Address | null = null;
   newAddress: Address = {} as Address;
   updatedAddress: Address = {} as Address;
-  country: string = '';
+  createAddressFormVisible = false;
+  updateAddressFormVisible = false;
   loading = false;
   errorMessage = '';
 
@@ -29,6 +31,9 @@ export class AddressComponent implements OnInit {
   loadAddresses(): void {
     this.loading = true;
     this.errorMessage = '';
+    this.createAddressFormVisible = false;
+    this.updateAddressFormVisible = false;
+    this.selectedAddress = null;
 
     this.addressService
       .getAddresses()
@@ -36,7 +41,6 @@ export class AddressComponent implements OnInit {
         take(1),
         finalize(() => {
           this.loading = false;
-          console.log('ADDRESS FINALIZE', this.loading);
           this.cdr.markForCheck();
         }),
       )
@@ -48,17 +52,12 @@ export class AddressComponent implements OnInit {
               (data as { items?: Address[]; data?: Address[] })?.data ??
               []);
 
-          console.log('ADDRESS DATA', data, 'NORMALIZED', payload);
           this.addresses = Array.isArray(payload) ? payload : [];
-          console.log('ADDRESS STATE', this.loading, this.addresses);
         },
         error: (err) => {
-          console.error('ADDRESS ERROR', err);
+          console.error(err);
           this.errorMessage = 'Unable to load addresses from /api/address.';
-        },
-        complete: () => {
-          console.log('ADDRESS COMPLETE', this.loading, this.addresses);
-        },
+        }
       });
   }
 
@@ -73,18 +72,19 @@ export class AddressComponent implements OnInit {
         take(1),
         finalize(() => {
           this.loading = false;
-          console.log('ADDRESS BY ID FINALIZE', this.loading);
           this.cdr.markForCheck();
         }),
       )
       .subscribe({
         next: (address: Address) => {
-          console.log('ADDRESS BY ID DATA', address);
           this.selectedAddress = address;
           this.updatedAddress = { ...address };
+
+          // auto switch UI mode safely
+          this.createAddressFormVisible = false;
+          this.updateAddressFormVisible = false;
         },
-        error: (err) => {
-          console.error('ADDRESS BY ID ERROR', err);
+        error: () => {
           this.errorMessage = `Unable to load address with ID ${id}.`;
         },
       });
@@ -93,28 +93,30 @@ export class AddressComponent implements OnInit {
   createAddress(newAddress: Address): void {
     this.loading = true;
     this.errorMessage = '';
-    
+
     this.addressService
       .createAddress(newAddress)
       .pipe(
-        take(1), 
+        take(1),
         finalize(() => {
           this.loading = false;
-          console.log('CREATE ADDRESS FINALIZE', this.loading);
           this.cdr.markForCheck();
         })
       )
       .subscribe({
         next: (createdAddress: Address) => {
-          console.log('CREATED ADDRESS DATA', createdAddress);
-          this.loadAddresses(); // Optional: Refresh list after creation
+
+          this.addresses.push(createdAddress);
+
+          this.newAddress = {} as Address;
+
+          this.createAddressFormVisible = false;
         },
-        error: (err: any) => {
-          console.error('CREATE ADDRESS ERROR', err);
+        error: () => {
           this.errorMessage = 'Unable to create address.';
         }
       });
-  }  
+  }
 
   updateAddress(id: number, updatedAddress: Address): void {
     this.loading = true;
@@ -126,16 +128,20 @@ export class AddressComponent implements OnInit {
         take(1),
         finalize(() => {
           this.loading = false;
-          console.log('UPDATE ADDRESS FINALIZE', this.loading);
           this.cdr.markForCheck();
         })
       )
       .subscribe({
         next: (data) => {
-          console.log('UPDATED ADDRESS DATA', updatedAddress);
+          this.addresses = this.addresses.map((address) =>
+            address.id === id ? { ...address, ...data, id } : address,
+          );
+
+          this.selectedAddress = { ...(data ?? {}), id } as Address;
+          this.updateAddressFormVisible = false;
+          this.createAddressFormVisible = false;
         },
-        error: (err) => {
-          console.error('Error updating address', err);
+        error: () => {
           this.errorMessage = 'Unable to update address.';
         }
       });
@@ -151,24 +157,52 @@ export class AddressComponent implements OnInit {
         take(1),
         finalize(() => {
           this.loading = false;
-          console.log('DELETE ADDRESS FINALIZE', this.loading);
           this.cdr.markForCheck();
         }),
       )
       .subscribe({
         next: () => {
-          console.log('Address deleted successfully');
-          this.loadAddresses(); 
+
+          this.addresses = this.addresses.filter(a => a.id !== id);
+
+          if (this.selectedAddress?.id === id) {
+            this.selectedAddress = null;
+          }
         },
-        error: (err) => {
-          console.error('Error deleting address', err);
+        error: () => {
           this.errorMessage = 'Unable to delete address.';
         }
       });
-  } // <-- Fixed missing closing brace
+  }
+
+  showUpdateAddressForm(address: Address): void {
+    this.updatedAddress = { ...address };
+    this.updateAddressFormVisible = true;
+    this.createAddressFormVisible = false;
+    this.selectedAddress = null;
+    this.errorMessage = '';
+  }
+
+  hideUpdateAddressForm(): void {
+    this.updateAddressFormVisible = false;
+    this.selectedAddress = null;
+    this.loadAddresses();
+  }
+
+  showCreateAddressForm(): void {
+    this.createAddressFormVisible = true;
+    this.updateAddressFormVisible = false;
+    this.selectedAddress = null;
+    this.errorMessage = '';
+  }
+
+  hideCreateAddressForm(): void {
+    this.createAddressFormVisible = false;
+    this.newAddress = {} as Address;
+    this.loadAddresses();
+  }
 
   clearSelection(): void {
     this.selectedAddress = null;
-    this.cdr.markForCheck();
   }
 }

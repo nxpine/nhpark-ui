@@ -13,8 +13,11 @@ export class CustomerComponent implements OnInit {
   selectedCustomer: Customer | null = null; // Stores the single fetched customer
   newCustomer: Customer = {} as Customer; // Optional, currently unused
   updatedCustomer: Customer = {} as Customer; // Optional, currently unused
+  createCustomerFormVisible = false; // Controls the visibility of the create customer form
+  updateCustomerFormVisible = false; // Controls the visibility of the update customer form
   loading = false;
   errorMessage = '';
+
 
   constructor(
     private readonly customerService: CustomerService,
@@ -28,6 +31,9 @@ export class CustomerComponent implements OnInit {
   loadCustomers(): void {
     this.loading = true;
     this.errorMessage = '';
+    this.createCustomerFormVisible = false;
+    this.updateCustomerFormVisible = false;
+    this.selectedCustomer = null;
 
     this.customerService
       .getCustomers()
@@ -83,8 +89,7 @@ export class CustomerComponent implements OnInit {
       .subscribe({
         next: (customer: Customer) => {
           console.log('CUSTOMER BY ID DATA', customer);
-          this.selectedCustomer = customer;
-          this.updatedCustomer = { ...customer }; // Create a copy for editing
+          this.selectedCustomer = customer;          
         },
         error: (err) => {
           console.error('CUSTOMER BY ID ERROR', err);
@@ -133,7 +138,13 @@ export class CustomerComponent implements OnInit {
       )
       .subscribe({
         next: (updatedCustomer: Customer) => {
-          console.log('UPDATED CUSTOMER DATA', updatedCustomer);
+          this.customers = this.customers.map((customer) =>
+            customer.id === id ? { ...customer, ...updatedCustomer, id } : customer,
+          );
+
+          this.selectedCustomer = { ...(updatedCustomer ?? {}), id } as Customer;
+          this.updateCustomerFormVisible = false;
+          this.createCustomerFormVisible = false;
         },
         error: (err) => {
           console.error('UPDATE_CUSTOMER_ERROR', err);
@@ -143,7 +154,7 @@ export class CustomerComponent implements OnInit {
   }
 
   deleteCustomer(id: number): void {
-    this.loading = true;
+    this.loading = false;
     this.errorMessage = '';
 
     this.customerService
@@ -167,7 +178,22 @@ export class CustomerComponent implements OnInit {
         },
       });
   }
-    
+
+  showUpdateCustomerForm(customer: Customer): void {
+    this.updatedCustomer = { ...customer };
+    this.updateCustomerFormVisible = true;
+  }
+
+  hideUpdateCustomerForm() {
+  this.updateCustomerFormVisible = false;
+  this.selectedCustomer = /* restore the customer you were viewing, e.g.: */
+    this.updatedCustomer;
+}
+
+  showCreateCustomerForm():void{
+    this.createCustomerFormVisible = true;
+  }
+
   clearSelection(): void {
     this.selectedCustomer = null;
     this.cdr.markForCheck();

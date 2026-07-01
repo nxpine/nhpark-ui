@@ -14,6 +14,8 @@ export class LocationComponent implements OnInit {
   selectedLocation: Location | null = null; // Stores the single fetched location
   newLocation: Location = {} as Location; // Optional, currently unused
   updatedLocation: Location = {} as Location; // Optional, currently unused
+  createLocationFormVisible = false;
+  updateLocationFormVisible = false;
   loading = false;
   errorMessage = '';
  
@@ -29,6 +31,9 @@ export class LocationComponent implements OnInit {
   loadLocation(): void {
     this.loading = true;
     this.errorMessage = '';
+    this.createLocationFormVisible = false;
+    this.updateLocationFormVisible = false;
+    this.selectedLocation = null;
 
     this.locationService
       .getLocations()
@@ -83,7 +88,6 @@ loadLocationById(id: number): void {
       next: (location: Location) => {
         console.log('LOCATION BY ID DATA', location);
         this.selectedLocation = location;
-        this.updatedLocation = { ...location }; // copy for editing
       },
       error: (err) => {
         console.error('LOCATION BY ID ERROR', err);
@@ -97,7 +101,8 @@ loadLocationById(id: number): void {
     this.loading = true;
     this.errorMessage = '';
 
-    this.locationService.createLocation(newLocation).pipe(
+    this.locationService
+    .createLocation(newLocation).pipe(
       take(1),
       finalize(() => {
         this.loading = false;
@@ -108,7 +113,6 @@ loadLocationById(id: number): void {
     .subscribe({
       next: (createdLocation: Location) => {
         console.log('CREATED LOCATION DATA', createdLocation);
-        this.loadLocation(); // Refresh the list after creation
       },
       error: (err) => {
         console.error('CREATE LOCATION ERROR', err);
@@ -134,7 +138,13 @@ loadLocationById(id: number): void {
       )
       .subscribe({
         next: (updatedLocation: Location) => {
-          console.log('UPDATED LOCATION DATA', updatedLocation);
+          this.location = this.location.map((item) =>
+            item.locationId === id ? { ...item, ...updatedLocation, locationId: id } : item,
+          );
+
+          this.selectedLocation = { ...(updatedLocation ?? {}), locationId: id } as Location;
+          this.updateLocationFormVisible = false;
+          this.createLocationFormVisible = false;
         },
         error: (err) => {
           console.error('UPDATE LOCATION ERROR', err);
@@ -166,6 +176,16 @@ loadLocationById(id: number): void {
           this.errorMessage = 'Unable to delete location.';
         }
       });
+  }
+  showUpdateLocationForm(location: Location): void { 
+    this.updatedLocation = { ...location };
+    this.updateLocationFormVisible = true;
+  }
+  hideUpdateLocationForm():void{
+    this.updateLocationFormVisible = false;
+  }
+  showCreateLocationForm():void{
+    this.createLocationFormVisible = true;
   }
   //  CLICK HANDLER FOR HYPERLINK
   clearSelection(): void {

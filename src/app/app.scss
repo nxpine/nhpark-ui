@@ -1,0 +1,178 @@
+/* Custom Design System Tokens */
+:root {
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Color Palette - Deep Dark Mode */
+  --bg-app: #0b0f19;
+  --bg-surface: rgba(20, 27, 45, 0.7);
+  --bg-capsule: rgba(30, 41, 59, 0.4);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  
+  /* Typography Colors */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-hover: #cbd5e1;
+  
+  /* Accent States */
+  --accent-primary: #3b82f6; /* Enterprise Royal Blue */
+  --accent-glow: rgba(59, 130, 246, 0.25);
+  
+  /* Animation Timing */
+  --transition-smooth: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Global resets for the App Layout */
+body {
+  margin: 0;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header Base Structure */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2.5rem;
+  background-color: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-light);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Global Content Wrapper Below Fixed Header */
+.content-wrapper {
+  margin-top: 5rem;
+  padding: 2.5rem;
+}
+
+/* Brand Identity Zone */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Increased padding slightly for the asset */
+  user-select: none;
+  
+  /* Brand Image Rules */
+  .logo-image {
+    height: 32px; /* Set layout boundaries explicitly */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
+  }
+
+  .logo-text {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.03em;
+    color: var(--text-main);
+    margin: 0; /* Remove user-agent headers spacing overlap */
+    
+    .highlight {
+      color: var(--accent-primary);
+      margin-left: 0.05rem;
+    }
+  }
+}
+
+/* Floating Segmented Navigation Capsule */
+.nav-container {
+  display: flex;
+  list-style: none;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.3rem;
+  background-color: var(--bg-capsule);
+  border-radius: 100px;
+  border: 1px solid var(--border-light);
+}
+
+/* Individual Pill Links */
+.navbar .pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  padding: 0.55rem 1.25rem;
+  border-radius: 100px;
+  transition: var(--transition-smooth);
+  
+  .material-symbols-rounded {
+    font-size: 1.25rem;
+    font-variation-settings: 'FILL' 0, 'wght' 400;
+    transition: var(--transition-smooth);
+  }
+  
+  .pill-text {
+    line-height: 1;
+  }
+}
+
+/* Hover States */
+.navbar .pill:hover {
+  color: var(--text-hover);
+  background-color: rgba(255, 255, 255, 0.03);
+
+  .material-symbols-rounded {
+    font-variation-settings: 'wght' 500;
+  }
+}
+
+/* Angular Router Active State Integration */
+.navbar .pill.active-route {
+  color: #396ebd;
+  background-color: var(--accent-primary);
+  box-shadow: 0 4px 14px var(--accent-glow);
+  
+  .material-symbols-rounded {
+    font-variation-settings: 'FILL' 1, 'wght' 500;
+  }
+}
+
+/* Minimalist Action Sync Button */
+.btn-sync {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+
+  .material-symbols-rounded {
+    font-size: 1.25rem;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &:hover {
+    color: var(--text-main);
+    border-color: var(--border-hover);
+    background-color: rgba(255, 255, 255, 0.03);
+
+    .material-symbols-rounded {
+      transform: rotate(180deg);
+    }
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}

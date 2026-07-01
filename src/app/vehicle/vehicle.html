@@ -1,0 +1,25 @@
+<section class="vehicle-panel">
+  <div class="vehicle-header">
+    <h2>Vehicle Types</h2>
+    <p>Manage the vehicle options available when creating bookings.</p>
+  </div>
+
+  @if (feedback) {
+    <p class="feedback">{{ feedback }}</p>
+  }
+
+  <form (ngSubmit)="addVehicleType()">
+    <label for="vehicleType">New vehicle type</label>
+    <input id="vehicleType" name="vehicleType" type="text" [(ngModel)]="newVehicleType" />
+    <button type="submit">Add</button>
+  </form>
+
+  <ul>
+    @for (type of vehicleTypes; track type) {
+      <li>
+        <span>{{ type }}</span>
+        <button type="button" (click)="removeVehicleType(type)">Remove</button>
+      </li>
+    }
+  </ul>
+</section>

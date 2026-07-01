@@ -1,3 +1,4 @@
+/* --- Base Container --- */
 .address-panel {
   max-width: 1100px;
   margin: 30px auto;
@@ -6,7 +7,7 @@
   color: #222;
 }
 
-/* Header */
+/* --- Header Section --- */
 .address-header {
   display: flex;
   justify-content: space-between;
@@ -17,16 +18,17 @@
 .address-header h2 {
   font-size: 24px;
   font-weight: 600;
+  margin: 0;
 }
 
 .address-header button {
   padding: 8px 14px;
   border: none;
-  background: #000;
+  background: #0c16a0;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .address-header button:hover {
@@ -38,7 +40,7 @@
   cursor: not-allowed;
 }
 
-/* Error message */
+/* --- Feedback Messages --- */
 .error {
   color: #d93025;
   background: #ffecec;
@@ -47,7 +49,7 @@
   margin-bottom: 10px;
 }
 
-/* Table */
+/* --- Table View Layout --- */
 .address-table {
   width: 100%;
   border-collapse: collapse;
@@ -55,6 +57,16 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.address-table button,
+.address-form button[type="submit"]:not(.save-btn) {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background: #c21d1d;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .address-table th,
@@ -74,22 +86,50 @@
 
 .address-table tbody tr:hover {
   background: #f7f7f7;
-  transition: 0.2s ease;
+  transition: background 0.2s ease;
 }
 
-.address-table a {
+/* Kept Underline: Forces button-styled link to always underline cleanly */
+.address-table .link-btn {
+  background: none;
+  border: none;
+  padding: 0;
   color: #007bff;
   text-decoration: underline;
   font-weight: 500;
+  font-size: inherit;
+  font-family: inherit;
   cursor: pointer;
 }
 
-.address-table a:hover {
+.address-table .link-btn:hover {
   color: #0056b3;
+  text-decoration: underline;
 }
 
-/* Selected Address Card */
-.selected-address {
+/* --- Shared Action Rows --- */
+.address-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.address-actions button {
+  padding: 8px 16px;
+  border: none;
+  background: #03058b;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.address-actions button:hover {
+  background: #333;
+}
+
+/* --- Card Details Section --- */
+.address-details {
   margin-top: 20px;
   padding: 16px;
   background: #f9f9f9;
@@ -97,22 +137,16 @@
   border-radius: 8px;
 }
 
-.selected-address button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  border: none;
-  background: #000;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.2s ease;
+.address-details h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
 }
 
-.selected-address button:hover {
-  background: #333;
+.address-details p {
+  margin: 6px 0;
 }
 
-/* Forms */
+/* --- Form Management Blocks --- */
 .address-form {
   margin-top: 25px;
   padding: 20px;
@@ -126,13 +160,11 @@
   font-size: 18px;
 }
 
-/* Form layout */
 .address-form form {
   display: grid;
   gap: 12px;
 }
 
-/* Labels */
 .address-form label {
   font-size: 14px;
   margin-bottom: 4px;
@@ -140,32 +172,73 @@
   color: #444;
 }
 
-/* Inputs */
 .address-form input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 6px;
   outline: none;
-  transition: 0.2s ease;
   background: #fff;
+  box-sizing: border-box; /* Clean structural fix for layout leaking */
+  transition: border-color 0.2s ease;
 }
 
 .address-form input:focus {
-  border-color: #000;
+  border-color: #000000;
 }
 
-/* Submit buttons */
+/* --- Specialized Form Control Rows --- */
 .address-form button {
+  font-family: inherit;
+  transition: background 0.2s ease;
+}
+
+/* Form Action Button Grid Placement Wrapper */
+.address-form div:last-child {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Standardized Form Submit Logic */
+.address-form button[type="submit"]:not(.save-btn) {
   padding: 10px;
   border: none;
   background: #2346b8;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s ease;
 }
 
-.address-form button:hover {
-  background: #333;
+.address-form button[type="submit"]:not(.save-btn):hover {
+  background: #19338a;
+}
+
+/* Back Button Variant Modification */
+.back-btn {
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #f5f5f5;
+}
+
+/* Save Button Variant Modification */
+.save-btn {
+  padding: 10px 30px;
+  border: none;
+  background: #d93025;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.save-btn:hover {
+  background: #b52218;
 }

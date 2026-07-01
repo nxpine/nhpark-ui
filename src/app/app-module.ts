@@ -10,6 +10,8 @@ import { CustomerComponent } from './customer/customer';
 import { HomeComponent } from './home/home';
 import { AddressComponent } from './address/address';
 import { LocationComponent } from './location/location';
+import { BookingComponent } from './booking/booking';
+import { Vehicle } from './vehicle/vehicle';
 
 @NgModule({
   declarations: [
@@ -17,15 +19,12 @@ import { LocationComponent } from './location/location';
     CustomerComponent,
     HomeComponent,
     AddressComponent,
-    LocationComponent
+    LocationComponent,
+    BookingComponent,
+    Vehicle,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [App]
+  bootstrap: [App],
 })
 export class AppModule {}
