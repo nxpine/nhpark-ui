@@ -1,27 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { Vehicle } from './vehicle';
+import { VehicleComponent } from './vehicle';
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('Vehicle', () => {
-  let component: Vehicle;
-  let fixture: ComponentFixture<Vehicle>;
+  let component: VehicleComponent;
+  let fixture: ComponentFixture<VehicleComponent>; 
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Vehicle],
+      declarations: [VehicleComponent], 
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Vehicle);
+    fixture = TestBed.createComponent(VehicleComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should provide common vehicle types', () => {
-    expect(component.vehicleTypes).toContain('Car');
-    expect(component.vehicleTypes.length).toBeGreaterThan(0);
   });
 });

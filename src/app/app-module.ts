@@ -11,7 +11,9 @@ import { HomeComponent } from './home/home';
 import { AddressComponent } from './address/address';
 import { LocationComponent } from './location/location';
 import { BookingComponent } from './booking/booking';
-import { Vehicle } from './vehicle/vehicle';
+import { VehicleComponent } from './vehicle/vehicle';
+import { LoginComponent } from './login/login';
+import { CustomerDetails } from './customer-details/customer-details';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { Vehicle } from './vehicle/vehicle';
     AddressComponent,
     LocationComponent,
     BookingComponent,
-    Vehicle,
+    VehicleComponent,
+    LoginComponent,
+    CustomerDetails,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

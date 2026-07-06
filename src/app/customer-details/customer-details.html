@@ -1,0 +1,56 @@
+<section class="customer-details-panel">
+
+  <div class="customer-details-header">
+    <h2>Customer Details</h2>
+
+    <button
+      type="button"
+      routerLink="/customer">
+      Back
+    </button>
+  </div>
+
+  @if (loading) {
+    <p>Loading customer...</p>
+  }
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  @if (!loading && customer) {
+
+    <div class="customer-details">
+
+      <p><strong>Name:</strong> {{ customer.name }}</p>
+
+      <p><strong>Email:</strong> {{ customer.email }}</p>
+
+      <p><strong>Phone:</strong> {{ customer.phoneNumber }}</p>
+
+      <p><strong>Gender:</strong> {{ customer.gender }}</p>
+
+      <p><strong>Date of Birth:</strong> {{ customer.dob }}</p>
+
+      <div class="customer-actions">
+
+        <button
+          type="button"
+          (click)="showUpdateCustomerForm()">
+          Edit
+        </button>
+
+        <button
+          type="button"
+          class="delete-btn"
+          (click)="deleteCustomer()">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</section>

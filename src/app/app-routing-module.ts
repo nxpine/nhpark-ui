@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { CustomerComponent } from './customer/customer';
 import { HomeComponent } from './home/home';
 import { AddressComponent } from './address/address';
 import { LocationComponent } from './location/location';
 import { BookingComponent } from './booking/booking';
-import { Vehicle } from './vehicle/vehicle';
+import { VehicleComponent } from './vehicle/vehicle';
+import { LoginComponent } from './login/login';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,7 +17,8 @@ const routes: Routes = [
   { path: 'address', component: AddressComponent },
   { path: 'location', component: LocationComponent },
   { path: 'booking', component: BookingComponent},
-  { path: 'vehicle', component: Vehicle },
+  { path: 'vehicle', component: VehicleComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
 ];
 

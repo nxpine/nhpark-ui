@@ -1,53 +1,69 @@
-<!-- Corrected Google Icons Link. Add this to your index.html <head> -->
-<link rel="stylesheet" href="https://googleapis.com">
-
 <header class="app-header">
-  <!-- Brand Zone with Image Logo -->
+
+  <!-- Brand -->
   <div class="brand" aria-label="NhPark Home">
     <h1 class="logo-text">NhPark<span class="highlight"></span></h1>
   </div>
 
-  <!-- Main Navigation Links -->
+  <!-- Navigation -->
   <nav class="navbar" aria-label="Main Navigation">
     <ul class="nav-container">
+
       <li>
-        <a routerLink="/customer" routerLinkActive="active-route" class="pill" aria-label="View Customers">
+        <a routerLink="/customer" routerLinkActive="active-route" class="pill">
           <span class="pill-text">Customers</span>
         </a>
       </li>
+
       <li>
-        <a routerLink="/address" routerLinkActive="active-route" class="pill" aria-label="View Addresses">
+        <a routerLink="/address" routerLinkActive="active-route" class="pill">
           <span class="pill-text">Addresses</span>
         </a>
       </li>
+
       <li>
-        <a routerLink="/location" routerLinkActive="active-route" class="pill" aria-label="View Locations">
+        <a routerLink="/location" routerLinkActive="active-route" class="pill">
           <span class="pill-text">Locations</span>
         </a>
       </li>
+
       <li>
-        <a routerLink="/booking" routerLinkActive="active-route" class="pill" aria-label="View Bookings">
+        <a routerLink="/booking" routerLinkActive="active-route" class="pill">
           <span class="pill-text">Bookings</span>
         </a>
       </li>
+
       <li>
-        <a routerLink="/vehicle" routerLinkActive="active-route" class="pill" aria-label="View Vehicles">
+        <a routerLink="/vehicle" routerLinkActive="active-route" class="pill">
           <span class="pill-text">Vehicles</span>
         </a>
       </li>
+
+      <li>
+        <a routerLink="/customer-details" routerLinkActive="active-route" class="pill">
+          <span class="pill-text">Customer Details</span>
+        </a>
+      </li>
+
+      <!-- NEW LOGIN LINK -->
+      <li>
+        <a routerLink="/login" routerLinkActive="active-route" class="pill">
+          <span class="pill-text">Login</span>
+        </a>
+      </li>
+
     </ul>
   </nav>
 
-  <!-- Utility Actions Zone -->
+  <!-- Actions -->
   <div class="user-action">
     <button class="btn-sync" aria-label="Sync Data" title="Sync Data">
-      <span class="material-symbols-rounded" aria-hidden="true">Refresh</span>
+      <span class="material-symbols-rounded">refresh</span>
     </button>
   </div>
+
 </header>
 
-<!-- Main Router Content Viewport -->
 <main class="content-wrapper">
   <router-outlet></router-outlet>
 </main>
-

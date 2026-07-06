@@ -30,5 +30,13 @@
     "pathRewrite": {
       "^/api": ""
     }
+  },
+  "/api/vehicle": {
+    "target": "http://localhost:8085",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
   }
 }

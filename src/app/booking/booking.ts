@@ -17,7 +17,7 @@ export class BookingComponent implements OnInit {
   updateBookingFormVisible = false;
   loading = false;
   errorMessage = '';
-  vehicleOptions = ['Compact', 'Sedan', 'SUV', 'Truck'];
+  vehicleOptions = ['VAN', 'SEDAN', 'SUV', 'Truck'];
 
   constructor(
     private readonly bookingService: BookingService,

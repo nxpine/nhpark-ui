@@ -1,12 +1,9 @@
 .booking-panel {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 30px auto;
-  padding: 20px;
-  background: #fff;
+  padding: 24px;
   font-family: Arial, sans-serif;
   color: #222;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .booking-header {
@@ -17,10 +14,12 @@
 }
 
 .booking-header h2 {
+  font-size: 24px;
+  font-weight: 600;
   margin: 0;
 }
 
-.-header button {
+.booking-header button {
   padding: 8px 14px;
   border: none;
   background: #242292;
@@ -29,145 +28,191 @@
   cursor: pointer;
   transition: 0.2s ease;
 }
+.booking-header button:hover {
+  background: #3373ab;
+}
+.booking-header button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d93025;
+  background: #ffecec;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
 .booking-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
-}
-
-.booking-table-header {
-  background-color: #f5f5f5;
-}
-
-.delete-btn {
-  background-color: #d32f2f !important;
-  color: white;
-}
-
-.delete-btn:hover:not(:disabled) {
-  background-color: #b71c1c !important;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .booking-table th,
 .booking-table td {
-  border: 1px solid #0f0909;
-  padding: 12px;
+  padding: 12px 14px;
   text-align: left;
+  border-bottom: 1px solid #eee;
 }
 
-.booking-table tr:nth-child(even) {
-  background-color: #fafafa;
+.booking-table th {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #111;
+  color: #fff;
 }
 
-.booking-table tr:hover {
-  background-color: #f1f1f1;
+.booking-table tbody tr:hover {
+  background: #f7f7f7;
+  transition: 0.2s ease;
 }
 
-.booking-table a {
+.booking-table .link-btn {
+  background: none;
+  border: none;
+  padding: 0;
   color: #007bff;
-  text-decoration: none;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: inherit;
+  font-family: inherit;
   cursor: pointer;
 }
-.booking-table tbody td a {
-  text-decoration: underline;
+
+.booking-table .link-btn:hover {
+  color: #0056b3;
 }
-.booking-table a:hover {
-  text-decoration: underline;
+
+/* --- Details Card --- */
+.booking-details {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f9f9f9;
+  border-left: 4px solid #000;
+  border-radius: 8px;
 }
 
 .booking-actions {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   gap: 10px;
 }
-
-button {
-  padding: 8px 18px;
-  border: none;
-  border-radius: 6px;
-  background-color: #0b0ebb;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-button:hover:not(:disabled) {
-  background-color: #0b0ebb;
-}
-
-.delete-btn:hover:not(:disabled) {
-  background-color: #b71c1c;
-}
-
-button:disabled {
-  background-color: #bdbdbd;
-  cursor: not-allowed;
-}
-
-
-.booking-details {
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  margin-top: 20px;
-  background: #fafafa;
-}
-
-.booking-details p {
-  margin: 10px 0;
-}
-
 .booking-form {
-  margin-top: 20px;
+  margin-top: 25px;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #fafafa;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .booking-form h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 18px;
 }
 
 .booking-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  gap: 12px;
 }
 
 .booking-form label {
+  font-size: 14px;
+  margin-bottom: 4px;
   display: block;
-  font-weight: 600;
-  margin-bottom: 5px;
+  color: #444;
 }
 
-.booking-form input {
+.booking-form input,
+.booking-form select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 6px;
-  box-sizing: border-box;
+  outline: none;
+  transition: 0.2s ease;
+  background: #fff;
+  box-sizing: border-box; /* Prevents 100% width blowout */
 }
 
+.booking-form input:focus,
+.booking-form select:focus {
+  border-color: #000;
+}
+
+button {
+  font-family: inherit;
+  transition: 0.2s ease;
+}
+
+/* Table Actions & Generic Form Submit Button */
+.booking-table button,
+.booking-form button[type="submit"]:not(.save-btn) {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  background: #c21d1d;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.booking-table button:hover,
+.booking-form button[type="submit"]:not(.save-btn):hover {
+  background: #f0f0f0;
+  border-color: #bbb;
+}
+
+/* Specific Create Action Button */
+.booking-actions button {
+  padding: 8px 16px;
+  border: none;
+  background: #2346b8;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.booking-actions button:hover {
+  background: #19338a;
+}
+
+/* Specific Context Layout Controls */
+.booking-form div:last-child {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Form Action Modifiers */
 .back-btn {
-  background-color: #757575;
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .back-btn:hover {
-  background-color: #5f5f5f;
+  background: #f5f5f5;
 }
 
 .save-btn {
-  background-color: #bd1414;
-}
-
-.save-btn:hover {
-  background-color: #a31914;
-}
-
-.error {
-  color: #d32f2f;
+  padding: 10px 30px;
+  border: none;
+  background: #d93025;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
   font-weight: bold;
-  margin: 15px 0;
+}
+
+.save-btn{
+   background: red !important;
+   padding-left: 30px ;
 }
