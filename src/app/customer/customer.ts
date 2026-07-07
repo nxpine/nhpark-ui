@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Customer, CustomerService } from '../customer-service';
 import { finalize, take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer',
@@ -22,6 +23,7 @@ export class CustomerComponent implements OnInit {
   constructor(
     private readonly customerService: CustomerService,
     private readonly cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -89,7 +91,8 @@ export class CustomerComponent implements OnInit {
       .subscribe({
         next: (customer: Customer) => {
           console.log('CUSTOMER BY ID DATA', customer);
-          this.selectedCustomer = customer;          
+          this.selectedCustomer = customer;     
+          this.router.navigate(['/customer-details', customer.id]);     
         },
         error: (err) => {
           console.error('CUSTOMER BY ID ERROR', err);

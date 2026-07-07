@@ -44,8 +44,9 @@
                 </a>
               </td>
 
-              <td>{{ booking.customerName ?? 'no customer name' }}</td>
-              <td>{{ booking.bookingDate ?? 'no date exists' }}</td>
+              <td>{{ booking.customerId ?? 'no customer id' }}</td>
+              <td>{{ booking.startDateTime ?? 'no date exists' }}</td>
+              <td>{{ booking.endDateTime ?? 'no date exists' }}</td>
               <td>{{ booking.vehicleType ?? 'Not selected' }}</td>
               <td>{{ booking.status ?? 'no status exists' }}</td>
 
@@ -77,11 +78,9 @@
       <h3>Booking Details</h3>
 
       <p><strong>ID:</strong> {{ getBookingId(selectedBooking) ?? 'Unknown' }}</p>
-      <p><strong>Customer Name:</strong> {{ selectedBooking.customerName ?? 'Not provided' }}</p>
-      <p><strong>Email:</strong> {{ selectedBooking.customerEmail ?? 'Not provided' }}</p>
-      <p><strong>Phone:</strong> {{ selectedBooking.customerPhone ?? 'Not provided' }}</p>
-      <p><strong>Date:</strong> {{ selectedBooking.bookingDate ?? 'Not provided' }}</p>
-      <p><strong>Time:</strong> {{ selectedBooking.bookingTime ?? 'Not provided' }}</p>
+      <p><strong>Customer Name:</strong> {{ selectedBooking.customerId ?? 'Not provided' }}</p>
+      <p><strong>Date:</strong> {{ selectedBooking.startDateTime ?? 'Not provided' }}</p>
+      <p><strong>Time:</strong> {{ selectedBooking.endDateTime ?? 'Not provided' }}</p>
       <p><strong>Service Type:</strong> {{ selectedBooking.serviceType ?? 'Not provided' }}</p>
       <p><strong>Vehicle Type:</strong> {{ selectedBooking.vehicleType ?? 'Not selected' }}</p>
       <p><strong>Status:</strong> {{ selectedBooking.status ?? 'Not provided' }}</p>
@@ -111,27 +110,17 @@
 
         <div>
           <label>Customer Name:</label>
-          <input type="text" name="customerName" [(ngModel)]="newBooking.customerName" required />
-        </div>
-
-        <div>
-          <label>Email:</label>
-          <input type="email" name="customerEmail" [(ngModel)]="newBooking.customerEmail" required />
-        </div>
-
-        <div>
-          <label>Phone:</label>
-          <input type="text" name="customerPhone" [(ngModel)]="newBooking.customerPhone" required />
+          <input type="text" name="customerName" [(ngModel)]="newBooking.customerId" required />
         </div>
 
         <div>
           <label>Booking Date:</label>
-          <input type="date" name="bookingDate" [(ngModel)]="newBooking.bookingDate" required />
+          <input type="date" name="bookingDate" [(ngModel)]="newBooking.startDateTime" required />
         </div>
 
         <div>
           <label>Booking Time:</label>
-          <input type="time" name="bookingTime" [(ngModel)]="newBooking.bookingTime" required />
+          <input type="time" name="bookingTime" [(ngModel)]="newBooking.endDateTime" required />
         </div>
 
         <div>
@@ -179,27 +168,17 @@
 
         <div>
           <label>Customer Name:</label>
-          <input type="text" name="update-customerName" [(ngModel)]="updatedBooking.customerName" required />
-        </div>
-
-        <div>
-          <label>Email:</label>
-          <input type="email" name="update-customerEmail" [(ngModel)]="updatedBooking.customerEmail" required />
-        </div>
-
-        <div>
-          <label>Phone:</label>
-          <input type="text" name="update-customerPhone" [(ngModel)]="updatedBooking.customerPhone" required />
+          <input type="text" name="update-customerName" [(ngModel)]="updatedBooking.customerId" required />
         </div>
 
         <div>
           <label>Date:</label>
-          <input type="date" name="update-date" [(ngModel)]="updatedBooking.bookingDate" required />
+          <input type="date" name="update-date" [(ngModel)]="updatedBooking.startDateTime" required />
         </div>
 
         <div>
           <label>Time:</label>
-          <input type="time" name="update-time" [(ngModel)]="updatedBooking.bookingTime" required />
+          <input type="time" name="update-time" [(ngModel)]="updatedBooking.endDateTime" required />
         </div>
 
         <div>

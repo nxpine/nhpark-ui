@@ -13,7 +13,7 @@ import { LocationComponent } from './location/location';
 import { BookingComponent } from './booking/booking';
 import { VehicleComponent } from './vehicle/vehicle';
 import { LoginComponent } from './login/login';
-import { CustomerDetails } from './customer-details/customer-details';
+import {  CustomerDetailsComponent } from './customer-details/customer-details';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { CustomerDetails } from './customer-details/customer-details';
     LocationComponent,
     BookingComponent,
     VehicleComponent,
+    CustomerDetailsComponent,
     LoginComponent,
-    CustomerDetails,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

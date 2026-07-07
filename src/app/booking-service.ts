@@ -5,15 +5,13 @@ import { Observable } from 'rxjs';
 export interface Booking {
   id?: number;
   bookingId?: number;
-  customerName?: string;
-  customerEmail?: string;
-  customerPhone?: string;
-  bookingDate?: string;
-  bookingTime?: string;
+  startDateTime?: string;
+  endDateTime?: string;
   serviceType?: string;
   vehicleType?: string;
   status?: string;
   createdAt?: string;
+  customerId?: number;
 }
 
 @Injectable({
@@ -32,6 +30,10 @@ export class BookingService {
 
   getBookingById(id: number): Observable<Booking> {
     return this.http.get<Booking>(`${this.apiUrl}/${id}`);
+  }
+
+  getBookingByCustomerId(customerId: number): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.apiUrl}/customer/${customerId}`);
   }
 
   createBooking(booking: Booking): Observable<Booking> {

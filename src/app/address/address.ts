@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Address, AddressService } from '../address-service';
 import { finalize, take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-address',
@@ -21,7 +22,8 @@ export class AddressComponent implements OnInit {
 
   constructor(
     private readonly addressService: AddressService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class AddressComponent implements OnInit {
         take(1),
         finalize(() => {
           this.loading = false;
+          console.log('ADDRESS FINALIZE', this.loading);
           this.cdr.markForCheck();
         }),
       )
