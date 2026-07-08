@@ -4,12 +4,14 @@ import { Address, AddressService } from '../address-service';
 import { Booking, BookingService } from '../booking-service';
 import { finalize, take } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-customer-details',
-  standalone: false,
+  standalone: true,
   templateUrl: './customer-details.html',
   styleUrl: './customer-details.scss',
+  imports: [MatTabsModule],
 })
 export class CustomerDetailsComponent implements OnInit {
   customerId: number | null = null;

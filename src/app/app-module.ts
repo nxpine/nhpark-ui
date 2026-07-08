@@ -14,18 +14,27 @@ import { BookingComponent } from './booking/booking';
 import { VehicleComponent } from './vehicle/vehicle';
 import { LoginComponent } from './login/login';
 import { CustomerDetailsComponent } from './customer-details/customer-details';
+import { CustomerAddress } from './customer-address/customer-address';
 
 @NgModule({
-  declarations: [App, CustomerDetailsComponent, LoginComponent, HomeComponent, AddressComponent, LocationComponent, BookingComponent, VehicleComponent],
+  declarations: [
+    App,
+    LoginComponent,
+    HomeComponent,
+    AddressComponent,
+    LocationComponent,
+    BookingComponent,
+    VehicleComponent,
+    CustomerAddress,
+  ],
 
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-
     CustomerComponent,
-    
+    CustomerDetailsComponent,
   ],
   providers: [],
   bootstrap: [App],

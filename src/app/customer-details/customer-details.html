@@ -14,81 +14,80 @@
     </div>
   }
 
-  <div class="address-details">
-    <h3>Address Details</h3>
-  </div>
   <div>
-    <table class="address-table">
-      <thead class="address-table-header">
-        <tr>
-          <th>Street</th>
-          <th>City</th>
-          <th>Province</th>
-          <th>Postal Code</th>
-          <th>Country</th>
-          <th>Phone Number</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+      <mat-tab label="Address">
+        <div>
+          <table class="address-table">
+            <thead class="address-table-header">
+              <tr>
+                <th>Street</th>
+                <th>City</th>
+                <th>Province</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-      <tbody>
-        @for (address of addresses; track address.id ?? address.street) {
-          <tr>
-            <td>
-              {{ address.street ?? 'No street exists' }}
-            </td>
+            <tbody>
+              @for (address of addresses; track address.id ?? address.street) {
+                <tr>
+                  <td>
+                    {{ address.street ?? 'No street exists' }}
+                  </td>
 
-            <td>{{ address.city ?? 'no city exists' }}</td>
-            <td>{{ address.province ?? 'no province exists' }}</td>
-            <td>{{ address.postalCode ?? 'no postal code exists' }}</td>
-            <td>{{ address.country ?? 'no country exists' }}</td>
-            <td>{{ address.phone ?? 'no phone exists' }}</td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+                  <td>{{ address.city ?? 'no city exists' }}</td>
+                  <td>{{ address.province ?? 'no province exists' }}</td>
+                  <td>{{ address.postalCode ?? 'no postal code exists' }}</td>
+                  <td>{{ address.country ?? 'no country exists' }}</td>
+                  <td>{{ address.phone ?? 'no phone exists' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Booking">
+        <div>
+          <table class="booking-table">
+            <thead class="booking-table-header">
+              <tr>
+                <th>Booking ID</th>
+                <th>Customer ID</th>
+                <th>Start Date Time</th>
+                <th>End Date Time</th>
+                <th>Vehicle Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-  <!-- BOOKING DETAILS -->
-  <div class="booking-details">
-    <h3>Booking Details</h3>
-  </div>
+            <tbody>
+              @for (booking of bookings; track booking.id ?? booking.customerId) {
+                <tr>
+                  <td>{{ booking.id ?? 'Unknown' }}</td>
+                  <td>{{ booking.customerId ?? 'no customer id' }}</td>
+                  <td>
+                    {{ booking.startDateTime ?? 'no date exists' }}
+                  </td>
 
-  <div>
-    <table class="booking-table">
-      <thead class="booking-table-header">
-        <tr>
-          <th>Booking ID</th>
-          <th>Customer ID</th>
-          <th>Start Date Time</th>
-          <th>End Date Time</th>
-          <th>Vehicle Type</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+                  <td>
+                    {{ booking.endDateTime ?? 'no date exists' }}
+                  </td>
+                  <td>
+                    {{ booking.vehicleType ?? 'Not selected' }}
+                  </td>
 
-      <tbody>
-        @for (booking of bookings; track booking.id ?? booking.customerId) {
-          <tr>
-            <td>{{ booking.id ?? 'Unknown' }}
-            </td>
-            <td>{{ booking.customerId ?? 'no customer id' }}</td>
-            <td>
-              {{ booking.startDateTime ?? 'no date exists' }}
-            <td>
-              {{ booking.endDateTime ?? 'no date exists' }}
-            </td>
-            <td>
-              {{ booking.vehicleType ?? 'Not selected' }}
-            </td>
-
-            <td>{{ booking.status ?? 'no status exists' }}</td>
-            <td></td>
-          </tr>
-        }
-        
-      </tbody>
-    </table>
+                  <td>{{ booking.status ?? 'no status exists' }}</td>
+                  <td></td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </section>
