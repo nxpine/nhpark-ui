@@ -1,105 +1,151 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, take } from 'rxjs';
-
 import { Customer, CustomerService } from '../customer-service';
+import { Address, AddressService } from '../address-service';
+import { Booking, BookingService } from '../booking-service';
+import { finalize, take } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-customer-details',
-  standalone: false,
+  standalone: true,
   templateUrl: './customer-details.html',
-  styleUrl: './customer-details.scss'
+  styleUrl: './customer-details.scss',
+  imports: [MatTabsModule],
 })
 export class CustomerDetailsComponent implements OnInit {
-
-  customer: Customer | null = null;
-
+  customerId: number | null = null;
+  customers: Customer[] = [];
+  selectedCustomer: Customer | null = null;
+  selectedAddress: Address | null = null;
+  addresses: Address[] = [];
+  addressId: number | null = null;
+  bookings: Booking[] = [];
+  bookingId: number | null = null;
+  selectedBooking: Booking | null = null;
   loading = false;
   errorMessage = '';
 
   constructor(
-    private readonly route: ActivatedRoute,
-    private readonly router: Router,
     private readonly customerService: CustomerService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly addressService: AddressService,
+    private readonly bookingService: BookingService,
+    private readonly cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.route.paramMap.subscribe((params) => {
+      const idParam = params.get('id');
+      if (idParam !== null) {
+        this.customerId = +idParam; // Convert to number
+        this.loadCustomerById(this.customerId);
+        this.loadAddressByCustomerId(this.customerId); // Assuming addressId is the same as customerId for this example
+        this.loadBookingByCustomerId(this.customerId);
+      }
+    });
+  }
+  
+  loadCustomerById(id: number | null): void {
     if (!id) {
-      this.errorMessage = 'Invalid customer ID.';
+      console.error('Invalid customer ID');
       return;
     }
+    this.loading = true;
+    this.errorMessage = '';
+    this.selectedCustomer = null; // Clear previous selection
+    this.selectedAddress = null; // Clear previous address selection
+    this.selectedBooking = null;
 
-    this.loadCustomer(id);
+    this.customerService
+      .getCustomerById(id) // Assumes this method exists in CustomerService
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          console.log('CUSTOMER BY ID FINALIZE', this.loading);
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: (customer: Customer) => {
+          console.log('CUSTOMER BY ID DATA', customer);
+          this.selectedCustomer = customer;
+        },
+        error: (err) => {
+          console.error('CUSTOMER BY ID ERROR', err);
+          this.errorMessage = `Unable to load customer with ID ${id}.`;
+        },
+      });
   }
-
-  loadCustomer(id: number): void {
+  loadAddressByCustomerId(customerId: number | null): void {
+    if (!customerId) {
+      console.error('Invalid address ID');
+      return;
+    }
 
     this.loading = true;
     this.errorMessage = '';
+    this.selectedAddress = null;
 
-    this.customerService
-      .getCustomerById(id)
+    this.addressService
+      .getAddressByCustomerId(customerId)
       .pipe(
         take(1),
         finalize(() => {
           this.loading = false;
           this.cdr.markForCheck();
-        })
+        }),
       )
       .subscribe({
-        next: (customer) => {
-          this.customer = customer;
+        next: (data) => {
+          const payload = Array.isArray(data)
+            ? data
+            : ((data as { items?: Address[]; data?: Address[] })?.items ??
+              (data as { items?: Address[]; data?: Address[] })?.data ??
+              []);
+
+          this.addresses = Array.isArray(payload) ? payload : [];
         },
-        error: () => {
-          this.errorMessage = 'Unable to load customer.';
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Unable to load addresses from /api/address.';
         }
       });
   }
+  loadBookingByCustomerId(customerId: number | null): void {
+  if (!customerId) {
+    console.error('Invalid booking ID');
+    return;
+  }
 
-  showUpdateCustomerForm(): void {
+  this.loading = true;
+  this.errorMessage = '';
+  this.selectedBooking = null;
 
-    if (!this.customer?.id) {
-      return;
-    }
+  this.bookingService
+    .getBookingByCustomerId(customerId)
+    .pipe(
+      take(1),
+      finalize(() => {
+        this.loading = false;
+        this.cdr.markForCheck();
+      }),
+    )
+    .subscribe({
+      next: (data) => {
+        const payload = Array.isArray(data)
+          ? data
+          : ((data as { items?: Booking[]; data?: Booking[] })?.items ??
+             (data as { items?: Booking[]; data?: Booking[] })?.data ??
+             []);
 
-    this.router.navigate(['/customer'], {
-      queryParams: {
-        edit: this.customer.id
+        this.bookings = Array.isArray(payload) ? payload : [];
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = 'Unable to load bookings from /api/booking.';
       }
     });
-
   }
-
-  deleteCustomer(): void {
-
-    if (!this.customer?.id) {
-      return;
-    }
-
-    this.loading = true;
-
-    this.customerService
-      .deleteCustomer(this.customer.id)
-      .pipe(
-        take(1),
-        finalize(() => {
-          this.loading = false;
-          this.cdr.markForCheck();
-        })
-      )
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/customer']);
-        },
-        error: () => {
-          this.errorMessage = 'Unable to delete customer.';
-        }
-      });
-
-  }
-
 }

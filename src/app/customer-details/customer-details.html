@@ -1,56 +1,93 @@
-<section class="customer-details-panel">
-
-  <div class="customer-details-header">
+<section class="customer-panel">
+  <div class="customer-header">
     <h2>Customer Details</h2>
-
-    <button
-      type="button"
-      routerLink="/customer">
-      Back
-    </button>
   </div>
 
-  @if (loading) {
-    <p>Loading customer...</p>
-  }
-
-  @if (errorMessage) {
-    <p class="error">{{ errorMessage }}</p>
-  }
-
-  @if (!loading && customer) {
-
+  <!-- CUSTOMER DETAILS -->
+  @if (selectedCustomer) {
     <div class="customer-details">
-
-      <p><strong>Name:</strong> {{ customer.name }}</p>
-
-      <p><strong>Email:</strong> {{ customer.email }}</p>
-
-      <p><strong>Phone:</strong> {{ customer.phoneNumber }}</p>
-
-      <p><strong>Gender:</strong> {{ customer.gender }}</p>
-
-      <p><strong>Date of Birth:</strong> {{ customer.dob }}</p>
-
-      <div class="customer-actions">
-
-        <button
-          type="button"
-          (click)="showUpdateCustomerForm()">
-          Edit
-        </button>
-
-        <button
-          type="button"
-          class="delete-btn"
-          (click)="deleteCustomer()">
-          Delete
-        </button>
-
-      </div>
-
+      <p><strong>Name:</strong> {{ selectedCustomer.name ?? 'Unnamed customer' }}</p>
+      <p><strong>Email:</strong> {{ selectedCustomer.email ?? 'no email exists' }}</p>
+      <p><strong>Date of Birth:</strong> {{ selectedCustomer.dob ?? 'no date of birth exists' }}</p>
+      <p><strong>Gender:</strong> {{ selectedCustomer.gender ?? 'no gender exists' }}</p>
+      <p><strong>Phone Number:</strong> {{ selectedCustomer.phoneNumber ?? 'no phone exists' }}</p>
     </div>
-
   }
 
+  <div>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+      <mat-tab label="Address">
+        <div>
+          <table class="address-table">
+            <thead class="address-table-header">
+              <tr>
+                <th>Street</th>
+                <th>City</th>
+                <th>Province</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (address of addresses; track address.id ?? address.street) {
+                <tr>
+                  <td>
+                    {{ address.street ?? 'No street exists' }}
+                  </td>
+
+                  <td>{{ address.city ?? 'no city exists' }}</td>
+                  <td>{{ address.province ?? 'no province exists' }}</td>
+                  <td>{{ address.postalCode ?? 'no postal code exists' }}</td>
+                  <td>{{ address.country ?? 'no country exists' }}</td>
+                  <td>{{ address.phone ?? 'no phone exists' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+      <mat-tab label="Booking">
+        <div>
+          <table class="booking-table">
+            <thead class="booking-table-header">
+              <tr>
+                <th>Booking ID</th>
+                <th>Customer ID</th>
+                <th>Start Date Time</th>
+                <th>End Date Time</th>
+                <th>Vehicle Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (booking of bookings; track booking.id ?? booking.customerId) {
+                <tr>
+                  <td>{{ booking.id ?? 'Unknown' }}</td>
+                  <td>{{ booking.customerId ?? 'no customer id' }}</td>
+                  <td>
+                    {{ booking.startDateTime ?? 'no date exists' }}
+                  </td>
+
+                  <td>
+                    {{ booking.endDateTime ?? 'no date exists' }}
+                  </td>
+                  <td>
+                    {{ booking.vehicleType ?? 'Not selected' }}
+                  </td>
+
+                  <td>{{ booking.status ?? 'no status exists' }}</td>
+                  <td></td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </section>

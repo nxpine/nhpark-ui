@@ -10,6 +10,7 @@ import { LocationComponent } from './location/location';
 import { BookingComponent } from './booking/booking';
 import { VehicleComponent } from './vehicle/vehicle';
 import { LoginComponent } from './login/login';
+import { CustomerDetailsComponent } from './customer-details/customer-details';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'location', component: LocationComponent },
   { path: 'booking', component: BookingComponent},
   { path: 'vehicle', component: VehicleComponent },
+  { path: 'customer-details/:id', component: CustomerDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
 ];
