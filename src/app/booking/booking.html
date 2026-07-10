@@ -1,9 +1,7 @@
 <section class="booking-panel">
   <div class="booking-header">
     <h2>Bookings</h2>
-    <button type="button" (click)="loadBookings()" [disabled]="loading">
-      Refresh
-    </button>
+    <button type="button" (click)="loadBookings()" [disabled]="loading">Refresh</button>
   </div>
 
   @if (loading) {
@@ -18,17 +16,20 @@
     <p>No bookings were returned by the API.</p>
   }
 
-  @if (!createBookingFormVisible && !updateBookingFormVisible && bookings.length > 0 && selectedBooking === null) {
-
+  @if (
+    !createBookingFormVisible &&
+    !updateBookingFormVisible &&
+    bookings.length > 0 &&
+    selectedBooking === null
+  ) {
     <div>
       <table class="booking-table">
-
         <thead class="booking-table-header">
           <tr>
             <th>Booking ID</th>
             <th>Customer Name</th>
             <th>Date</th>
-            <th>Vehicle Type</th>
+            <th>Vehicle ID</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
@@ -37,7 +38,6 @@
         <tbody>
           @for (booking of bookings; track getBookingId(booking)) {
             <tr>
-
               <td>
                 <a href="javascript:void(0)" (click)="loadBookingById(getBookingId(booking) ?? 0)">
                   {{ getBookingId(booking) ?? 'Unknown' }}
@@ -47,7 +47,7 @@
               <td>{{ booking.customerId ?? 'no customer id' }}</td>
               <td>{{ booking.startDateTime ?? 'no date exists' }}</td>
               <td>{{ booking.endDateTime ?? 'no date exists' }}</td>
-              <td>{{ booking.vehicleType ?? 'Not selected' }}</td>
+              <td>{{ booking.vehicleId ?? 'Not selected' }}</td>
               <td>{{ booking.status ?? 'no status exists' }}</td>
 
               <td>
@@ -55,26 +55,20 @@
                   Delete
                 </button>
               </td>
-
             </tr>
           }
         </tbody>
-
       </table>
 
       <div class="booking-actions">
-        <button type="button" (click)="showCreateBookingForm()">
-          Create
-        </button>
+        <button type="button" (click)="showCreateBookingForm()">Create</button>
       </div>
     </div>
   }
 
   <!-- DETAILS -->
   @if (selectedBooking && !updateBookingFormVisible) {
-
     <div class="booking-details">
-
       <h3>Booking Details</h3>
 
       <p><strong>ID:</strong> {{ getBookingId(selectedBooking) ?? 'Unknown' }}</p>
@@ -82,32 +76,26 @@
       <p><strong>Date:</strong> {{ selectedBooking.startDateTime ?? 'Not provided' }}</p>
       <p><strong>Time:</strong> {{ selectedBooking.endDateTime ?? 'Not provided' }}</p>
       <p><strong>Service Type:</strong> {{ selectedBooking.serviceType ?? 'Not provided' }}</p>
-      <p><strong>Vehicle Type:</strong> {{ selectedBooking.vehicleType ?? 'Not selected' }}</p>
+      <p><strong>Vehicle ID:</strong> {{ selectedBooking.vehicleId ?? 'Not selected' }}</p>
       <p><strong>Status:</strong> {{ selectedBooking.status ?? 'Not provided' }}</p>
       <p><strong>Created At:</strong> {{ selectedBooking.createdAt ?? 'Not provided' }}</p>
 
       <div class="booking-actions">
-        <button type="button" (click)="showUpdateBookingForm(selectedBooking)">
-          Edit
-        </button>
+        <button type="button" (click)="showUpdateBookingForm(selectedBooking)">Edit</button>
 
         <button type="button" (click)="deleteBooking(getBookingId(selectedBooking) ?? 0)">
           Delete
         </button>
       </div>
-
     </div>
   }
 
   <!-- CREATE -->
   @if (createBookingFormVisible) {
-
     <div class="booking-form">
-
       <h3>Create Booking</h3>
 
       <form (ngSubmit)="createBooking(newBooking)">
-
         <div>
           <label>Customer Name:</label>
           <input type="text" name="customerName" [(ngModel)]="newBooking.customerId" required />
@@ -127,14 +115,9 @@
           <label>Service Type:</label>
           <input type="text" name="serviceType" [(ngModel)]="newBooking.serviceType" required />
         </div>
-
         <div>
-          <label>Vehicle Type:</label>
-          <select name="vehicleType" [(ngModel)]="newBooking.vehicleType" required>
-            @for (option of vehicleOptions; track option) {
-              <option [value]="option">{{ option }}</option>
-            }
-          </select>
+          <label>Vehicle ID:</label>
+          <input type="number" name="vehicleId" [(ngModel)]="newBooking.vehicleId" required />
         </div>
 
         <div>
@@ -143,37 +126,38 @@
         </div>
 
         <div>
-          <button type="button" class="back-btn" (click)="hideCreateBookingForm()">
-            Back
-          </button>
+          <button type="button" class="back-btn" (click)="hideCreateBookingForm()">Back</button>
 
-          <button type="submit" class="save-btn">
-            Create Booking
-          </button>
+          <button type="submit" class="save-btn">Create Booking</button>
         </div>
-
       </form>
-
     </div>
   }
 
   <!-- UPDATE -->
   @if (updateBookingFormVisible) {
-
     <div class="booking-form">
-
       <h3>Update Booking</h3>
 
       <form (ngSubmit)="updateBooking(getBookingId(updatedBooking) ?? 0, updatedBooking)">
-
         <div>
           <label>Customer Name:</label>
-          <input type="text" name="update-customerName" [(ngModel)]="updatedBooking.customerId" required />
+          <input
+            type="text"
+            name="update-customerName"
+            [(ngModel)]="updatedBooking.customerId"
+            required
+          />
         </div>
 
         <div>
           <label>Date:</label>
-          <input type="date" name="update-date" [(ngModel)]="updatedBooking.startDateTime" required />
+          <input
+            type="date"
+            name="update-date"
+            [(ngModel)]="updatedBooking.startDateTime"
+            required
+          />
         </div>
 
         <div>
@@ -183,17 +167,23 @@
 
         <div>
           <label>Service Type:</label>
-          <input type="text" name="update-serviceType" [(ngModel)]="updatedBooking.serviceType" required />
+          <input
+            type="text"
+            name="update-serviceType"
+            [(ngModel)]="updatedBooking.serviceType"
+            required
+          />
         </div>
 
         <div>
-          <label>Vehicle Type:</label>
-          <select name="update-vehicleType" [(ngModel)]="updatedBooking.vehicleType" required>
-            @for (option of vehicleOptions; track option) {
-              <option [value]="option">{{ option }}</option>
-            }
-          </select>
-        </div>
+  <label>Vehicle ID:</label>
+  <input
+    type="number"
+    name="vehicleId"
+    [(ngModel)]="newBooking.vehicleId"
+    required
+  />
+</div>
 
         <div>
           <label>Status:</label>
@@ -201,18 +191,11 @@
         </div>
 
         <div>
-          <button type="button" class="back-btn" (click)="hideUpdateBookingForm()">
-            Back
-          </button>
+          <button type="button" class="back-btn" (click)="hideUpdateBookingForm()">Back</button>
 
-          <button type="submit" class="save-btn">
-            Save
-          </button>
+          <button type="submit" class="save-btn">Save</button>
         </div>
-
       </form>
-
     </div>
   }
-
 </section>

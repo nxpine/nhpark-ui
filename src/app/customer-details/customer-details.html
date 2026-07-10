@@ -62,6 +62,7 @@
                       Delete
                     </button>
                   </td>
+                  
                 </tr>
               }
             </tbody>
@@ -77,7 +78,7 @@
                 <th>Customer ID</th>
                 <th>Start Date Time</th>
                 <th>End Date Time</th>
-                <th>Vehicle Type</th>
+                <th>Vehicle Id</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -96,7 +97,7 @@
                     {{ booking.endDateTime ?? 'no date exists' }}
                   </td>
                   <td>
-                    {{ booking.vehicleType ?? 'Not selected' }}
+                    {{ booking.vehicleId ?? 'Not selected' }}
                   </td>
 
                   <td>{{ booking.status ?? 'no status exists' }}</td>
@@ -119,6 +120,7 @@
                       Delete
                     </button>
                   </td>
+                  
                 </tr>
               }
             </tbody>
@@ -126,9 +128,17 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+    <div class="address-actions">
+  <button
+  type="button"
+  mat-raised-button
+  color="primary"
+  (click)="createAddress()">
+  Create Address
+</button>
+</div>
   </div>
   <div></div>
-  <div class="example-button-row">
-    <a matButton="filled" href="http://localhost:4200/booking" target="_blank">Booking</a>
-  </div>
+  <div></div>
+  
 </section>

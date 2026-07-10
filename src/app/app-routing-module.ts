@@ -7,6 +7,7 @@ import { CustomerComponent } from './customer/customer';
 import { HomeComponent } from './home/home';
 import { AddressComponent } from './address/address';
 import { CustomerAddressComponent } from './customer-address/customer-address';
+import { CustomerBookingComponent} from './customer-booking/customer-booking';
 import { LocationComponent } from './location/location';
 import { BookingComponent } from './booking/booking';
 import { VehicleComponent } from './vehicle/vehicle';
@@ -18,10 +19,12 @@ const routes: Routes = [
   { path: 'customer', component: CustomerComponent },
   { path: 'address', component: AddressComponent },
   { path: 'customer-address/:id', component: CustomerAddressComponent },
+  { path: 'customer-booking/:id', component: CustomerBookingComponent },
   { path: 'location', component: LocationComponent },
   { path: 'booking', component: BookingComponent},
   { path: 'vehicle', component: VehicleComponent },
   { path: 'customer-details/:id', component: CustomerDetailsComponent },
+  { path: 'create-address/:id', component: CustomerAddressComponent},
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
 ];

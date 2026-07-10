@@ -15,7 +15,8 @@ import { VehicleComponent } from './vehicle/vehicle';
 import { LoginComponent } from './login/login';
 import { CustomerDetailsComponent } from './customer-details/customer-details';
 import { CustomerAddressComponent } from './customer-address/customer-address';
-import { CustomerBooking } from './customer-booking/customer-booking';
+import { CustomerBookingComponent } from './customer-booking/customer-booking';
+import { CustomerAddressCreate } from './customer-address-create/customer-address-create';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CustomerBooking } from './customer-booking/customer-booking';
     BookingComponent,
     VehicleComponent,
     CustomerAddressComponent,
-    CustomerBooking,
+    CustomerBookingComponent,
+    CustomerAddressCreate,
   ],
 
   imports: [

@@ -1,17 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CustomerBooking } from './customer-booking';
+import { CustomerBookingComponent } from './customer-booking';
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CustomerBooking', () => {
-  let component: CustomerBooking;
-  let fixture: ComponentFixture<CustomerBooking>;
+  let component: CustomerBookingComponent;
+  let fixture: ComponentFixture<CustomerBookingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CustomerBooking],
+      declarations: [CustomerBookingComponent],
+      imports: [FormsModule, HttpClientTestingModule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CustomerBooking);
+    fixture = TestBed.createComponent(CustomerBookingComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

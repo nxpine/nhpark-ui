@@ -8,7 +8,7 @@ export interface Booking {
   startDateTime?: string;
   endDateTime?: string;
   serviceType?: string;
-  vehicleType?: string;
+  vehicleId?: number;
   status?: string;
   createdAt?: string;
   customerId?: number;

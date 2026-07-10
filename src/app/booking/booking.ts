@@ -15,6 +15,7 @@ export class BookingComponent implements OnInit {
   updatedBooking: Booking = { vehicleType: 'Car' } as Booking;
   createBookingFormVisible = false;
   updateBookingFormVisible = false;
+  vehicleId: number | null = null;
   loading = false;
   errorMessage = '';
   vehicleOptions = ['VAN', 'SEDAN', 'SUV', 'Truck'];
@@ -187,12 +188,16 @@ export class BookingComponent implements OnInit {
       });
   }
   showUpdateBookingForm(booking: Booking): void {
-    this.updatedBooking = { ...booking, vehicleType: booking.vehicleType ?? 'Car' };
-    this.updateBookingFormVisible = true;
-    this.createBookingFormVisible = false;
-    this.selectedBooking = null;
-    this.errorMessage = '';
-  }
+  this.updatedBooking = {
+    ...booking,
+    vehicleId: booking.vehicleId ?? undefined
+  };
+
+  this.updateBookingFormVisible = true;
+  this.createBookingFormVisible = false;
+  this.selectedBooking = null;
+  this.errorMessage = '';
+}
 
   hideUpdateBookingForm(): void {
     this.updateBookingFormVisible = false;

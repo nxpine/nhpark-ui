@@ -28,9 +28,13 @@ export class CustomerDetailsComponent implements OnInit {
   updatedCustomer: Customer = {} as Customer;
   updateCustomerFormVisible: boolean = false;
   updateCustomerDetailsFormVisible: boolean = false;
+  createAddressFormVisible: boolean = false;
   createBookingFormVisible: boolean = false;
+  updateAddressFormVisible: boolean = false;
   newBooking: Booking = {} as Booking;
+  newAddress: Address = {} as Address;
   updatedBooking: Booking = {} as Booking;
+  vehicleId: number | null = null;
   loading = false;
   errorMessage = '';
 
@@ -133,6 +137,9 @@ updateAddress(id: number | undefined): void {
 
 }
 
+
+
+
 deleteAddress(id: number): void {
 
   this.loading = true;
@@ -203,64 +210,25 @@ deleteAddress(id: number): void {
   
 }
 
-createBooking(newBooking: Booking): void {
-    this.loading = true;
-    this.errorMessage = '';
+updateBooking(id: number | undefined): void {
 
-    this.bookingService
-      .createBooking(newBooking)
-      .pipe(
-        take(1),
-        finalize(() => {
-          this.loading = false;
-          this.cdr.markForCheck();
-        }),
-      )
-      .subscribe({
-              next: (createdBooking: Booking) => {
-      
-                this.bookings.push(createdBooking);
-      
-                this.newBooking = {} as Booking;
-      
-                this.createBookingFormVisible = false;
-              },
-              error: () => {
-                this.errorMessage = 'Unable to create booking.';
-              }
-            });
-        }
+  if (!id) {
+    console.error('Invalid booking ID');
+    return;
+  }
 
-  updateBooking(id: number): void {
+  this.router.navigate(['/customer-booking', id]);
 
-  this.loading = true;
+}
+
+createAddress(): void {
+
+  this.createAddressFormVisible = true;
+
+  this.newAddress = {} as Address;
+
   this.errorMessage = '';
 
-  this.bookingService
-    .updateBooking(id, this.updatedBooking)
-    .pipe(
-      take(1),
-      finalize(() => {
-        this.loading = false;
-        this.cdr.markForCheck();
-      }),
-    )
-    .subscribe({
-      next: () => {
-
-        this.bookings = this.bookings.filter(
-          (booking) => booking.id !== id
-        );
-
-        if (this.selectedBooking?.id === id) {
-          this.selectedBooking = null;
-        }
-
-      },
-      error: () => {
-        this.errorMessage = 'Unable to update booking.';
-      }
-    });
 }
 
 deleteBooking(id: number): void {

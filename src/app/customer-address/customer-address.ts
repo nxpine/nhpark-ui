@@ -14,7 +14,7 @@ export class CustomerAddressComponent implements OnInit {
   errorMessage = '';
 
   addressId: number | null = null;
-
+  newAddress: Address = {} as Address;
   address: Address = {} as Address;
 
   constructor(
@@ -87,4 +87,48 @@ export class CustomerAddressComponent implements OnInit {
         },
       });
   }
+ createAddress(): void {
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    if (this.addressId) {
+      this.newAddress.customerId = this.addressId;
+    }
+
+
+    this.addressService
+      .createAddress(this.newAddress)
+      .pipe(
+        take(1),
+        finalize(() => {
+
+          this.loading = false;
+          this.cdr.markForCheck();
+
+        }),
+      )
+      .subscribe({
+
+        next: (address: Address) => {
+
+          this.newAddress = {} as Address;
+
+          this.errorMessage = 'Address created successfully.';
+
+        },
+
+
+        error: (err) => {
+
+          console.error(err);
+
+          this.errorMessage = 'Unable to create address.';
+
+        },
+
+      });
+
+  }
+
 }
