@@ -43,6 +43,25 @@
                   <td>{{ address.postalCode ?? 'no postal code exists' }}</td>
                   <td>{{ address.country ?? 'no country exists' }}</td>
                   <td>{{ address.phone ?? 'no phone exists' }}</td>
+
+                  <td>
+                    <button
+                      type="button"
+                      mat-raised-button
+                      color="primary"
+                      (click)="updateAddress(address.id)"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      mat-raised-button
+                      color="warn"
+                      (click)="address.id && deleteAddress(address.id)"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               }
             </tbody>
@@ -82,6 +101,24 @@
 
                   <td>{{ booking.status ?? 'no status exists' }}</td>
                   <td></td>
+                  <td>
+                    <button
+                      type="button"
+                      mat-raised-button
+                      color="primary"
+                      (click)="booking.id && updateBooking(booking.id)"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      mat-raised-button
+                      color="warn"
+                      (click)="booking.id && deleteBooking(booking.id)"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               }
             </tbody>
@@ -89,5 +126,9 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+  </div>
+  <div></div>
+  <div class="example-button-row">
+    <a matButton="filled" href="http://localhost:4200/booking" target="_blank">Booking</a>
   </div>
 </section>

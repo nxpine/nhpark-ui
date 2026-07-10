@@ -1,1 +1,66 @@
-<p>customer-address works!</p>
+<section class="customer-panel">
+
+ 
+    <div class="customer-address-form">
+      <h3>Edit Customer Address</h3>
+      <p> {{ errorMessage }}</p>
+      <form (ngSubmit)="updateAddress()">
+        <div>
+          <label for="street">Street:</label>
+          <input
+            type="text"
+            id="street"
+            name="street"
+            [(ngModel)]="address.street"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="city">City:</label>
+          <input type="text" id="city" name="city" [(ngModel)]="address.city" required />
+        </div>
+
+        <div>
+          <label for="province">Province:</label>
+          <input
+            type="text"
+            id="province"
+            name="province"
+            [(ngModel)]="address.province"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="postalCode">Postal Code:</label>
+          <input
+            type="text"
+            id="postalCode"
+            name="postalCode"
+            [(ngModel)]="address.postalCode"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="country">Country:</label>
+          <input
+            type="text"
+            id="country"
+            name="country"
+            [(ngModel)]="address.country"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="phone">Phone Number:</label>
+          <input type="text" id="phone" name="phone" [(ngModel)]="address.phone" required />
+        </div>
+
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  
+</section>
