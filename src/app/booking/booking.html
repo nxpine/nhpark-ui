@@ -27,8 +27,9 @@
         <thead class="booking-table-header">
           <tr>
             <th>Booking ID</th>
-            <th>Customer Name</th>
-            <th>Date</th>
+            <th>Customer ID</th>
+            <th>Start Date Time</th>
+            <th>End Date Time</th>
             <th>Vehicle ID</th>
             <th>Status</th>
             <th>Actions</th>
@@ -36,22 +37,36 @@
         </thead>
 
         <tbody>
-          @for (booking of bookings; track getBookingId(booking)) {
+          @for (booking of bookings; track booking.id) {
             <tr>
               <td>
-                <a href="javascript:void(0)" (click)="loadBookingById(getBookingId(booking) ?? 0)">
-                  {{ getBookingId(booking) ?? 'Unknown' }}
+                <a href="javascript:void(0)" (click)="booking.id && loadBookingById(booking.id)">
+                  {{ booking.id ?? 'Unknown' }}
                 </a>
               </td>
 
-              <td>{{ booking.customerId ?? 'no customer id' }}</td>
-              <td>{{ booking.startDateTime ?? 'no date exists' }}</td>
-              <td>{{ booking.endDateTime ?? 'no date exists' }}</td>
-              <td>{{ booking.vehicleId ?? 'Not selected' }}</td>
-              <td>{{ booking.status ?? 'no status exists' }}</td>
+              <td>
+                {{ booking.customerId ?? 'No customer id' }}
+              </td>
 
               <td>
-                <button type="button" (click)="deleteBooking(getBookingId(booking) ?? 0)">
+                {{ booking.startDateTime ?? 'No start date' }}
+              </td>
+
+              <td>
+                {{ booking.endDateTime ?? 'No end date' }}
+              </td>
+
+              <td>
+                {{ booking.vehicleId ?? 'Not selected' }}
+              </td>
+
+              <td>
+                {{ booking.status ?? 'No status' }}
+              </td>
+
+              <td>
+                <button type="button" (click)="booking.id && deleteBooking(booking.id)">
                   Delete
                 </button>
               </td>
@@ -67,23 +82,50 @@
   }
 
   <!-- DETAILS -->
+
   @if (selectedBooking && !updateBookingFormVisible) {
     <div class="booking-details">
       <h3>Booking Details</h3>
 
-      <p><strong>ID:</strong> {{ getBookingId(selectedBooking) ?? 'Unknown' }}</p>
-      <p><strong>Customer Name:</strong> {{ selectedBooking.customerId ?? 'Not provided' }}</p>
-      <p><strong>Date:</strong> {{ selectedBooking.startDateTime ?? 'Not provided' }}</p>
-      <p><strong>Time:</strong> {{ selectedBooking.endDateTime ?? 'Not provided' }}</p>
-      <p><strong>Service Type:</strong> {{ selectedBooking.serviceType ?? 'Not provided' }}</p>
-      <p><strong>Vehicle ID:</strong> {{ selectedBooking.vehicleId ?? 'Not selected' }}</p>
-      <p><strong>Status:</strong> {{ selectedBooking.status ?? 'Not provided' }}</p>
-      <p><strong>Created At:</strong> {{ selectedBooking.createdAt ?? 'Not provided' }}</p>
+      <p>
+        <strong>Booking ID:</strong>
+        {{ selectedBooking.id ?? 'Not provided' }}
+      </p>
+
+      <p>
+        <strong>Customer ID:</strong>
+        {{ selectedBooking.customerId ?? 'Not provided' }}
+      </p>
+
+      <p>
+        <strong>Start Date Time:</strong>
+        {{ selectedBooking.startDateTime ?? 'Not provided' }}
+      </p>
+
+      <p>
+        <strong>End Date Time:</strong>
+        {{ selectedBooking.endDateTime ?? 'Not provided' }}
+      </p>
+
+      <p>
+        <strong>Vehicle ID:</strong>
+        {{ selectedBooking.vehicleId ?? 'Not selected' }}
+      </p>
+
+      <p>
+        <strong>Status:</strong>
+        {{ selectedBooking.status ?? 'Not provided' }}
+      </p>
+
+      <p>
+        <strong>Created At:</strong>
+        {{ selectedBooking.createdAt ?? 'Not provided' }}
+      </p>
 
       <div class="booking-actions">
         <button type="button" (click)="showUpdateBookingForm(selectedBooking)">Edit</button>
 
-        <button type="button" (click)="deleteBooking(getBookingId(selectedBooking) ?? 0)">
+        <button type="button" (click)="selectedBooking.id && deleteBooking(selectedBooking.id)">
           Delete
         </button>
       </div>
@@ -91,37 +133,59 @@
   }
 
   <!-- CREATE -->
+
   @if (createBookingFormVisible) {
     <div class="booking-form">
       <h3>Create Booking</h3>
 
       <form (ngSubmit)="createBooking(newBooking)">
         <div>
-          <label>Customer Name:</label>
-          <input type="text" name="customerName" [(ngModel)]="newBooking.customerId" required />
+          <label>Booking ID:</label>
+
+          <input
+            type="number"
+            name="bookingId"
+            [(ngModel)]="newBooking.bookingId"
+            required
+          />
+        </div>
+        <div>
+          <label>Customer ID:</label>
+
+          <input type="number" name="customerId" [(ngModel)]="newBooking.customerId" required />
         </div>
 
         <div>
-          <label>Booking Date:</label>
-          <input type="date" name="bookingDate" [(ngModel)]="newBooking.startDateTime" required />
+          <label>Start Date Time:</label>
+
+          <input
+            type="datetime-local"
+            name="startDateTime"
+            [(ngModel)]="newBooking.startDateTime"
+            required
+          />
         </div>
 
         <div>
-          <label>Booking Time:</label>
-          <input type="time" name="bookingTime" [(ngModel)]="newBooking.endDateTime" required />
+          <label>End Date Time:</label>
+
+          <input
+            type="datetime-local"
+            name="endDateTime"
+            [(ngModel)]="newBooking.endDateTime"
+            required
+          />
         </div>
 
-        <div>
-          <label>Service Type:</label>
-          <input type="text" name="serviceType" [(ngModel)]="newBooking.serviceType" required />
-        </div>
         <div>
           <label>Vehicle ID:</label>
+
           <input type="number" name="vehicleId" [(ngModel)]="newBooking.vehicleId" required />
         </div>
 
         <div>
           <label>Status:</label>
+
           <input type="text" name="status" [(ngModel)]="newBooking.status" required />
         </div>
 
@@ -135,59 +199,61 @@
   }
 
   <!-- UPDATE -->
+
   @if (updateBookingFormVisible) {
     <div class="booking-form">
       <h3>Update Booking</h3>
 
-      <form (ngSubmit)="updateBooking(getBookingId(updatedBooking) ?? 0, updatedBooking)">
+      <form (ngSubmit)="updatedBooking.id && updateBooking(updatedBooking.id, updatedBooking)">
+        
         <div>
-          <label>Customer Name:</label>
+          <label>Customer ID:</label>
+
           <input
-            type="text"
-            name="update-customerName"
+            type="number"
+            name="updateCustomerId"
             [(ngModel)]="updatedBooking.customerId"
             required
           />
         </div>
 
         <div>
-          <label>Date:</label>
+          <label>Start Date Time:</label>
+
           <input
-            type="date"
-            name="update-date"
+            type="datetime-local"
+            name="updateStartDateTime"
             [(ngModel)]="updatedBooking.startDateTime"
             required
           />
         </div>
 
         <div>
-          <label>Time:</label>
-          <input type="time" name="update-time" [(ngModel)]="updatedBooking.endDateTime" required />
-        </div>
+          <label>End Date Time:</label>
 
-        <div>
-          <label>Service Type:</label>
           <input
-            type="text"
-            name="update-serviceType"
-            [(ngModel)]="updatedBooking.serviceType"
+            type="datetime-local"
+            name="updateEndDateTime"
+            [(ngModel)]="updatedBooking.endDateTime"
             required
           />
         </div>
 
         <div>
-  <label>Vehicle ID:</label>
-  <input
-    type="number"
-    name="vehicleId"
-    [(ngModel)]="newBooking.vehicleId"
-    required
-  />
-</div>
+          <label>Vehicle ID:</label>
+
+          <input
+            type="number"
+            name="updateVehicleId"
+            [(ngModel)]="updatedBooking.vehicleId"
+            required
+          />
+        </div>
 
         <div>
           <label>Status:</label>
-          <input type="text" name="update-status" [(ngModel)]="updatedBooking.status" required />
+
+          <input type="text" name="updateStatus" [(ngModel)]="updatedBooking.status" required />
         </div>
 
         <div>

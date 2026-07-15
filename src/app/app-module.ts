@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login';
 import { CustomerDetailsComponent } from './customer-details/customer-details';
 import { CustomerAddressComponent } from './customer-address/customer-address';
 import { CustomerBookingComponent } from './customer-booking/customer-booking';
-import { CustomerAddressCreate } from './customer-address-create/customer-address-create';
+import { CustomerAddressCreateComponent } from './customer-address-create/customer-address-create';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { CustomerAddressCreate } from './customer-address-create/customer-addres
     VehicleComponent,
     CustomerAddressComponent,
     CustomerBookingComponent,
-    CustomerAddressCreate,
+    CustomerAddressCreateComponent,
   ],
 
   imports: [

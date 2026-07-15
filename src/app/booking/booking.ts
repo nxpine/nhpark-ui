@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Booking, BookingService } from '../booking-service';
 import { finalize, take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -11,8 +12,8 @@ import { finalize, take } from 'rxjs';
 export class BookingComponent implements OnInit {
   bookings: Booking[] = [];
   selectedBooking: Booking | null = null;
-  newBooking: Booking = { vehicleType: 'Car' } as Booking;
-  updatedBooking: Booking = { vehicleType: 'Car' } as Booking;
+  newBooking: Booking = {} as Booking;
+  updatedBooking: Booking = {} as Booking;
   createBookingFormVisible = false;
   updateBookingFormVisible = false;
   vehicleId: number | null = null;
@@ -23,15 +24,13 @@ export class BookingComponent implements OnInit {
   constructor(
     private readonly bookingService: BookingService,
     private readonly cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadBookings();
   }
 
-  getBookingId(booking: Booking | null | undefined): number | undefined {
-    return booking?.id ?? booking?.bookingId;
-  }
 
   loadBookings(): void {
     this.loading = true;
@@ -46,6 +45,7 @@ export class BookingComponent implements OnInit {
         take(1),
         finalize(() => {
           this.loading = false;
+          console.log('BOOKING FINALIZE', this.loading);
           this.cdr.markForCheck();
         }),
       )
@@ -57,19 +57,11 @@ export class BookingComponent implements OnInit {
                     (data as { items?: Booking[]; data?: Booking[] })?.data ??
                     []);
       
-                console.log('BOOKING DATA', data, 'NORMALIZED', payload);
           this.bookings = Array.isArray(payload) ? payload : [];
-          this.loading = false;
-          console.log('BOOKING STATE', this.loading, this.bookings);
         },
         error: (err) => {
-          console.error('BOOKING ERROR', err);
+          console.error(err);
           this.errorMessage = 'Unable to load booking from /api/booking.';
-          this.loading = false;
-        },
-        complete: () => {
-          this.loading = false;
-          console.log('BOOKING COMPLETE', this.loading, this.bookings);
         },
       });
   }
@@ -145,24 +137,24 @@ export class BookingComponent implements OnInit {
         }),
       )
       .subscribe({
-        next: (data) => {
-          this.bookings = this.bookings.map((booking) => {
-            const bookingId = this.getBookingId(booking);
-            return bookingId === id ? { ...booking, ...data, id: data.id ?? booking.id ?? id, bookingId: data.bookingId ?? booking.bookingId ?? id } : booking;
-          });
-
-          this.selectedBooking = { ...(data ?? {}), id: data.id ?? id, bookingId: data.bookingId ?? id } as Booking;
-          this.updateBookingFormVisible = false;
-          this.createBookingFormVisible = false;
-        },
-        error: () => {
-          this.errorMessage = 'Unable to update booking.';
+              next: (data) => {
+                this.bookings = this.bookings.map((booking) =>
+                  booking.id === id ? { ...booking, ...data, id } : booking,
+                );
+      
+                this.selectedBooking = { ...(data ?? {}), id } as Booking;
+                this.updateBookingFormVisible = false;
+                this.createBookingFormVisible = false;
+              },
+              error: () => {
+                this.errorMessage = 'Unable to update booking.';
+              }
+            });
         }
-      });
-  }
+      
 
   deleteBooking(id: number): void {
-    this.loading = false;
+    this.loading = true;
     this.errorMessage = '';
 
     this.bookingService
@@ -176,9 +168,10 @@ export class BookingComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-           this.bookings = this.bookings.filter((booking) => this.getBookingId(booking) !== id);
 
-          if (this.getBookingId(this.selectedBooking) === id) {
+          this.bookings = this.bookings.filter(a => a.id !== id);
+
+          if (this.selectedBooking?.id === id) {
             this.selectedBooking = null;
           }
         },
@@ -188,11 +181,7 @@ export class BookingComponent implements OnInit {
       });
   }
   showUpdateBookingForm(booking: Booking): void {
-  this.updatedBooking = {
-    ...booking,
-    vehicleId: booking.vehicleId ?? undefined
-  };
-
+  this.updatedBooking = {...booking};
   this.updateBookingFormVisible = true;
   this.createBookingFormVisible = false;
   this.selectedBooking = null;
@@ -206,7 +195,6 @@ export class BookingComponent implements OnInit {
   }
 
   showCreateBookingForm(): void {
-    this.newBooking = { vehicleType: 'Car' } as Booking;
     this.createBookingFormVisible = true;
     this.updateBookingFormVisible = false;
     this.selectedBooking = null;
@@ -215,7 +203,7 @@ export class BookingComponent implements OnInit {
 
   hideCreateBookingForm(): void {
     this.createBookingFormVisible = false;
-    this.newBooking = { vehicleType: 'Car' } as Booking;
+    this.newBooking = {} as Booking;
     this.loadBookings();
   }
 

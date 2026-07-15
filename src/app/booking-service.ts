@@ -32,16 +32,16 @@ export class BookingService {
     return this.http.get<Booking>(`${this.apiUrl}/${id}`);
   }
 
-  getBookingByCustomerId(customerId: number): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.apiUrl}/customer/${customerId}`);
-  }
+  getBookingByCustomerId(customerId: number): Observable<Booking> {
+  return this.http.get<Booking>(`${this.apiUrl}/customer/${customerId}`);
+}
 
   createBooking(booking: Booking): Observable<Booking> {
     return this.http.post<Booking>(this.apiUrl, booking);
   }
 
-  updateBooking(id: number, booking: Booking): Observable<Booking> {
-    return this.http.patch<Booking>(`${this.apiUrl}/${id}`, booking);
+  updateBooking(id: number, updatedBooking: Booking): Observable<Booking> {
+    return this.http.patch<Booking>(`${this.apiUrl}/${id}`, updatedBooking);
   }
 
   deleteBooking(id: number): Observable<void> {

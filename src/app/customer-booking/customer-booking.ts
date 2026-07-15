@@ -10,13 +10,15 @@ import { finalize, take } from 'rxjs';
   styleUrl: './customer-booking.scss',
 })
 export class CustomerBookingComponent implements OnInit {
-
   loading = false;
   errorMessage = '';
 
-  bookingId: number | null = null;
+  customerId: number | null = null;
+  newBooking: Booking = {} as Booking;
   booking: Booking = {} as Booking;
-  vehicleId: number | null = null;
+  updatedBooking: Booking = {} as Booking;
+  createBookingFormVisible = true;
+  updateBookingFormVisible = false;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -26,117 +28,116 @@ export class CustomerBookingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.route.paramMap.subscribe((params) => {
-
       const idParam = params.get('id');
 
       if (idParam !== null) {
+        this.customerId = +idParam;
+        this.loadBookingByCustomerId(this.customerId);        
+      }
+    });
+  }
 
-        this.bookingId = Number(idParam);
+  loadBookingByCustomerId(id: number | null): void {
+    if (!id) {
+      console.error('Invalid customer ID.');
+      return;
+    }
 
-        this.loadBookingById(this.bookingId);
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.bookingService
+      .getBookingByCustomerId(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: (booking: Booking) => {
+          this.booking = booking;
+        },
+
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = `Customer Booking - Unable to load booking with ID ${id}.`;
+        },
+      });
+  }
+
+  updateBooking(): void {
+    if (!this.customerId) {
+        console.error('Invalid booking ID.');
+      return;
+    }
+
+    this.bookingService
+      .updateBooking(this.customerId, this.booking)
+      .pipe(take(1))
+      .subscribe({
+        next: (booking: Booking) => {
+          this.booking = booking;
+          this.errorMessage = 'Booking saved successfully.';
+          this.cdr.markForCheck();
+        },
+
+        error: () => {
+          this.errorMessage = 'Unable to update booking.';
+        },
+      });
+  }
+  
+  createBooking(): void {
+
+  this.createBookingFormVisible = true;
+  this.updateBookingFormVisible = false;
+
+  this.newBooking = {} as Booking;
+
+  if (this.customerId) {
+    this.newBooking.customerId = this.customerId;
+  }
+
+}
+createBookingSubm(): void {
+
+  this.loading = true;
+
+  if (this.customerId) {
+    this.newBooking.customerId = this.customerId;
+  }
+
+
+  this.bookingService
+    .createBooking(this.newBooking)
+    .pipe(
+      take(1),
+      finalize(() => {
+        this.loading = false;
+        this.cdr.markForCheck();
+      })
+    )
+    .subscribe({
+
+      next: () => {
+
+        this.createBookingFormVisible = false;
+
+        this.loadBookingByCustomerId(this.customerId);
+
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+        this.errorMessage = 'Unable to create booking.';
 
       }
 
     });
 
-  }
-
-
-  loadBookingById(id: number): void {
-
-    if (!id) {
-
-      this.errorMessage = 'Invalid booking ID.';
-      return;
-
-    }
-
-
-    this.loading = true;
-    this.errorMessage = '';
-
-
-    this.bookingService
-      .getBookingById(id)
-      .pipe(
-        take(1),
-        finalize(() => {
-
-          this.loading = false;
-          this.cdr.markForCheck();
-
-        })
-      )
-      .subscribe({
-
-        next: (booking: Booking) => {
-
-          this.booking = booking;
-
-        },
-
-        error: (err) => {
-
-          console.error(err);
-
-          this.errorMessage = `Unable to load booking with ID ${id}.`;
-
-        }
-
-      });
-
-  }
-
-
-
-  updateBooking(): void {
-
-    if (!this.bookingId) {
-
-      this.errorMessage = 'Invalid booking ID.';
-      return;
-
-    }
-
-
-    this.loading = true;
-    this.errorMessage = '';
-
-
-    this.bookingService
-      .updateBooking(this.bookingId, this.booking)
-      .pipe(
-        take(1),
-        finalize(() => {
-
-          this.loading = false;
-          this.cdr.markForCheck();
-
-        })
-      )
-      .subscribe({
-
-        next: (updatedBooking: Booking) => {
-
-          this.booking = updatedBooking;
-
-          this.errorMessage = 'Booking updated successfully.';
-
-        },
-
-        error: (err) => {
-
-          console.error(err);
-
-          this.errorMessage = 'Unable to update booking.';
-
-        }
-
-      });
-
-  }
-
-}
-    
+} }

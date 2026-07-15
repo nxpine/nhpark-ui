@@ -1,4 +1,4 @@
-<section class="customer-panel">
+customer booking html <section class="customer-panel">
 
   <div class="customer-header">
     <h2>Edit Customer Booking</h2>
@@ -17,7 +17,7 @@
           id="bookingId"
           name="bookingId"
           [(ngModel)]="booking.id"
-          readonly
+          required
         />
       </div>
 
@@ -85,6 +85,78 @@
       <button type="submit">
         Save
       </button>
+
+    </form>
+
+  </div>
+
+<hr>
+
+  <!-- Create Booking -->
+  <div class="customer-header">
+    <h2>Create Customer Booking</h2>
+  </div>
+
+  <div class="customer-booking-form">
+
+    <form (ngSubmit)="createBooking()">
+
+      <div>
+        <label for="newCustomerId">Customer ID:</label>
+        <input
+          type="number"
+          id="newCustomerId"
+          name="newCustomerId"
+          [(ngModel)]="newBooking.customerId"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="newStartDateTime">Start Date Time:</label>
+        <input
+          type="datetime-local"
+          id="newStartDateTime"
+          name="newStartDateTime"
+          [(ngModel)]="newBooking.startDateTime"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="newEndDateTime">End Date Time:</label>
+        <input
+          type="datetime-local"
+          id="newEndDateTime"
+          name="newEndDateTime"
+          [(ngModel)]="newBooking.endDateTime"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="newVehicleId">Vehicle ID:</label>
+        <input
+          type="number"
+          id="newVehicleId"
+          name="newVehicleId"
+          [(ngModel)]="newBooking.vehicleId"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="newStatus">Status:</label>
+        <input
+          type="text"
+          id="newStatus"
+          name="newStatus"
+          [(ngModel)]="newBooking.status"
+          required
+        />
+      </div>
+
+      <button type="submit">Create Booking</button>
 
     </form>
 

@@ -1,7 +1,7 @@
 <section class="customer-panel">
 
-  <!-- UPDATE ADDRESS -->
   <div class="customer-address-form">
+
     <h3>Edit Customer Address</h3>
 
     <p>{{ errorMessage }}</p>
@@ -19,6 +19,7 @@
         />
       </div>
 
+
       <div>
         <label for="city">City:</label>
         <input
@@ -29,6 +30,7 @@
           required
         />
       </div>
+
 
       <div>
         <label for="province">Province:</label>
@@ -41,6 +43,7 @@
         />
       </div>
 
+
       <div>
         <label for="postalCode">Postal Code:</label>
         <input
@@ -51,6 +54,7 @@
           required
         />
       </div>
+
 
       <div>
         <label for="country">Country:</label>
@@ -63,6 +67,7 @@
         />
       </div>
 
+
       <div>
         <label for="phone">Phone Number:</label>
         <input
@@ -74,100 +79,11 @@
         />
       </div>
 
-      <button type="submit">Save</button>
 
-    </form>
-  </div>
+      <button type="submit">
+        Save
+      </button>
 
-  <hr>
-
-  <!-- CREATE ADDRESS -->
-  <div class="customer-address-form">
-
-    <h3>Create Customer Address</h3>
-
-    <p>{{ errorMessage }}</p>
-
-    <form (ngSubmit)="createAddress()">
-
-      <div>
-        <label for="newStreet">Street:</label>
-        <input
-          type="text"
-          id="newStreet"
-          name="newStreet"
-          [(ngModel)]="newAddress.street"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="newCity">City:</label>
-        <input
-          type="text"
-          id="newCity"
-          name="newCity"
-          [(ngModel)]="newAddress.city"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="newProvince">Province:</label>
-        <input
-          type="text"
-          id="newProvince"
-          name="newProvince"
-          [(ngModel)]="newAddress.province"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="newPostalCode">Postal Code:</label>
-        <input
-          type="text"
-          id="newPostalCode"
-          name="newPostalCode"
-          [(ngModel)]="newAddress.postalCode"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="newCountry">Country:</label>
-        <input
-          type="text"
-          id="newCountry"
-          name="newCountry"
-          [(ngModel)]="newAddress.country"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="newPhone">Phone Number:</label>
-        <input
-          type="text"
-          id="newPhone"
-          name="newPhone"
-          [(ngModel)]="newAddress.phone"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="newCustomerId">Customer ID:</label>
-        <input
-          type="number"
-          id="newCustomerId"
-          name="newCustomerId"
-          [(ngModel)]="newAddress.customerId"
-          required
-        />
-      </div>
-
-      <button type="submit">Create Address</button>
 
     </form>
 
