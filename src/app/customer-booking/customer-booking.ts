@@ -12,13 +12,10 @@ import { finalize, take } from 'rxjs';
 export class CustomerBookingComponent implements OnInit {
   loading = false;
   errorMessage = '';
-
+  bookingId: number | null = null;
   customerId: number | null = null;
-  newBooking: Booking = {} as Booking;
   booking: Booking = {} as Booking;
-  updatedBooking: Booking = {} as Booking;
-  createBookingFormVisible = true;
-  updateBookingFormVisible = false;
+  newBooking: Booking = {} as Booking;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -32,8 +29,9 @@ export class CustomerBookingComponent implements OnInit {
       const idParam = params.get('id');
 
       if (idParam !== null) {
-        this.customerId = +idParam;
-        this.loadBookingByCustomerId(this.customerId);        
+        this.bookingId = +idParam;
+
+        this.loadBookingByCustomerId(this.bookingId);
       }
     });
   }
@@ -69,13 +67,13 @@ export class CustomerBookingComponent implements OnInit {
   }
 
   updateBooking(): void {
-    if (!this.customerId) {
-        console.error('Invalid booking ID.');
+    if (!this.bookingId) {
+      console.error('Invalid booking ID.');
       return;
     }
 
     this.bookingService
-      .updateBooking(this.customerId, this.booking)
+      .updateBooking(this.bookingId, this.booking)
       .pipe(take(1))
       .subscribe({
         next: (booking: Booking) => {
@@ -84,60 +82,40 @@ export class CustomerBookingComponent implements OnInit {
           this.cdr.markForCheck();
         },
 
-        error: () => {
+        error: (err) => {
           this.errorMessage = 'Unable to update booking.';
         },
       });
   }
-  
   createBooking(): void {
+    this.loading = true;
+    this.errorMessage = '';
 
-  this.createBookingFormVisible = true;
-  this.updateBookingFormVisible = false;
+    if (this.bookingId) {
+      this.newBooking.customerId = this.bookingId;
+    }
 
-  this.newBooking = {} as Booking;
+    this.bookingService
+      .createBooking(this.newBooking)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: (booking: Booking) => {
+          this.newBooking = {} as Booking;
 
-  if (this.customerId) {
-    this.newBooking.customerId = this.customerId;
+          this.errorMessage = 'Booking created successfully.';
+        },
+
+        error: (err) => {
+          console.error(err);
+
+          this.errorMessage = 'Unable to create booking.';
+        },
+      });
   }
-
 }
-createBookingSubm(): void {
-
-  this.loading = true;
-
-  if (this.customerId) {
-    this.newBooking.customerId = this.customerId;
-  }
-
-
-  this.bookingService
-    .createBooking(this.newBooking)
-    .pipe(
-      take(1),
-      finalize(() => {
-        this.loading = false;
-        this.cdr.markForCheck();
-      })
-    )
-    .subscribe({
-
-      next: () => {
-
-        this.createBookingFormVisible = false;
-
-        this.loadBookingByCustomerId(this.customerId);
-
-      },
-
-      error: (err) => {
-
-        console.error(err);
-
-        this.errorMessage = 'Unable to create booking.';
-
-      }
-
-    });
-
-} }

@@ -1,26 +1,26 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Address, AddressService } from '../address-service';
+import { Booking, BookingService } from '../booking-service';
 import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-customer-address-create',
+  selector: 'app-customer-booking-create',
   standalone: false,
-  templateUrl: './customer-address-create.html',
-  styleUrl: './customer-address-create.scss',
+  templateUrl: './customer-booking-create.html',
+  styleUrl: './customer-booking-create.scss',
 })
-export class CustomerAddressCreateComponent implements OnInit {
+export class CustomerBookingCreateComponent implements OnInit {
   customerId: number | null = null;
 
-  address: Address = {} as Address;
+  booking: Booking = {} as Booking;
 
-  errorMessage = '';
   loading = false;
+  errorMessage = '';
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly bookingService: BookingService,
     private readonly router: Router,
-    private readonly addressService: AddressService,
     private readonly cdr: ChangeDetectorRef,
   ) {}
 
@@ -30,24 +30,24 @@ export class CustomerAddressCreateComponent implements OnInit {
 
       if (id) {
         this.customerId = Number(id);
-        this.address.customerId = this.customerId;
+        this.booking.customerId = this.customerId;
       }
     });
   }
 
-  createAddress(): void {
+  createBooking(): void {
     if (!this.customerId) {
       this.errorMessage = 'Customer ID is missing.';
       return;
     }
 
-    this.address.customerId = this.customerId;
+    this.booking.customerId = this.customerId;
 
     this.loading = true;
     this.errorMessage = '';
 
-    this.addressService
-      .createAddress(this.address)
+    this.bookingService
+      .createBooking(this.booking)
       .pipe(take(1))
       .subscribe({
         next: () => {
@@ -58,12 +58,15 @@ export class CustomerAddressCreateComponent implements OnInit {
           console.error(err);
 
           this.loading = false;
-          this.errorMessage = 'Unable to create address.';
+          this.errorMessage = 'Unable to create booking.';
         },
       });
   }
 
   goBack(): void {
-    this.router.navigate(['/customer-details', this.customerId]);
+    if (this.customerId) {
+      this.router.navigate(['/customer-details', this.customerId]);
+    }
   }
+
 }

@@ -17,6 +17,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details';
 import { CustomerAddressComponent } from './customer-address/customer-address';
 import { CustomerBookingComponent } from './customer-booking/customer-booking';
 import { CustomerAddressCreateComponent } from './customer-address-create/customer-address-create';
+import { CustomerBookingCreateComponent } from './customer-booking-create/customer-booking-create';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CustomerAddressCreateComponent } from './customer-address-create/custom
     CustomerAddressComponent,
     CustomerBookingComponent,
     CustomerAddressCreateComponent,
+    CustomerBookingCreateComponent,
   ],
 
   imports: [

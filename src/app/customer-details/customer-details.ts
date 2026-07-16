@@ -4,8 +4,8 @@ import { Address, AddressService } from '../address-service';
 import { Booking, BookingService } from '../booking-service';
 import { finalize, take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatButtonModule} from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-customer-details',
@@ -48,61 +48,51 @@ export class CustomerDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe((params) => {
+      const idParam = params.get('id');
 
-    const idParam = params.get('id');
+      if (idParam) {
+        this.customerId = Number(idParam);
 
-    if (idParam) {
-      this.customerId = Number(idParam);
-
-      this.loadCustomerById(this.customerId);
-      this.loadAddressByCustomerId(this.customerId);
-      this.loadBookingByCustomerId(this.customerId);
-
-    } else {
-      console.error('No customer ID found in route');
-      this.errorMessage = 'Customer ID missing.';
-    }
-
-  });
-}
-
-
-loadCustomerById(id: number): void {
-
-  this.loading = true;
-  this.errorMessage = '';
-
-  this.customerService
-    .getCustomerById(id)
-    .pipe(
-      take(1),
-      finalize(() => {
-        this.loading = false;
-        this.cdr.detectChanges();
-      })
-    )
-    .subscribe({
-
-      next: (customer: Customer) => {
-        console.log('Customer loaded:', customer);
-
-        this.selectedCustomer = customer;
-
-      },
-
-      error: (err) => {
-        console.error('Customer loading error:', err);
-
-        this.errorMessage = 
-          `Unable to load customer with ID ${id}.`;
-
-        this.selectedCustomer = null;
+        this.loadCustomerById(this.customerId);
+        this.loadAddressByCustomerId(this.customerId);
+        this.loadBookingByCustomerId(this.customerId);
+      } else {
+        console.error('No customer ID found in route');
+        this.errorMessage = 'Customer ID missing.';
       }
-
     });
+  }
 
-}
+  loadCustomerById(id: number): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.customerService
+      .getCustomerById(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.detectChanges();
+        }),
+      )
+      .subscribe({
+        next: (customer: Customer) => {
+          console.log('Customer loaded:', customer);
+
+          this.selectedCustomer = customer;
+        },
+
+        error: (err) => {
+          console.error('Customer loading error:', err);
+
+          this.errorMessage = `Unable to load customer with ID ${id}.`;
+
+          this.selectedCustomer = null;
+        },
+      });
+  }
   loadAddressByCustomerId(customerId: number | null): void {
     if (!customerId) {
       console.error('Invalid customer ID');
@@ -135,163 +125,139 @@ loadCustomerById(id: number): void {
         error: (err) => {
           console.error(err);
           this.errorMessage = 'Unable to load addresses from /api/address.';
-        }
+        },
       });
   }
-  
-updateAddress(id: number | undefined): void {
 
-  if (!id) {
-    console.error('Invalid address ID');
-    return;
+  updateAddress(id: number | undefined): void {
+    if (!id) {
+      console.error('Invalid address ID');
+      return;
+    }
+
+    this.router.navigate(['/customer-address', id]);
+  }
+  createAddress(): void {
+    if (!this.customerId) {
+      console.error('Invalid customer ID');
+      return;
+    }
+
+    this.router.navigate(['/create-address', this.customerId]);
   }
 
-  this.router.navigate(['/customer-address', id]);
+  deleteAddress(id: number): void {
+    this.loading = true;
+    this.errorMessage = '';
 
-}
-createAddress(): void {
+    this.addressService
+      .deleteAddress(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.addresses = this.addresses.filter((address) => address.id !== id);
 
-  if (!this.customerId) {
-    console.error('Invalid customer ID');
-    return;
+          if (this.selectedAddress?.id === id) {
+            this.selectedAddress = null;
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Unable to delete address.';
+        },
+      });
   }
-
-  this.router.navigate(['/create-address', this.customerId]);
-
-}
-
-
-deleteAddress(id: number): void {
-
-  this.loading = true;
-  this.errorMessage = '';
-
-  this.addressService
-    .deleteAddress(id)
-    .pipe(
-      take(1),
-      finalize(() => {
-        this.loading = false;
-        this.cdr.markForCheck();
-      }),
-    )
-    .subscribe({
-      next: () => {
-
-        this.addresses = this.addresses.filter(
-          (address) => address.id !== id
-        );
-
-        if (this.selectedAddress?.id === id) {
-          this.selectedAddress = null;
-        }
-
-      },
-      error: (err) => {
-        console.error(err);
-        this.errorMessage = 'Unable to delete address.';
-      }
-    });
-}
 
   loadBookingByCustomerId(customerId: number | null): void {
+    if (!customerId) {
+      console.error('Invalid customer ID');
+      return;
+    }
 
-  if (customerId === null || customerId === undefined) {
-    console.error('Invalid customer ID');
-    return;
+    this.loading = true;
+    this.errorMessage = '';
+    this.selectedBooking = null;
+
+    this.bookingService
+      .getBookingByCustomerId(customerId)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: (data) => {
+          const payload = Array.isArray(data)
+            ? data
+            : ((data as { items?: Booking[]; data?: Booking[] })?.items ??
+              (data as { items?: Booking[]; data?: Booking[] })?.data ??
+              []);
+
+          this.bookings = Array.isArray(payload) ? payload : [];
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Unable to load bookings from /api/booking.';
+        },
+      });
   }
 
-  this.loading = true;
-  this.errorMessage = '';
+  updateBooking(id: number | undefined): void {
+    if (!id) {
+      console.error('Invalid booking ID');
+      return;
+    }
 
-  this.bookingService
-    .getBookingByCustomerId(customerId)
-    .pipe(
-      take(1),
-      finalize(() => {
-        this.loading = false;
-        this.cdr.markForCheck();
-      }),
-    )
-    .subscribe({
-      next: (data) => {
-
-        const payload = Array.isArray(data)
-          ? data
-          : ((data as { items?: Booking[]; data?: Booking[] })?.items ??
-             (data as { items?: Booking[]; data?: Booking[] })?.data ??
-             []);
-
-        this.bookings = payload;
-
-        console.log('Bookings for customer:', customerId, this.bookings);
-      },
-
-      error: (err) => {
-        console.error('Booking loading error:', err);
-        this.errorMessage = `Unable to load bookings for customer ${customerId}.`;
-      }
-    });
-}
-
-updateBooking(id: number | undefined): void {
-
-  if (!id) {
-    console.error('Invalid booking ID');
-    return;
+    this.router.navigate(['/customer-booking', id]);
   }
 
-  this.router.navigate(['/customer-booking', id]);
+  createBooking(): void {
+    if (!this.customerId) {
+      console.error('Invalid customer ID');
+      return;
+    }
 
-}
-
-
-createBooking(): void {
-
-  if (!this.customerId) {
-    console.error('Invalid customer ID');
-    return;
+    this.router.navigate(['/customer-booking-create', this.customerId]);
   }
 
-  this.router.navigate(['/customer-booking', this.customerId]);
+  deleteBooking(id: number | undefined): void {
+    if (id === undefined) {
+      console.error('Invalid booking ID');
+      return;
+    }
 
-}
+    this.loading = true;
+    this.errorMessage = '';
 
-deleteBooking(id: number | undefined): void {
+    this.bookingService
+      .deleteBooking(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.bookings = this.bookings.filter((booking) => booking.id !== id);
 
-  if (id === undefined) {
-    console.error('Invalid booking ID');
-    return;
+          if (this.selectedBooking?.id === id) {
+            this.selectedBooking = null;
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Unable to delete booking.';
+        },
+      });
   }
-
-  this.loading = true;
-  this.errorMessage = '';
-
-  this.bookingService
-    .deleteBooking(id)
-    .pipe(
-      take(1),
-      finalize(() => {
-        this.loading = false;
-        this.cdr.markForCheck();
-      }),
-    )
-    .subscribe({
-      next: () => {
-
-        this.bookings = this.bookings.filter(
-          (booking) => booking.id !== id
-        );
-
-        if (this.selectedBooking?.id === id) {
-          this.selectedBooking = null;
-        }
-
-      },
-      error: (err) => {
-  console.error(err);
-  this.errorMessage = 'Unable to delete booking.';
-}
-    });
-}
 }

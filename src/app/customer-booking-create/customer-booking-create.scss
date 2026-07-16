@@ -1,0 +1,136 @@
+.customer-panel {
+  width: 100%;
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Header */
+.customer-header {
+  background: #2c3e50;
+  padding: 18px 25px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.customer-header h2 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Error message */
+.error {
+  background: #ffe5e5;
+  color: #c0392b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Form container */
+.customer-booking-form {
+  padding: 10px;
+}
+
+.customer-booking-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Form fields */
+.customer-booking-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-booking-form label {
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.customer-booking-form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.customer-booking-form input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+
+/* Readonly customer ID */
+.customer-booking-form input[readonly] {
+  background: #f2f2f2;
+  cursor: not-allowed;
+}
+
+/* Buttons */
+.booking-actions {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.save-btn,
+.back-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Create button */
+.save-btn {
+  background: #27ae60;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #219150;
+}
+
+/* Back button */
+.back-btn {
+  background: #7f8c8d;
+  color: white;
+}
+
+.back-btn:hover {
+  background: #636e72;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .customer-panel {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .booking-actions {
+    flex-direction: column !important;
+  }
+
+  .save-btn,
+  .back-btn {
+    width: 100%;
+  }
+}

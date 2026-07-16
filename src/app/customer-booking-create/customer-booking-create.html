@@ -1,0 +1,59 @@
+<section class="customer-panel">
+  <div class="customer-header">
+    <h2>Create Customer Booking</h2>
+  </div>
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <div class="customer-booking-form">
+    <form (ngSubmit)="createBooking()">
+      <div>
+        <label>Customer ID:</label>
+
+        <input type="number" name="customerId" [(ngModel)]="booking.customerId" readonly />
+      </div>
+
+      <div>
+        <label>Start Date Time:</label>
+
+        <input
+          type="datetime-local"
+          name="startDateTime"
+          [(ngModel)]="booking.startDateTime"
+          required
+        />
+      </div>
+
+      <div>
+        <label>End Date Time:</label>
+
+        <input
+          type="datetime-local"
+          name="endDateTime"
+          [(ngModel)]="booking.endDateTime"
+          required
+        />
+      </div>
+
+      <div>
+        <label>Vehicle ID:</label>
+
+        <input type="number" name="vehicleId" [(ngModel)]="booking.vehicleId" required />
+      </div>
+
+      <div>
+        <label>Status:</label>
+
+        <input type="text" name="status" [(ngModel)]="booking.status" required />
+      </div>
+
+      <div class="booking-actions">
+        <button type="submit" class="save-btn">Create Booking</button>
+
+        <button type="button" class="back-btn" (click)="goBack()">Back</button>
+      </div>
+    </form>
+  </div>
+</section>

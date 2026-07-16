@@ -1,71 +1,202 @@
-.login-panel {
-  max-width: 450px;
-  margin: 50px auto;
-  padding: 25px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.1);
-  font-family: Arial, Helvetica, sans-serif;
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #c1c5ce, #5774c4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: "Segoe UI", sans-serif;
 }
 
+
+/* Brand Logo */
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgb(10, 5, 5);
+  margin-bottom: 30px;
+}
+
+.login-brand .logo {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.login-brand h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+/* Main Login Container */
+.login-container {
+  width: 900px;
+  max-width: 95%;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+}
+
+
+/* Car Image Side */
+.login-image {
+  width: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Login Card */
+.login-card {
+  width: 50%;
+  padding: 45px;
+}
+
+
 .login-header {
-  text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .login-header h2 {
-  margin: 0;
+  font-size: 30px;
+  margin-bottom: 8px;
+  color: #0f172a;
 }
 
-.login-form form div {
-  margin-bottom: 15px;
-}
-
-.login-form label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.login-form input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.login-form input:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.login-actions {
-  text-align: center;
-}
-
-.login-actions button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  background: #0c68cb;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
+.login-header p {
+  color: #64748b;
   font-size: 15px;
 }
 
-.login-actions button:hover {
-  background: #0056b3;
+
+/* Error Message */
+.error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
+
+/* Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+
+.form-group input {
+  padding: 14px 15px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+
+.form-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+
+/* Button */
+.login-actions button {
+  width: 100%;
+  padding: 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+.login-actions button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+
 .login-actions button:disabled {
-  background: #999;
+  background: #94a3b8;
   cursor: not-allowed;
 }
 
-.error {
-  color: #d9534f;
+
+/* Register */
+.register-link {
   text-align: center;
-  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+
+.register-link p {
+  color: #64748b;
+}
+
+
+.register-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-image {
+    width: 100%;
+    height: 220px;
+  }
+
+  .login-card {
+    width: 100%;
+    padding: 30px;
+  }
+
 }
