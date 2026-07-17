@@ -16,22 +16,20 @@ export interface Vehicle {
   providedIn: 'root',
 })
 export class VehicleService {
-
   private readonly apiUrl = '/api/vehicle';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getVehicles(): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>(this.apiUrl);
   }
 
- getVehicleById(id: number): Observable<Vehicle> {
+  getVehicleById(id: number): Observable<Vehicle> {
     return this.http.get<Vehicle>(`${this.apiUrl}/${id}`);
-  
- }
+  }
 
-  getVehicleByCustomerId(customerId: number): Observable<Vehicle> {
-    return this.http.get<Vehicle>(`${this.apiUrl}/${customerId}`);
+  getVehiclesByCustomerId(customerId: number) {
+    return this.http.get<Vehicle[]>(`${this.apiUrl}/customer/${customerId}`);
   }
 
   createVehicle(vehicle: Vehicle): Observable<Vehicle> {

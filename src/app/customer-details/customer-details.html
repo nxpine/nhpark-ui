@@ -141,44 +141,55 @@
         </button>
       </div>
     </mat-tab>
-  
-  <!-- VEHICLE TAB -->
-  <mat-tab label="Vehicle">
+
+    <!-- VEHICLE TAB -->
+<mat-tab label="Vehicle">
+
+  <div class="vehicle-details">
+
     <table class="vehicle-table">
+
       <thead class="vehicle-table-header">
         <tr>
           <th>Make</th>
           <th>Model</th>
           <th>Year</th>
           <th>License Plate</th>
-          <th>ID</th>
           <th>Color</th>
           <th>Actions</th>
         </tr>
       </thead>
 
+
       <tbody>
-        @for (vehicle of vehicles; track vehicle.id ?? vehicle.make) {
+
+        @for (vehicle of vehicles; track vehicle.id) {
+
           <tr>
+
             <td>
               {{ vehicle.make ?? 'no make exists' }}
             </td>
+
             <td>
               {{ vehicle.model ?? 'no model exists' }}
             </td>
+
             <td>
               {{ vehicle.year ?? 'no year exists' }}
             </td>
+
             <td>
               {{ vehicle.licensePlate ?? 'no license plate exists' }}
             </td>
-            <td>
-              {{ vehicle.id ?? 'no id exists' }}
-            </td>
+
             <td>
               {{ vehicle.color ?? 'no color exists' }}
             </td>
+
+
             <td>
+
               <button
                 type="button"
                 mat-raised-button
@@ -188,6 +199,7 @@
                 Edit
               </button>
 
+
               <button
                 type="button"
                 mat-raised-button
@@ -196,17 +208,34 @@
               >
                 Delete
               </button>
+
             </td>
+
           </tr>
+
         }
+
       </tbody>
+
     </table>
+
+
     <div class="vehicle-actions">
-      <button type="button" mat-raised-button color="primary" (click)="createVehicle()">
+
+      <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        (click)="createVehicle()"
+      >
         Create Vehicle
       </button>
+
     </div>
-  </mat-tab>
+
+  </div>
+
+</mat-tab>
   </mat-tab-group>
   <!-- BOTTOM ACTION BUTTONS -->
   <div class="bottom-actions"></div>

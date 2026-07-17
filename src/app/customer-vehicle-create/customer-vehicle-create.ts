@@ -13,7 +13,7 @@ export class CustomerVehicleCreateComponent implements OnInit {
   customerId: number | null = null;
 
   vehicle: Vehicle = {} as Vehicle;
-
+  vehicleId: number | null= null;
   errorMessage = '';
   loading = false;
 
@@ -64,6 +64,7 @@ export class CustomerVehicleCreateComponent implements OnInit {
   }
 
   goBack(): void {
+    if (this.customerId)
     this.router.navigate(['/customer-details', this.customerId]);
   }
 }

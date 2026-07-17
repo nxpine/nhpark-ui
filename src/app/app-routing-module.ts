@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'customer-address-create/:id', component: CustomerAddressCreateComponent },
   { path: 'customer-booking-create/:id', component: CustomerBookingCreateComponent },
-  { path: 'customer-booking-create/:id', component: CustomerVehicleCreateComponent },
+  { path: 'customer-vehicle-create/:id', component: CustomerVehicleCreateComponent },
   { path: '**', redirectTo: '' },
 ];
 

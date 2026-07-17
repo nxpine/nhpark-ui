@@ -6,6 +6,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+
 /* Customer Header */
 .customer-header {
   background-color: #2c3e50;
@@ -43,25 +44,20 @@
 }
 
 
-/* Section Titles */
-.address-details,
-.booking-details {
-  margin-top: 25px;
-  margin-bottom: 15px;
+/* Material Tabs */
+::ng-deep .mat-mdc-tab-group {
+  margin-top: 20px;
 }
 
-.address-details h3,
-.booking-details h3 {
-  font-size: 20px;
-  color: #2c3e50;
-  border-left: 5px solid #ffffff;
-  padding-left: 10px;
+::ng-deep .mat-mdc-tab {
+  font-weight: 600;
 }
 
 
 /* Tables */
 .address-table,
-.booking-table {
+.booking-table,
+.vehicle-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 30px;
@@ -74,7 +70,8 @@
 
 /* Table Headers */
 .address-table-header th,
-.booking-table-header th {
+.booking-table-header th,
+.vehicle-table-header th {
   background-color: #2c3e50;
   color: white;
   padding: 12px;
@@ -83,9 +80,10 @@
 }
 
 
-/* Table Rows */
+/* Table Data */
 .address-table td,
-.booking-table td {
+.booking-table td,
+.vehicle-table td {
   padding: 12px;
   border-bottom: 1px solid #ddd;
   color: #333;
@@ -93,17 +91,42 @@
 }
 
 
-/* Hover Effect */
+/* Hover */
 .address-table tbody tr:hover,
-.booking-table tbody tr:hover {
+.booking-table tbody tr:hover,
+.vehicle-table tbody tr:hover {
   background-color: #f2f8fc;
 }
 
 
-/* Last row border remove */
+/* Remove last border */
 .address-table tr:last-child td,
-.booking-table tr:last-child td {
+.booking-table tr:last-child td,
+.vehicle-table tr:last-child td {
   border-bottom: none;
+}
+
+
+/* Action Areas */
+.address-actions,
+.booking-actions,
+.vehicle-actions {
+  margin-bottom: 25px;
+}
+
+
+/* Buttons */
+button[mat-raised-button] {
+  margin-right: 8px;
+}
+
+
+
+
+
+/* Bottom */
+.bottom-actions {
+  margin-top: 20px;
 }
 
 
@@ -114,8 +137,10 @@
     grid-template-columns: 1fr;
   }
 
+
   .address-table,
-  .booking-table {
+  .booking-table,
+  .vehicle-table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;

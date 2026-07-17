@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './vehicle.scss',
 })
 export class VehicleComponent implements OnInit {
+
   vehicles: Vehicle[] = [];
   selectedVehicle: Vehicle | null = null;
   newVehicle: Vehicle = {} as Vehicle;
@@ -20,10 +21,10 @@ export class VehicleComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private readonly vehicleService: VehicleService,
-    private readonly cdr: ChangeDetectorRef,
-    private readonly router: Router,
-  ) {}
+  private readonly vehicleService: VehicleService,
+  private readonly cdr: ChangeDetectorRef,
+  private readonly router: Router
+) {}
 
   ngOnInit(): void {
     this.loadVehicles();
@@ -44,22 +45,22 @@ export class VehicleComponent implements OnInit {
           this.loading = false;
           console.log('VEHICLE FINALIZE', this.loading);
           this.cdr.markForCheck();
-        }),
+        })
       )
       .subscribe({
         next: (data) => {
           const payload = Array.isArray(data)
-            ? data
-            : ((data as { items?: Vehicle[]; data?: Vehicle[] })?.items ??
-              (data as { items?: Vehicle[]; data?: Vehicle[] })?.data ??
-              []);
+          ? data
+          : ((data as { items?: Vehicle[]; data?: Vehicle[] })?.items ??
+           (data as { items?: Vehicle[]; data?: Vehicle[] })?.data ??
+           []);
 
           this.vehicles = Array.isArray(payload) ? payload : [];
         },
         error: (err) => {
           console.error(err);
           this.errorMessage = 'Unable to load vehicles from API.';
-        },
+        }
       });
   }
 
@@ -76,7 +77,7 @@ export class VehicleComponent implements OnInit {
         finalize(() => {
           this.loading = false;
           this.cdr.markForCheck();
-        }),
+        })
       )
       .subscribe({
         next: (vehicle: Vehicle) => {
@@ -88,7 +89,7 @@ export class VehicleComponent implements OnInit {
         },
         error: () => {
           this.errorMessage = `Unable to load vehicle with ID ${id}.`;
-        },
+        }
       });
   }
 
@@ -104,7 +105,7 @@ export class VehicleComponent implements OnInit {
         finalize(() => {
           this.loading = false;
           this.cdr.markForCheck();
-        }),
+        })
       )
       .subscribe({
         next: (created) => {
@@ -114,7 +115,7 @@ export class VehicleComponent implements OnInit {
         },
         error: () => {
           this.errorMessage = 'Unable to create vehicle.';
-        },
+        }
       });
   }
 
@@ -130,26 +131,30 @@ export class VehicleComponent implements OnInit {
         finalize(() => {
           this.loading = false;
           this.cdr.markForCheck();
-        }),
+        })
       )
       .subscribe({
         next: (data) => {
-          this.vehicles = this.vehicles.map((v) => (v.id === id ? { ...v, ...data, id } : v));
 
-          this.selectedVehicle = {
-            ...updatedVehicle,
-            ...data,
-            id,
-          };
+  this.vehicles = this.vehicles.map(v =>
+    v.id === id ? { ...v, ...data, id } : v
+  );
 
-          this.updateVehicleFormVisible = false;
-          this.createVehicleFormVisible = false;
-        },
+  this.selectedVehicle = {
+    ...updatedVehicle,
+    ...data,
+    id
+  };
+
+  this.updateVehicleFormVisible = false;
+  this.createVehicleFormVisible = false;
+},
         error: () => {
           this.errorMessage = 'Unable to update vehicle.';
-        },
+        }
       });
   }
+
 
   // === DELETE ===
   deleteVehicle(id: number): void {
@@ -163,11 +168,12 @@ export class VehicleComponent implements OnInit {
         finalize(() => {
           this.loading = false;
           this.cdr.markForCheck();
-        }),
+        })
       )
       .subscribe({
         next: () => {
-          this.vehicles = this.vehicles.filter((v) => v.id !== id);
+
+          this.vehicles = this.vehicles.filter(v => v.id !== id);
 
           if (this.selectedVehicle?.id === id) {
             this.selectedVehicle = null;
@@ -175,39 +181,39 @@ export class VehicleComponent implements OnInit {
         },
         error: () => {
           this.errorMessage = 'Unable to delete vehicle.';
-        },
+        }
       });
   }
 
   // ================= UI CONTROL =================
-  showUpdateVehicleForm(vehicle: Vehicle): void {
-    this.updatedVehicle = { ...vehicle };
-    this.updateVehicleFormVisible = true;
-    this.createVehicleFormVisible = false;
-    this.selectedVehicle = null;
-    this.errorMessage = '';
-  }
-
-  hideUpdateVehicleForm(): void {
-    this.updateVehicleFormVisible = false;
-    this.selectedVehicle = null;
-    this.loadVehicles();
-  }
-
-  hideCreateVehicleForm(): void {
-    this.createVehicleFormVisible = false;
-    this.newVehicle = {} as Vehicle;
-    this.loadVehicles();
-  }
-
-  showCreateVehicleForm(): void {
-    this.createVehicleFormVisible = true;
-    this.updateVehicleFormVisible = false;
-    this.selectedVehicle = null;
-    this.errorMessage = '';
-  }
-
-  clearSelection(): void {
-    this.selectedVehicle = null;
-  }
+ showUpdateVehicleForm(vehicle: Vehicle): void {
+     this.updatedVehicle = { ...vehicle };
+     this.updateVehicleFormVisible = true;
+     this.createVehicleFormVisible = false;
+     this.selectedVehicle = null;
+     this.errorMessage = '';
+   }
+ 
+   hideUpdateVehicleForm(): void {
+  this.updateVehicleFormVisible = false;
+  this.selectedVehicle = null;
+  this.loadVehicles();
 }
+ 
+ hideCreateVehicleForm(): void {
+  this.createVehicleFormVisible = false;
+  this.newVehicle = {} as Vehicle;
+  this.loadVehicles();
+}
+ 
+   showCreateVehicleForm():void{
+     this.createVehicleFormVisible = true;
+     this.updateVehicleFormVisible = false;
+     this.selectedVehicle = null;
+     this.errorMessage = '';
+   }
+ 
+   clearSelection(): void {
+     this.selectedVehicle = null;
+   }
+ }
