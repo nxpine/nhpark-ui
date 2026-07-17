@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Customer, CustomerService } from '../customer-service';
 import { Address, AddressService } from '../address-service';
 import { Booking, BookingService } from '../booking-service';
+import { Vehicle, VehicleService } from '../vehicle-service';
 import { finalize, take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -24,12 +25,15 @@ export class CustomerDetailsComponent implements OnInit {
   updatedAddress: Address = {} as Address;
   bookings: Booking[] = [];
   bookingId: number | null = null;
+  vehicles: Vehicle[] = [];
+  selectedVehicle: Vehicle | null = null;
   selectedBooking: Booking | null = null;
   updatedCustomer: Customer = {} as Customer;
   updateCustomerFormVisible: boolean = false;
   updateCustomerDetailsFormVisible: boolean = false;
   createAddressFormVisible: boolean = false;
   createBookingFormVisible: boolean = false;
+  createVehicleFormVisible: boolean = false;
   updateAddressFormVisible: boolean = false;
   newBooking: Booking = {} as Booking;
   newAddress: Address = {} as Address;
@@ -42,6 +46,7 @@ export class CustomerDetailsComponent implements OnInit {
     private readonly customerService: CustomerService,
     private readonly addressService: AddressService,
     private readonly bookingService: BookingService,
+    private readonly vehicleService: VehicleService,
     private readonly cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
     private readonly router: Router,
@@ -57,6 +62,7 @@ export class CustomerDetailsComponent implements OnInit {
         this.loadCustomerById(this.customerId);
         this.loadAddressByCustomerId(this.customerId);
         this.loadBookingByCustomerId(this.customerId);
+        this.loadVehicleByCustomerId(this.customerId);
       } else {
         console.error('No customer ID found in route');
         this.errorMessage = 'Customer ID missing.';
@@ -257,6 +263,86 @@ export class CustomerDetailsComponent implements OnInit {
         error: (err) => {
           console.error(err);
           this.errorMessage = 'Unable to delete booking.';
+        },
+      });
+  }
+  loadVehicleByCustomerId(customerId: number | null): void {
+    if (!customerId) {
+      console.error('Invalid customer ID');
+      return;
+    }
+
+    this.loading = true;
+    this.errorMessage = '';
+    this.selectedVehicle = null;
+
+    this.vehicleService
+      .getVehicleByCustomerId(customerId)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: (data) => {
+          const payload = Array.isArray(data)
+            ? data
+            : ((data as { items?: Vehicle[]; data?: Vehicle[] })?.items ??
+              (data as { items?: Vehicle[]; data?: Vehicle[] })?.data ??
+              []);
+
+          this.vehicles = Array.isArray(payload) ? payload : [];
+        },
+
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Unable to load vehicles from /api/vehicle.';
+        },
+      });
+  }
+  updateVehicle(id: number | undefined): void {
+    if (!id) {
+      console.error('Invalid vehicle ID');
+      return;
+    }
+
+    this.router.navigate(['/customer-vehicle', id]);
+  }
+  createVehicle(): void {
+    if (!this.customerId) {
+      console.error('Invalid customer ID');
+      return;
+    }
+
+    this.router.navigate(['/customer-vehicle-create', this.customerId]);
+  }
+  
+  deleteVehicle(id: number): void {
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.vehicleService
+      .deleteVehicle(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.vehicles = this.vehicles.filter((vehicle) => vehicle.id !== id);
+
+          if (this.selectedVehicle?.id === id) {
+            this.selectedVehicle = null;
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Unable to delete vehicle.';
         },
       });
   }

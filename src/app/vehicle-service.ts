@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Vehicle {
-    id?: number;
+  id?: number;
+  customerId?: number;
   make?: string;
   model?: string;
   year?: number;
   licensePlate?: string;
-  type?: string;
   color?: string;
 }
 
@@ -25,16 +25,21 @@ export class VehicleService {
     return this.http.get<Vehicle[]>(this.apiUrl);
   }
 
-  getVehicleById(id: number): Observable<Vehicle> {
+ getVehicleById(id: number): Observable<Vehicle> {
     return this.http.get<Vehicle>(`${this.apiUrl}/${id}`);
+  
+ }
+
+  getVehicleByCustomerId(customerId: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${this.apiUrl}/${customerId}`);
   }
 
   createVehicle(vehicle: Vehicle): Observable<Vehicle> {
     return this.http.post<Vehicle>(this.apiUrl, vehicle);
   }
 
-  updateVehicle(id: number, vehicle: Vehicle): Observable<Vehicle> {
-    return this.http.put<Vehicle>(`${this.apiUrl}/${id}`, vehicle);
+  updateVehicle(id: number, updatedVehicle: Vehicle): Observable<Vehicle> {
+    return this.http.put<Vehicle>(`${this.apiUrl}/${id}`, updatedVehicle);
   }
 
   deleteVehicle(id: number): Observable<void> {
