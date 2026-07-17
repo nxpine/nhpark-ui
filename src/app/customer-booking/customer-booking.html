@@ -1,0 +1,67 @@
+<section class="customer-panel">
+  <div class="customer-header">
+    <h2>Edit Customer Booking</h2>
+  </div>
+
+  <p>{{ errorMessage }}</p>
+
+  <div class="customer-booking-form">
+    <form (ngSubmit)="updateBooking()">
+      <div>
+        <label for="bookingId">Booking ID:</label>
+        <input type="number" id="bookingId" name="bookingId" [(ngModel)]="booking.id" required />
+      </div>
+
+      <div>
+        <label for="customerId">Customer ID:</label>
+        <input
+          type="number"
+          id="customerId"
+          name="customerId"
+          [(ngModel)]="booking.customerId"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="startDateTime">Start Date Time:</label>
+        <input
+          type="datetime-local"
+          id="startDateTime"
+          name="startDateTime"
+          [(ngModel)]="booking.startDateTime"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="endDateTime">End Date Time:</label>
+        <input
+          type="datetime-local"
+          id="endDateTime"
+          name="endDateTime"
+          [(ngModel)]="booking.endDateTime"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="vehicleId">Vehicle ID:</label>
+        <input
+          type="number"
+          id="vehicleId"
+          name="vehicleId"
+          [(ngModel)]="booking.vehicleId"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" [(ngModel)]="booking.status" required />
+      </div>
+
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</section>

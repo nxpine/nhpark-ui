@@ -31,7 +31,7 @@
             <th>Model</th>
             <th>Year</th>
             <th>License Plate</th>
-            <th>Type</th>
+            <th>Id</th>
             <th>Color</th>
             <th>Actions</th>
           </tr>
@@ -47,11 +47,12 @@
                   {{ vehicle.make ?? 'no make exists' }}
                 </a>
               </td>
-
+               
+              <td>{{ vehicle.make ?? 'no make exists' }}</td>
               <td>{{ vehicle.model ?? 'no model exists' }}</td>
               <td>{{ vehicle.year ?? 'no year exists' }}</td>
               <td>{{ vehicle.licensePlate ?? 'no license plate exists' }}</td>
-              <td>{{ vehicle.type ?? 'no type exists' }}</td>
+              <td>{{ vehicle.id ?? 'no type exists' }}</td>
               <td>{{ vehicle.color ?? 'no color exists' }}</td>
 
               <td>
@@ -87,7 +88,7 @@
       <p><strong>Model:</strong> {{ selectedVehicle.model }}</p>
       <p><strong>Year:</strong> {{ selectedVehicle.year }}</p>
       <p><strong>License Plate:</strong> {{ selectedVehicle.licensePlate }}</p>
-      <p><strong>Type:</strong> {{ selectedVehicle.type }}</p>
+      <p><strong>Type:</strong> {{ selectedVehicle.id }}</p>
       <p><strong>Color:</strong> {{ selectedVehicle.color }}</p>
 
       <div class="vehicle-actions">
@@ -138,7 +139,7 @@
 
         <div>
           <label>Type:</label>
-          <input type="text" [(ngModel)]="newVehicle.type" name="type" required />
+          <input type="text" [(ngModel)]="newVehicle.id" name="type" required />
         </div>
 
         <div>
@@ -191,7 +192,7 @@
 
         <div>
           <label>Type:</label>
-          <input type="text" [(ngModel)]="updatedVehicle.type" name="type" required />
+          <input type="text" [(ngModel)]="updatedVehicle.id" name="type" required />
         </div>
 
         <div>

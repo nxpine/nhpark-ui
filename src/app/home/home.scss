@@ -1,74 +1,286 @@
-/* Smooth, modern container with subtle gradient background */
 .home-page {
-  background: radial-gradient(circle at top right, #f8fafc, #e2e8f0);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Inter, system-ui, -apple-system, sans-serif;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
+
+    min-height:100vh;
+    background:
+    linear-gradient(135deg,#7588c6,#8abed0);
+
+    padding:50px;
+
+    font-family:"Segoe UI",sans-serif;
+
+    color:white;
+
 }
 
-/* Polished card layout with clear borders */
-.card {
-  background: #ffffff;
-  padding: 2.5rem;
-  border-radius: 20px;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.05), 
-    0 20px 25px -5px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  width: 100%;
-  max-width: 380px;
-  display: flex;
-  flex-direction: column;
+
+
+/* HERO */
+
+.hero {
+
+    text-align:center;
+
+    max-width:1200px;
+
+    margin:auto;
+
 }
 
-h1 {
-  margin: 0 0 8px 0;
-  font-size: 1.85rem;
-  color: #0f172a;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+
+
+.brand {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
 }
 
-p {
-  margin: 0 0 2rem 0;
-  color: #64748b;
-  font-size: 0.95rem;
-  line-height: 1.5;
+
+.logo {
+
+    width:70px;
+
 }
 
-/* Modern buttons with subtle shadows and hover animations */
-.pill {
-  display: block;
-  background-color: #2563eb;
-  color: white;
-  text-decoration: none;
-  padding: 14px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+.brand h1 {
+
+    font-size:42px;
+
+    font-weight:800;
+
 }
 
-/* Remove margin on the last button */
-.pill:last-child {
-  margin-bottom: 0;
+
+
+.hero h2 {
+
+    margin-top:40px;
+
+    font-size:52px;
+
+    letter-spacing:-1px;
+
 }
 
-/* Hover and active states */
-.pill:hover {
-  background-color: #1d4ed8;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.25);
+
+
+.hero p {
+
+    max-width:600px;
+
+    margin:20px auto;
+
+    color:#f1f3f5;
+
+    font-size:18px;
+
+    line-height:1.6;
+
 }
 
-.pill:active {
-  transform: translateY(0);
+
+
+/* CENTER CAR */
+
+.car-container {
+
+    margin:45px auto;
+
+    width:650px;
+
+    height:330px;
+
+    max-width:90%;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:
+
+    radial-gradient(
+    circle,
+    rgba(56,189,248,.25),
+    transparent 65%
+    );
+
 }
 
+
+
+.car-image {
+
+    width:100%;
+
+    max-width:550px;
+
+    filter:drop-shadow(
+    0 25px 20px rgba(0,0,0,.5)
+    );
+
+}
+
+
+
+/* BUTTONS */
+
+
+.hero-buttons {
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+
+
+
+.primary-btn,
+.secondary-btn {
+
+    padding:15px 35px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+
+
+.primary-btn {
+
+    background:#38bdf8;
+
+    color:#082f49;
+
+}
+
+
+
+.secondary-btn {
+
+    border:1px solid #38bdf8;
+
+    color:#38bdf8;
+
+}
+
+
+
+/* FEATURES */
+
+
+.features {
+
+    margin:60px auto;
+
+    max-width:1200px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.feature-card {
+
+    background:#1a253d;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    border:1px solid #1e293b;
+
+    transition:.3s;
+
+}
+
+
+
+.feature-card:hover {
+
+    transform:translateY(-8px);
+
+    border-color:#38bdf8;
+
+}
+
+
+
+.feature-card h3 {
+
+    font-size:22px;
+
+}
+
+
+
+.feature-card p {
+
+    color:#dedfe1;
+
+}
+
+
+
+.feature-card a {
+
+    color:#38bdf8;
+
+    text-decoration:none;
+
+}
+
+
+
+/* MOBILE */
+
+
+@media(max-width:900px){
+
+.features{
+
+    grid-template-columns:1fr 1fr;
+
+}
+
+
+.hero h2{
+
+    font-size:38px;
+
+}
+
+}
+
+
+
+@media(max-width:600px){
+
+.features{
+
+    grid-template-columns:1fr;
+
+}
+
+}

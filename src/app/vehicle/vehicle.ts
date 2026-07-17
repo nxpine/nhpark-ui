@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { finalize, take } from 'rxjs';
 import { Vehicle, VehicleService } from '../vehicle-service';
+import { finalize, take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle',
@@ -20,15 +21,15 @@ export class VehicleComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private readonly vehicleService: VehicleService,
-    private readonly cdr: ChangeDetectorRef
-  ) {}
+  private readonly vehicleService: VehicleService,
+  private readonly cdr: ChangeDetectorRef,
+  private readonly router: Router
+) {}
 
   ngOnInit(): void {
     this.loadVehicles();
   }
 
-  // ================= LOAD ALL =================
   loadVehicles(): void {
     this.loading = true;
     this.errorMessage = '';
@@ -49,12 +50,15 @@ export class VehicleComponent implements OnInit {
       .subscribe({
         next: (data) => {
           const payload = Array.isArray(data)
-            ? data
-            : ((data as any)?.items ?? (data as any)?.data ?? []);
+          ? data
+          : ((data as { items?: Vehicle[]; data?: Vehicle[] })?.items ??
+           (data as { items?: Vehicle[]; data?: Vehicle[] })?.data ??
+           []);
 
           this.vehicles = Array.isArray(payload) ? payload : [];
         },
-        error: () => {
+        error: (err) => {
+          console.error(err);
           this.errorMessage = 'Unable to load vehicles from API.';
         }
       });
@@ -116,12 +120,12 @@ export class VehicleComponent implements OnInit {
   }
 
   // ================= UPDATE =================
-  updateVehicle(id: number, updated: Vehicle): void {
+  updateVehicle(id: number, updatedVehicle: Vehicle): void {
     this.loading = true;
     this.errorMessage = '';
 
     this.vehicleService
-      .updateVehicle(id, updated)
+      .updateVehicle(id, updatedVehicle)
       .pipe(
         take(1),
         finalize(() => {
@@ -132,24 +136,25 @@ export class VehicleComponent implements OnInit {
       .subscribe({
         next: (data) => {
 
-          this.vehicles = this.vehicles.map(v =>
-            v.id === id ? { ...v, ...data, id } : v
-          );
+  this.vehicles = this.vehicles.map(v =>
+    v.id === id ? { ...v, ...data, id } : v
+  );
 
-          this.selectedVehicle = { ...(data ?? {}), id } as Vehicle;
+  this.selectedVehicle = {
+    ...updatedVehicle,
+    ...data,
+    id
+  };
 
-          this.updateVehicleFormVisible = false;
-          this.createVehicleFormVisible = false;
-        },
+  this.updateVehicleFormVisible = false;
+  this.createVehicleFormVisible = false;
+},
         error: () => {
           this.errorMessage = 'Unable to update vehicle.';
         }
       });
   }
 
-  getVehicleYear(vehicle?: Vehicle | null): string {
-    return vehicle?.year != null ? `${vehicle.year}` : 'no year exists';
-  }
 
   // === DELETE ===
   deleteVehicle(id: number): void {
@@ -184,25 +189,31 @@ export class VehicleComponent implements OnInit {
  showUpdateVehicleForm(vehicle: Vehicle): void {
      this.updatedVehicle = { ...vehicle };
      this.updateVehicleFormVisible = true;
-   }
- 
-   hideUpdateVehicleForm() {
-   this.updateVehicleFormVisible = false;
-   this.selectedVehicle = /* restore the vehicle you were viewing, e.g.: */
-     this.updatedVehicle;
- }
- 
- hideCreateVehicleForm
-() {
      this.createVehicleFormVisible = false;
+     this.selectedVehicle = null;
+     this.errorMessage = '';
    }
+ 
+   hideUpdateVehicleForm(): void {
+  this.updateVehicleFormVisible = false;
+  this.selectedVehicle = null;
+  this.loadVehicles();
+}
+ 
+ hideCreateVehicleForm(): void {
+  this.createVehicleFormVisible = false;
+  this.newVehicle = {} as Vehicle;
+  this.loadVehicles();
+}
  
    showCreateVehicleForm():void{
      this.createVehicleFormVisible = true;
+     this.updateVehicleFormVisible = false;
+     this.selectedVehicle = null;
+     this.errorMessage = '';
    }
  
    clearSelection(): void {
      this.selectedVehicle = null;
-     this.cdr.markForCheck();
    }
  }

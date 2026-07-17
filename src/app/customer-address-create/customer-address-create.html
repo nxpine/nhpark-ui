@@ -1,0 +1,104 @@
+<section class="customer-panel">
+
+  <div class="customer-header">
+    <h2>Create Customer Address</h2>
+  </div>
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <div class="customer-address-form">
+
+    <form (ngSubmit)="createAddress()">
+
+      <div>
+        <label>Street:</label>
+        <input
+          type="text"
+          name="street"
+          [(ngModel)]="address.street"
+          required
+        />
+      </div>
+
+
+      <div>
+        <label>City:</label>
+        <input
+          type="text"
+          name="city"
+          [(ngModel)]="address.city"
+          required
+        />
+      </div>
+
+
+      <div>
+        <label>Province:</label>
+        <input
+          type="text"
+          name="province"
+          [(ngModel)]="address.province"
+          required
+        />
+      </div>
+
+
+      <div>
+        <label>Postal Code:</label>
+        <input
+          type="text"
+          name="postalCode"
+          [(ngModel)]="address.postalCode"
+          required
+        />
+      </div>
+
+
+      <div>
+        <label>Country:</label>
+        <input
+          type="text"
+          name="country"
+          [(ngModel)]="address.country"
+          required
+        />
+      </div>
+
+
+      <div>
+        <label>Phone Number:</label>
+        <input
+          type="text"
+          name="phone"
+          [(ngModel)]="address.phone"
+          required
+        />
+      </div>
+
+
+      <div class="address-actions">
+
+        <button
+          type="submit"
+          class="save-btn">
+          Create Address
+        </button>
+
+
+        <button
+          type="button"
+          class="back-btn"
+          (click)="goBack()">
+          Back
+        </button>
+
+      </div>
+
+
+    </form>
+
+  </div>
+
+</section>

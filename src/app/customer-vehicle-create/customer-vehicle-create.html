@@ -1,0 +1,89 @@
+<section class="customer-panel">
+  <div class="customer-header">
+    <h2>Create Customer Vehicle</h2>
+  </div>
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <div class="customer-vehicle-form">
+    <form (ngSubmit)="createVehicle()">
+      <div>
+        <label for="make">Make:</label>
+        <input
+          type="text"
+          id="make"
+          name="make"
+          [(ngModel)]="vehicle.make"
+          placeholder="Enter vehicle make"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="model">Model:</label>
+        <input
+          type="text"
+          id="model"
+          name="model"
+          [(ngModel)]="vehicle.model"
+          placeholder="Enter vehicle model"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="year">Year:</label>
+        <input
+          type="number"
+          id="year"
+          name="year"
+          [(ngModel)]="vehicle.year"
+          placeholder="Enter vehicle year"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="licensePlate">License Plate:</label>
+        <input
+          type="text"
+          id="licensePlate"
+          name="licensePlate"
+          [(ngModel)]="vehicle.licensePlate"
+          placeholder="Enter license plate"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="type">Vehicle ID:</label>
+        <input
+          type="number"
+          id="vehicleId"
+          name="vehicleId"
+          [(ngModel)]="vehicle.id"
+          placeholder="Enter vehicle ID"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="color">Color:</label>
+        <input
+          type="text"
+          id="color"
+          name="color"
+          [(ngModel)]="vehicle.color"
+          placeholder="Enter vehicle color"
+          required
+        />
+      </div>
+
+      <button type="submit" class="save-btn">Create Vehicle</button>
+
+      <button type="button" class="back-btn" (click)="goBack()">Cancel</button>
+    </form>
+  </div>
+</section>

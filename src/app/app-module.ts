@@ -14,7 +14,12 @@ import { BookingComponent } from './booking/booking';
 import { VehicleComponent } from './vehicle/vehicle';
 import { LoginComponent } from './login/login';
 import { CustomerDetailsComponent } from './customer-details/customer-details';
-import { CustomerAddress } from './customer-address/customer-address';
+import { CustomerAddressComponent } from './customer-address/customer-address';
+import { CustomerBookingComponent } from './customer-booking/customer-booking';
+import { CustomerVehicleComponent } from './customer-vehicle/customer-vehicle';
+import { CustomerAddressCreateComponent } from './customer-address-create/customer-address-create';
+import { CustomerBookingCreateComponent } from './customer-booking-create/customer-booking-create';
+import { CustomerVehicleCreateComponent } from './customer-vehicle-create/customer-vehicle-create';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import { CustomerAddress } from './customer-address/customer-address';
     LocationComponent,
     BookingComponent,
     VehicleComponent,
-    CustomerAddress,
+    CustomerAddressComponent,
+    CustomerBookingComponent,
+    CustomerVehicleComponent,
+    CustomerAddressCreateComponent,
+    CustomerBookingCreateComponent,
+    CustomerVehicleCreateComponent,
   ],
 
   imports: [

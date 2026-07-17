@@ -1,11 +1,53 @@
 <main class="home-page">
-  <section class="card">
-    <h1>nhpark-ui</h1>
-    <p>Welcome to the Angular customer dashboard.</p>
-    <a routerLink="/customer" class="pill">View Customers</a>
-    <a routerLink="/address" class="pill">View Addresses</a>
-    <a routerLink="/location" class="pill">View Locations</a>
-    <a routerLink="/booking" class="pill">View Booking</a>
-    <a routerLink="/vehicle" class="pill">View Vehicles</a>
+  <section class="hero">
+    <div class="brand">
+      <img
+        src="https://www.pngplay.com/wp-content/uploads/13/Audi-R8-Transparent-Image.png"
+        class="logo"
+        alt="NhPark"
+      />
+      <h1>NhPark</h1>
+    </div>
+
+    <h2>Parking Management System</h2>
+
+    <p>Manage customers, vehicles, bookings, and parking locations with one modern platform.</p>
+
+    <!-- Car Center -->
+    <div class="car-container">
+      <img
+        src="https://media.istockphoto.com/id/1269774445/photo/cars-parked-on-a-tree-lined-street-pittsburgh-pennsylvania-usa.jpg?s=170667a&w=0&k=20&c=nYBHkHQecvNTaJJfbPJ6IQbsSoDa-3QPG6H-FVbX1rY="
+        alt="Car"
+        class="car-image"
+      />
+    </div>
+
+    <div><div></div></div>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h3>Customers</h3>
+      <p>Manage customer accounts and profiles.</p>
+      <a routerLink="/customer">Open →</a>
+    </div>
+
+    <div class="feature-card">
+      <h3>Vehicles</h3>
+      <p>Track registered vehicles.</p>
+      <a routerLink="/vehicle">Open →</a>
+    </div>
+
+    <div class="feature-card">
+      <h3>Bookings</h3>
+      <p>Create and manage parking reservations.</p>
+      <a routerLink="/booking">Open →</a>
+    </div>
+
+    <div class="feature-card">
+      <h3>Locations</h3>
+      <p>Manage parking locations.</p>
+      <a routerLink="/location">Open →</a>
+    </div>
   </section>
 </main>

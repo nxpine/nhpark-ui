@@ -1,0 +1,104 @@
+.customer-panel {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.customer-header {
+  background: #2c3e50;
+  color: #ffffff;
+  padding: 18px 25px;
+}
+
+.customer-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.customer-booking-form {
+  padding: 30px;
+}
+
+.customer-booking-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.customer-booking-form form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-booking-form label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.customer-booking-form input {
+  padding: 12px 14px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.customer-booking-form input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.customer-booking-form input[readonly] {
+  background-color: #f4f4f4;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.customer-booking-form button {
+  align-self: flex-start;
+  padding: 12px 28px;
+  background: #2c3e50;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.customer-booking-form button:hover {
+  background: #1f2d3a;
+}
+
+.customer-booking-form button:active {
+  transform: scale(0.98);
+}
+
+.customer-panel p {
+  margin: 20px 30px 0;
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .customer-panel {
+    margin: 20px;
+  }
+
+  .customer-booking-form {
+    padding: 20px;
+  }
+
+  .customer-booking-form button {
+    width: 100%;
+  }
+}

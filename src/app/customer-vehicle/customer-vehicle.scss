@@ -1,0 +1,136 @@
+.customer-panel {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+
+/* Header */
+.customer-header {
+  background: #2c3e50;
+  color: #ffffff;
+  padding: 18px 25px;
+}
+
+.customer-header h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.customer-header p {
+  margin: 8px 0 0;
+  color: #dcdcdc;
+  font-size: 14px;
+}
+
+
+/* Error */
+.customer-panel > p {
+  margin: 20px 30px 0;
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+
+/* Form */
+.customer-panel form {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.customer-panel form div {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Labels */
+.customer-panel label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+
+/* Inputs */
+.customer-panel input {
+  padding: 12px 14px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+
+.customer-panel input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+
+/* Readonly ID */
+.customer-panel input[readonly] {
+  background-color: #f4f4f4;
+  color: #666;
+  cursor: not-allowed;
+}
+
+
+/* Button */
+.form-actions {
+  margin-top: 10px;
+}
+
+
+.form-actions button {
+  align-self: flex-start;
+  padding: 12px 28px;
+  background: #2c3e50;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+
+.form-actions button:hover {
+  background: #1f2d3a;
+}
+
+
+.form-actions button:active {
+  transform: scale(0.98);
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .customer-panel {
+    margin: 20px;
+  }
+
+
+  .customer-panel form {
+    padding: 20px;
+  }
+
+
+  .form-actions button {
+    width: 100%;
+  }
+
+}
