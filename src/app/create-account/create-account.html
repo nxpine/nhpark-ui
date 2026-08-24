@@ -1,0 +1,201 @@
+<div class="create-account-page">
+
+  <div class="create-account-card">
+
+    <!-- LEFT SIDE -->
+
+    <div class="welcome-panel">
+
+      <div class="logo">
+        <div class="logo-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <span class="logo-text">
+          NH<span>Park</span>
+        </span>
+      </div>
+
+      <div class="welcome-content">
+
+        <p class="small-title">
+          PARK BOOKING SYSTEM
+        </p>
+
+        <h1>
+          Create your
+          <span>NhPark</span>
+          account.
+        </h1>
+
+        <p class="description">
+          Join NhPark to manage your park
+          reservations and booking information
+          in one place.
+        </p>
+
+      </div>
+
+      <p class="copyright">
+        © 2026 NhPark
+      </p>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="form-panel">
+
+      <div class="form-content">
+
+        <p class="form-label">
+          CREATE ACCOUNT
+        </p>
+
+        <h2>
+          Get started
+        </h2>
+
+        <p class="subtitle">
+          Create your account to continue.
+        </p>
+
+
+        <form (ngSubmit)="createAccount()">
+
+          <!-- USERNAME -->
+
+          <div class="input-group">
+
+            <label>
+              Username
+            </label>
+
+            <input
+              type="text"
+              name="username"
+              [(ngModel)]="username"
+              placeholder="Enter your username"
+            >
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="input-group">
+
+            <label>
+              Email
+            </label>
+
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              placeholder="Enter your email"
+            >
+
+          </div>
+
+
+          <!-- PASSWORD -->
+
+          <div class="input-group">
+
+            <label>
+              Password
+            </label>
+
+            <input
+              type="password"
+              name="password"
+              [(ngModel)]="password"
+              placeholder="Enter your password"
+            >
+
+          </div>
+
+
+          <!-- CONFIRM PASSWORD -->
+
+          <div class="input-group">
+
+            <label>
+              Confirm Password
+            </label>
+
+            <input
+              type="password"
+              name="confirmPassword"
+              [(ngModel)]="confirmPassword"
+              placeholder="Confirm your password"
+            >
+
+          </div>
+
+
+          <!-- ERROR -->
+
+          <div
+            class="error-message"
+            *ngIf="errorMessage"
+          >
+            {{ errorMessage }}
+          </div>
+
+
+          <!-- SUCCESS -->
+
+          <div
+            class="success-message"
+            *ngIf="successMessage"
+          >
+            {{ successMessage }}
+          </div>
+
+
+          <!-- BUTTON -->
+
+          <button
+            type="submit"
+            [disabled]="loading"
+          >
+
+            <span *ngIf="!loading">
+              Create Account
+            </span>
+
+            <span *ngIf="loading">
+              Creating Account...
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <!-- LOGIN -->
+
+        <div class="login-link">
+
+          <span>
+            Already have an account?
+          </span>
+
+          <a href="/login">
+            Sign in
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

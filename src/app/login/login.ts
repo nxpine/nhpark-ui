@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,21 +15,25 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
+  constructor(private router: Router) {}
+
   login(): void {
 
     this.loading = true;
     this.errorMessage = '';
 
-    // Temporary login
     console.log('Username:', this.username);
     console.log('Email:', this.email);
     console.log('Password:', this.password);
 
     setTimeout(() => {
-      this.loading = false;
-      alert('Login clicked!');
-    }, 500);
 
+      this.loading = false;
+
+      // Go to home after login
+      this.router.navigate(['/home']);
+
+    }, 500);
   }
 
 }
