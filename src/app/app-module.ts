@@ -20,6 +20,9 @@ import { CustomerVehicleComponent } from './customer-vehicle/customer-vehicle';
 import { CustomerAddressCreateComponent } from './customer-address-create/customer-address-create';
 import { CustomerBookingCreateComponent } from './customer-booking-create/customer-booking-create';
 import { CustomerVehicleCreateComponent } from './customer-vehicle-create/customer-vehicle-create';
+import { About } from './about/about';
+import { Features } from './features/features';
+import { Parks } from './parks/parks';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { CustomerVehicleCreateComponent } from './customer-vehicle-create/custom
     CustomerAddressCreateComponent,
     CustomerBookingCreateComponent,
     CustomerVehicleCreateComponent,
+    About,
+    Features,
+    Parks,
   ],
 
   imports: [

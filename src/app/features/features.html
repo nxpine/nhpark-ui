@@ -1,0 +1,146 @@
+<div class="page">
+
+  <nav class="navbar">
+
+    <div class="nav-container">
+
+      <a routerLink="/home" class="logo">
+
+        <div class="logo-mark">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <span>
+          NH<span>Park</span>
+        </span>
+
+      </a>
+
+
+      <div class="nav-links">
+
+        <a routerLink="/home">
+          Home
+        </a>
+
+        <a routerLink="/parks">
+          Parks
+        </a>
+
+        <a routerLink="/features" class="active">
+          Features
+        </a>
+
+        <a routerLink="/about">
+          About
+        </a>
+
+      </div>
+
+
+      <a routerLink="/login" class="book-button">
+        Book a Park
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <main>
+
+    <section class="features-header">
+
+      <span>
+        NHPARK FEATURES
+      </span>
+
+      <h1>
+        Everything you need to
+        manage your park visits.
+      </h1>
+
+      <p>
+        NhPark brings park discovery,
+        reservations and account management
+        together in one simple platform.
+      </p>
+
+    </section>
+
+
+    <section class="features-section">
+
+      <div class="features-grid">
+
+        <div
+          class="feature-card"
+          *ngFor="let feature of features"
+        >
+
+          <div class="feature-number">
+            {{ feature.number }}
+          </div>
+
+          <h2>
+            {{ feature.title }}
+          </h2>
+
+          <p>
+            {{ feature.description }}
+          </p>
+
+          <div class="feature-arrow">
+            →
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="feature-bottom">
+
+      <div>
+
+        <span>
+          SIMPLE BY DESIGN
+        </span>
+
+        <h2>
+          One platform.
+          Everything organized.
+        </h2>
+
+      </div>
+
+      <p>
+        Find parks, make reservations and
+        manage your visits without unnecessary
+        complexity.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div>
+      <strong>
+        NH<span>Park</span>
+      </strong>
+    </div>
+
+    <span>
+      © 2026 NhPark
+    </span>
+
+  </footer>
+
+</div>

@@ -1,53 +1,338 @@
-<main class="home-page">
-  <section class="hero">
-    <div class="brand">
-      <img
-        src="https://www.pngplay.com/wp-content/uploads/13/Audi-R8-Transparent-Image.png"
-        class="logo"
-        alt="NhPark"
-      />
-      <h1>NhPark</h1>
+<div class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="nav-container">
+
+      <a routerLink="/home" class="logo">
+        <div class="logo-mark">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <span class="logo-text">
+          NH<span>Park</span>
+        </span>
+      </a>
+
+      <div class="nav-links">
+
+        <a routerLink="/home" class="active">
+          Home
+        </a>
+
+        <a routerLink="/parks">
+          Parks
+        </a>
+
+        <a routerLink="/features">
+          Features
+        </a>
+
+        <a routerLink="/about">
+          About
+        </a>
+
+      </div>
+
+      <div class="nav-actions">
+
+        <a routerLink="/login" class="sign-in">
+          Sign In
+        </a>
+
+        <a routerLink="/login" class="book-button">
+          Book a Park
+        </a>
+
+      </div>
+
     </div>
 
-    <h2>Parking Management System</h2>
+  </nav>
 
-    <p>Manage customers, vehicles, bookings, and parking locations with one modern platform.</p>
 
-    <!-- Car Center -->
-    <div class="car-container">
-      <img
-        src="https://media.istockphoto.com/id/1269774445/photo/cars-parked-on-a-tree-lined-street-pittsburgh-pennsylvania-usa.jpg?s=170667a&w=0&k=20&c=nYBHkHQecvNTaJJfbPJ6IQbsSoDa-3QPG6H-FVbX1rY="
-        alt="Car"
-        class="car-image"
-      />
+  <!-- HERO -->
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-container">
+
+        <div class="hero-content">
+
+          <div class="eyebrow">
+            <span></span>
+            PARK RESERVATION SYSTEM
+          </div>
+
+          <h1>
+            Plan your next
+            <span>park visit.</span>
+          </h1>
+
+          <p>
+            Discover parks, check availability,
+            and manage your reservations through
+            one simple platform.
+          </p>
+
+          <div class="hero-actions">
+
+            <a
+              routerLink="/parks"
+              class="primary-button"
+            >
+              Explore Parks
+              <span>→</span>
+            </a>
+
+            <a
+              routerLink="/about"
+              class="secondary-button"
+            >
+              Learn More
+            </a>
+
+          </div>
+
+          <div class="stats">
+
+            <div class="stat">
+              <strong>50+</strong>
+              <span>Available Parks</span>
+            </div>
+
+            <div class="stat-line"></div>
+
+            <div class="stat">
+              <strong>10K+</strong>
+              <span>Reservations</span>
+            </div>
+
+            <div class="stat-line"></div>
+
+            <div class="stat">
+              <strong>4.9</strong>
+              <span>User Rating</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual">
+
+          <div class="park-scene">
+
+            <div class="sun"></div>
+
+            <div class="hill hill-back"></div>
+            <div class="hill hill-front"></div>
+
+            <div class="tree tree-1"></div>
+            <div class="tree tree-2"></div>
+            <div class="tree tree-3"></div>
+            <div class="tree tree-4"></div>
+
+          </div>
+
+
+          <div class="booking-card">
+
+            <div class="card-top">
+
+              <div>
+                <small>FEATURED PARK</small>
+
+                <h3>
+                  Green Valley Park
+                </h3>
+              </div>
+
+              <span class="available">
+                Available
+              </span>
+
+            </div>
+
+            <div class="card-details">
+
+              <div>
+                <small>LOCATION</small>
+                <strong>British Columbia</strong>
+              </div>
+
+              <div>
+                <small>STATUS</small>
+                <strong>Open Today</strong>
+              </div>
+
+            </div>
+
+            <a
+              routerLink="/parks"
+              class="card-button"
+            >
+              View Park
+              <span>→</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- QUICK SEARCH -->
+
+    <section class="quick-search">
+
+      <div class="search-container">
+
+        <div class="search-title">
+
+          <span>QUICK SEARCH</span>
+
+          <h2>
+            Find your next park
+          </h2>
+
+        </div>
+
+        <div class="search-fields">
+
+          <div class="field">
+
+            <small>
+              LOCATION
+            </small>
+
+            <strong>
+              Choose a park
+            </strong>
+
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="field">
+
+            <small>
+              DATE
+            </small>
+
+            <strong>
+              Select a date
+            </strong>
+
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="field">
+
+            <small>
+              VISIT TYPE
+            </small>
+
+            <strong>
+              Choose type
+            </strong>
+
+          </div>
+
+          <button
+            type="button"
+            class="search-button"
+          >
+            Search
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INTRO -->
+
+    <section class="intro">
+
+      <div class="intro-container">
+
+        <div>
+          <span class="section-label">
+            NHPARK
+          </span>
+
+          <h2>
+            Everything you need
+            for your next visit.
+          </h2>
+        </div>
+
+        <p>
+          From discovering new locations to
+          managing reservations, NhPark keeps
+          the entire process simple and organized.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-container">
+
+      <div>
+        <strong>NH<span>Park</span></strong>
+        <p>
+          Park booking made simple.
+        </p>
+      </div>
+
+      <div class="footer-links">
+
+        <a routerLink="/parks">
+          Parks
+        </a>
+
+        <a routerLink="/features">
+          Features
+        </a>
+
+        <a routerLink="/about">
+          About
+        </a>
+
+        <a routerLink="/login">
+          Sign In
+        </a>
+
+      </div>
+
     </div>
 
-    <div><div></div></div>
-  </section>
-
-  <section class="features">
-    <div class="feature-card">
-      <h3>Customers</h3>
-      <p>Manage customer accounts and profiles.</p>
-      <a routerLink="/customer">Open →</a>
+    <div class="copyright">
+      © 2026 NhPark. Park Booking & Management System.
     </div>
 
-    <div class="feature-card">
-      <h3>Vehicles</h3>
-      <p>Track registered vehicles.</p>
-      <a routerLink="/vehicle">Open →</a>
-    </div>
+  </footer>
 
-    <div class="feature-card">
-      <h3>Bookings</h3>
-      <p>Create and manage parking reservations.</p>
-      <a routerLink="/booking">Open →</a>
-    </div>
-
-    <div class="feature-card">
-      <h3>Locations</h3>
-      <p>Manage parking locations.</p>
-      <a routerLink="/location">Open →</a>
-    </div>
-  </section>
-</main>
+</div>

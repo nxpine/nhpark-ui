@@ -121,6 +121,8 @@ export class CustomerDetailsComponent implements OnInit {
       )
       .subscribe({
         next: (data) => {
+          console.log('Address response:', data);
+
           const payload = Array.isArray(data)
             ? data
             : ((data as { items?: Address[]; data?: Address[] })?.items ??
@@ -128,6 +130,8 @@ export class CustomerDetailsComponent implements OnInit {
               []);
 
           this.addresses = Array.isArray(payload) ? payload : [];
+
+          console.log('Addresses loaded:', this.addresses);
         },
         error: (err) => {
           console.error(err);
@@ -150,7 +154,7 @@ export class CustomerDetailsComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/create-address', this.customerId]);
+    this.router.navigate(['/create-address-create', this.customerId]);
   }
 
   deleteAddress(id: number): void {
@@ -268,43 +272,45 @@ export class CustomerDetailsComponent implements OnInit {
       });
   }
   loadVehicleByCustomerId(customerId: number | null): void {
-  if (!customerId) {
-    console.error('Invalid customer ID');
-    return;
+    if (!customerId) {
+      console.error('Invalid customer ID');
+      return;
+    }
+
+    this.loading = true;
+    this.errorMessage = '';
+    this.selectedVehicle = null;
+
+    this.vehicleService
+      .getVehiclesByCustomerId(customerId)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.loading = false;
+          this.cdr.markForCheck();
+        }),
+      )
+      .subscribe({
+        next: (data) => {
+          console.log('Vehicle response:', data);
+
+          const payload = Array.isArray(data)
+            ? data
+            : ((data as { items?: Vehicle[]; data?: Vehicle[] })?.items ??
+              (data as { items?: Vehicle[]; data?: Vehicle[] })?.data ??
+              []);
+
+          this.vehicles = Array.isArray(payload) ? payload : [];
+
+          console.log('Vehicles loaded:', this.vehicles);
+        },
+
+        error: (err) => {
+          console.error('Vehicle loading error:', err);
+          this.errorMessage = 'Unable to load vehicles from /api/vehicle.';
+        },
+      });
   }
-
-  this.loading = true;
-  this.errorMessage = '';
-  this.selectedVehicle = null;
-
-  this.vehicleService
-    .getVehiclesByCustomerId(customerId)
-    .pipe(
-      take(1),
-      finalize(() => {
-        this.loading = false;
-        this.cdr.markForCheck();
-      }),
-    )
-    .subscribe({
-      next: (data) => {
-        const payload = Array.isArray(data)
-          ? data
-          : ((data as { items?: Vehicle[]; data?: Vehicle[] })?.items ??
-            (data as { items?: Vehicle[]; data?: Vehicle[] })?.data ??
-            []);
-
-        this.vehicles = Array.isArray(payload) ? payload : [];
-
-        console.log('Vehicles loaded:', this.vehicles);
-      },
-
-      error: (err) => {
-        console.error('Vehicle loading error:', err);
-        this.errorMessage = 'Unable to load vehicles from /api/vehicle.';
-      },
-    });
-}
   updateVehicle(id: number | undefined): void {
     if (!id) {
       console.error('Invalid vehicle ID');
@@ -321,7 +327,7 @@ export class CustomerDetailsComponent implements OnInit {
 
     this.router.navigate(['/customer-vehicle-create', this.customerId]);
   }
-  
+
   deleteVehicle(id: number | undefined): void {
     if (id === undefined) {
       console.error('Invalid vehicle ID');
