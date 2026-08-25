@@ -1,8 +1,6 @@
 <section class="vehicle-panel">
-
   <div class="vehicle-header">
     <h2>Vehicles</h2>
-
     <button type="button" (click)="loadVehicles()" [disabled]="loading">
       Refresh
     </button>
@@ -40,7 +38,6 @@
         <tbody>
           @for (vehicle of vehicles; track vehicle.id ?? vehicle.make) {
             <tr>
-
               <td>
                 <a href="javascript:void(0)"
                    (click)="loadVehicleById(vehicle.id ?? 0)">
@@ -56,16 +53,13 @@
               <td>{{ vehicle.color ?? 'no color exists' }}</td>
 
               <td>
-                <button type="button"
-                        (click)="deleteVehicle(vehicle.id ?? 0)">
+                <button type="button" (click)="deleteVehicle(vehicle.id ?? 0)">
                   Delete
                 </button>
               </td>
-
             </tr>
           }
         </tbody>
-
       </table>
 
       <div class="vehicle-actions">
