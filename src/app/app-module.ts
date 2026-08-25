@@ -41,6 +41,7 @@ import { CreateAccountComponent } from './create-account/create-account';
     CustomerBookingCreateComponent,
     CustomerVehicleCreateComponent,
     CreateAccountComponent,
+    ParksComponent,
   ],
 
   imports: [
@@ -52,7 +53,6 @@ import { CreateAccountComponent } from './create-account/create-account';
     CustomerDetailsComponent,
     AboutComponent,
     FeaturesComponent,
-    ParksComponent,
   ],
   providers: [],
   bootstrap: [App],

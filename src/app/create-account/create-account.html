@@ -2,8 +2,6 @@
 
   <div class="create-account-card">
 
-    <!-- LEFT SIDE -->
-
     <div class="welcome-panel">
 
       <div class="logo">
@@ -20,9 +18,9 @@
 
       <div class="welcome-content">
 
-        <p class="small-title">
+        <div class="small-title">
           PARK BOOKING SYSTEM
-        </p>
+        </div>
 
         <h1>
           Create your
@@ -30,43 +28,39 @@
           account.
         </h1>
 
-        <p class="description">
-          Join NhPark to manage your park
-          reservations and booking information
-          in one place.
+        <p>
+          Create an account to manage your
+          park bookings, vehicles, and
+          customer information.
         </p>
 
       </div>
 
-      <p class="copyright">
+      <div class="copyright">
         © 2026 NhPark
-      </p>
+      </div>
 
     </div>
 
-
-    <!-- RIGHT SIDE -->
 
     <div class="form-panel">
 
       <div class="form-content">
 
-        <p class="form-label">
+        <div class="form-label">
           CREATE ACCOUNT
-        </p>
+        </div>
 
         <h2>
           Get started
         </h2>
 
         <p class="subtitle">
-          Create your account to continue.
+          Create your NhPark account.
         </p>
 
 
-        <form (ngSubmit)="createAccount()">
-
-          <!-- USERNAME -->
+        <form (submit)="createAccount()">
 
           <div class="input-group">
 
@@ -77,14 +71,12 @@
             <input
               type="text"
               name="username"
-              [(ngModel)]="username"
               placeholder="Enter your username"
+              required
             >
 
           </div>
 
-
-          <!-- EMAIL -->
 
           <div class="input-group">
 
@@ -95,14 +87,12 @@
             <input
               type="email"
               name="email"
-              [(ngModel)]="email"
               placeholder="Enter your email"
+              required
             >
 
           </div>
 
-
-          <!-- PASSWORD -->
 
           <div class="input-group">
 
@@ -113,14 +103,12 @@
             <input
               type="password"
               name="password"
-              [(ngModel)]="password"
-              placeholder="Enter your password"
+              placeholder="Create a password"
+              required
             >
 
           </div>
 
-
-          <!-- CONFIRM PASSWORD -->
 
           <div class="input-group">
 
@@ -131,54 +119,19 @@
             <input
               type="password"
               name="confirmPassword"
-              [(ngModel)]="confirmPassword"
               placeholder="Confirm your password"
+              required
             >
 
           </div>
 
 
-          <!-- ERROR -->
-
-          <div
-            class="error-message"
-            *ngIf="errorMessage"
-          >
-            {{ errorMessage }}
-          </div>
-
-
-          <!-- SUCCESS -->
-
-          <div
-            class="success-message"
-            *ngIf="successMessage"
-          >
-            {{ successMessage }}
-          </div>
-
-
-          <!-- BUTTON -->
-
-          <button
-            type="submit"
-            [disabled]="loading"
-          >
-
-            <span *ngIf="!loading">
-              Create Account
-            </span>
-
-            <span *ngIf="loading">
-              Creating Account...
-            </span>
-
+          <button type="submit">
+            Create Account
           </button>
 
         </form>
 
-
-        <!-- LOGIN -->
 
         <div class="login-link">
 
@@ -186,9 +139,12 @@
             Already have an account?
           </span>
 
-          <a href="/login">
+          <button
+            type="button"
+            (click)="goToLogin()"
+          >
             Sign in
-          </a>
+          </button>
 
         </div>
 

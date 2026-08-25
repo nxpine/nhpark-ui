@@ -5,101 +5,56 @@
 .create-account-page {
   min-height: 100vh;
 
-  background: #f5f7f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  color: #293238;
+  padding: 30px;
 
-  font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
+  background: #f4f6f5;
+
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-
-/* MAIN CONTAINER */
-
-.account-container {
-  min-height: 100vh;
+.create-account-card {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 620px;
 
   display: grid;
+  grid-template-columns: 43% 57%;
 
-  grid-template-columns: 42% 58%;
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e5e5;
+  border-radius: 12px;
+
+  box-shadow: 0 20px 50px rgba(30, 40, 35, 0.08);
 }
 
 
-/* LEFT SIDE */
+/* LEFT */
 
-.account-info {
-  position: relative;
-
+.welcome-panel {
   display: flex;
   flex-direction: column;
 
-  padding: 45px 55px;
+  padding: 40px;
 
-  background: #28342e;
+  background: #29352f;
 
   color: white;
-
-  overflow: hidden;
 }
 
-
-/* SUBTLE BACKGROUND */
-
-.account-info::before {
-  content: "";
-
-  position: absolute;
-
-  width: 400px;
-  height: 400px;
-
-  right: -180px;
-  bottom: -180px;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255, 255, 255, .08);
-}
-
-.account-info::after {
-  content: "";
-
-  position: absolute;
-
-  width: 250px;
-  height: 250px;
-
-  right: -100px;
-  bottom: -100px;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255, 255, 255, .06);
-}
-
-
-/* BRAND */
-
-.brand {
-  position: relative;
-  z-index: 2;
-
+.logo {
   display: flex;
   align-items: center;
-
   gap: 10px;
-
-  font-size: 20px;
-  font-weight: 700;
 }
 
-.brand-name span {
-  color: #8eae9a;
-}
-
-.logo-mark {
+.logo-icon {
   width: 34px;
   height: 34px;
 
@@ -111,193 +66,164 @@
 
   padding-bottom: 7px;
 
-  border-radius: 8px;
-
   background: #5b8069;
+
+  border-radius: 8px;
 }
 
-.logo-mark span {
+.logo-icon span {
   width: 5px;
   height: 13px;
 
-  border-radius: 3px;
-
   background: white;
+
+  border-radius: 3px;
 }
 
-.logo-mark span:nth-child(2) {
+.logo-icon span:nth-child(2) {
   height: 19px;
 }
 
-.logo-mark span:nth-child(3) {
+.logo-icon span:nth-child(3) {
   height: 10px;
 }
 
-
-/* INFO CONTENT */
-
-.info-content {
-  position: relative;
-  z-index: 2;
-
-  max-width: 430px;
-
-  margin: auto 0;
-}
-
-.eyebrow {
-  color: #9eb3a6;
-
-  font-size: 9px;
-  font-weight: 700;
-
-  letter-spacing: 1.3px;
-}
-
-.info-content h1 {
-  margin: 15px 0 20px;
-
-  font-size: clamp(42px, 5vw, 62px);
-
-  line-height: 1.05;
-
-  letter-spacing: -2.5px;
-}
-
-.info-content h1 span {
-  color: #8eae9a;
-}
-
-.info-content p {
-  max-width: 400px;
-
-  margin: 0;
-
-  color: #b4c0ba;
-
-  font-size: 13px;
-
-  line-height: 1.8;
-}
-
-
-/* INFO FOOTER */
-
-.info-footer {
-  position: relative;
-  z-index: 2;
-
-  color: #8d9d94;
-
-  font-size: 9px;
-}
-
-
-/* RIGHT SIDE */
-
-.account-form-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 50px 30px;
-
-  background: #ffffff;
-}
-
-.form-container {
-  width: min(420px, 100%);
-}
-
-
-/* MOBILE BRAND */
-
-.mobile-brand {
-  display: none;
-
-  align-items: center;
-
-  gap: 10px;
-
-  margin-bottom: 40px;
-
-  color: #293238;
-
+.logo-text {
   font-size: 20px;
   font-weight: 700;
 }
 
-.mobile-brand > span > span {
-  color: #5b8069;
+.logo-text span {
+  color: #8ead99;
 }
 
 
-/* HEADER */
+/* CONTENT */
 
-.form-header {
-  margin-bottom: 30px;
+.welcome-content {
+  max-width: 380px;
+
+  margin: auto 0;
 }
 
-.section-label {
+.small-title {
+  margin-bottom: 15px;
+
+  color: #9db2a5;
+
+  font-size: 9px;
+  font-weight: bold;
+
+  letter-spacing: 1.3px;
+}
+
+.welcome-content h1 {
+  margin: 0 0 20px;
+
+  font-size: 48px;
+
+  line-height: 1.05;
+
+  letter-spacing: -2px;
+}
+
+.welcome-content h1 span {
+  color: #8ead99;
+}
+
+.welcome-content p {
+  margin: 0;
+
+  color: #b7c2bc;
+
+  font-size: 12px;
+
+  line-height: 1.8;
+}
+
+.copyright {
+  color: #89978f;
+
+  font-size: 8px;
+}
+
+
+/* RIGHT */
+
+.form-panel {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px;
+}
+
+.form-content {
+  width: 100%;
+  max-width: 380px;
+}
+
+.form-label {
+  margin-bottom: 8px;
+
   color: #5b8069;
 
   font-size: 8px;
-  font-weight: 700;
+  font-weight: bold;
 
   letter-spacing: 1.2px;
 }
 
-.form-header h2 {
-  margin: 10px 0 8px;
+.form-content h2 {
+  margin: 0 0 7px;
 
   color: #293238;
 
   font-size: 28px;
-
-  letter-spacing: -.7px;
 }
 
-.form-header p {
-  margin: 0;
+.subtitle {
+  margin: 0 0 28px;
 
-  color: #858e93;
+  color: #899196;
 
-  font-size: 11px;
+  font-size: 10px;
 }
 
 
-/* FORM */
+/* INPUTS */
 
 form {
   display: flex;
   flex-direction: column;
 
-  gap: 17px;
+  gap: 15px;
 }
 
-.form-group {
+.input-group {
   display: flex;
   flex-direction: column;
 
-  gap: 7px;
+  gap: 6px;
 }
 
-.form-group label {
+.input-group label {
   color: #4b565b;
 
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 9px;
+  font-weight: bold;
 }
 
-.form-group input {
+.input-group input {
   width: 100%;
-  height: 43px;
+  height: 42px;
 
-  padding: 0 13px;
+  padding: 0 12px;
 
   border: 1px solid #dfe4e5;
 
-  border-radius: 6px;
+  border-radius: 5px;
 
   outline: none;
 
@@ -305,107 +231,57 @@ form {
 
   color: #354047;
 
-  font-family: inherit;
-
-  font-size: 11px;
-
-  transition:
-    border-color .2s,
-    box-shadow .2s;
-}
-
-.form-group input::placeholder {
-  color: #a6adb0;
-}
-
-.form-group input:focus {
-  border-color: #6d8b77;
-
-  background: white;
-
-  box-shadow:
-    0 0 0 3px rgba(91, 128, 105, .08);
-}
-
-
-/* BUTTON */
-
-.create-button {
-  width: 100%;
-  height: 44px;
-
-  margin-top: 5px;
-
-  border: none;
-
-  border-radius: 6px;
-
-  background: #4f755d;
-
-  color: white;
-
-  font-family: inherit;
-
-  font-size: 11px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: background .2s;
-}
-
-.create-button:hover:not(:disabled) {
-  background: #3f634c;
-}
-
-.create-button:disabled {
-  opacity: .6;
-
-  cursor: not-allowed;
-}
-
-
-/* MESSAGES */
-
-.message {
-  padding: 11px 13px;
-
-  border-radius: 5px;
-
   font-size: 10px;
 }
 
-.error {
-  background: #f9eeee;
+.input-group input:focus {
+  border-color: #638271;
 
-  color: #a45656;
+  background: white;
 
-  border: 1px solid #efdada;
-}
-
-.success {
-  background: #edf5ef;
-
-  color: #52745f;
-
-  border: 1px solid #d9e8dd;
+  box-shadow: 0 0 0 3px rgba(91, 128, 105, 0.08);
 }
 
 
-/* LOGIN LINK */
+/* CREATE BUTTON */
+
+form button {
+  width: 100%;
+  height: 43px;
+
+  margin-top: 4px;
+
+  border: none;
+  border-radius: 5px;
+
+  background: #587b65;
+
+  color: white;
+
+  font-size: 10px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #486b55;
+}
+
+
+/* LOGIN */
 
 .login-link {
   display: flex;
   justify-content: center;
-  align-items: center;
 
   gap: 5px;
 
-  margin-top: 25px;
+  margin-top: 22px;
 
-  color: #8a9397;
+  color: #899196;
 
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .login-link button {
@@ -415,75 +291,50 @@ form {
 
   background: transparent;
 
-  color: #4f755d;
+  color: #587b65;
 
-  font-family: inherit;
-
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 9px;
+  font-weight: bold;
 
   cursor: pointer;
 }
 
-
-/* FOOTER */
-
-.form-footer {
-  display: flex;
-  justify-content: space-between;
-
-  margin-top: 50px;
-  padding-top: 15px;
-
-  border-top: 1px solid #edf0f1;
-
-  color: #a0a8ab;
-
-  font-size: 8px;
+.login-link button:hover {
+  text-decoration: underline;
 }
 
 
-/* TABLET */
+/* RESPONSIVE */
 
-@media (max-width: 850px) {
+@media (max-width: 800px) {
 
-  .account-container {
-    grid-template-columns: 1fr;
+  .create-account-page {
+    padding: 0;
   }
 
-  .account-info {
+  .create-account-card {
+    min-height: 100vh;
+
+    grid-template-columns: 1fr;
+
+    border: none;
+    border-radius: 0;
+  }
+
+  .welcome-panel {
     display: none;
   }
 
-  .account-form-section {
-    min-height: 100vh;
-
+  .form-panel {
     padding: 40px 25px;
-  }
-
-  .mobile-brand {
-    display: flex;
   }
 
 }
 
-
-/* PHONE */
-
 @media (max-width: 500px) {
 
-  .account-form-section {
+  .form-panel {
     padding: 30px 20px;
-  }
-
-  .form-header h2 {
-    font-size: 25px;
-  }
-
-  .form-footer {
-    flex-direction: column;
-
-    gap: 6px;
   }
 
 }

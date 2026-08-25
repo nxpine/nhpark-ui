@@ -1,67 +1,145 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
-interface Park {
+interface ParkingSpace {
   name: string;
   location: string;
   description: string;
   price: number;
-  imageClass: string;
   featured: boolean;
+  imageClass: string;
 }
 
 @Component({
   selector: 'app-parks',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink
-  ],
+  standalone: false,
   templateUrl: './parks.html',
   styleUrl: './parks.scss'
 })
 export class ParksComponent {
 
+  // ============================
+  // SEARCH
+  // ============================
+
+  selectedLocation = '';
+  selectedDate = '';
+  selectedTime = '';
+
+  // ============================
+  // PARKING SELECTION
+  // ============================
+
   selectedPark = '';
 
-  parks: Park[] = [
+  // ============================
+  // PARKING SPACES
+  // ============================
+
+  parks: ParkingSpace[] = [
 
     {
-      name: 'Cedar Ridge Park',
-      location: 'NORTH VANCOUVER',
+      name: 'Residential Driveway',
+      location: 'Surrey, BC',
       description:
-        'Forest trails, open spaces and scenic mountain views.',
-      price: 18,
-      imageClass: 'image-one',
-      featured: true
+        'Private driveway parking near local events, businesses, and neighbourhood destinations.',
+      price: 10,
+      featured: true,
+      imageClass: 'park-surrey'
     },
 
     {
-      name: 'Green Valley Park',
-      location: 'SURREY',
+      name: 'Private Parking Space',
+      location: 'Richmond, BC',
       description:
-        'Peaceful walking paths and spacious outdoor areas.',
+        'Convenient neighbourhood parking for visitors attending nearby events and destinations.',
+      price: 12,
+      featured: false,
+      imageClass: 'park-richmond'
+    },
+
+    {
+      name: 'Neighbourhood Parking',
+      location: 'Langley, BC',
+      description:
+        'Reserve a local parking space before arriving at your event or destination.',
+      price: 8,
+      featured: false,
+      imageClass: 'park-langley'
+    },
+
+    {
+      name: 'Driveway Parking',
+      location: 'Delta, BC',
+      description:
+        'Private neighbourhood parking for visitors looking for a convenient space.',
+      price: 9,
+      featured: false,
+      imageClass: 'park-delta'
+    },
+
+    {
+      name: 'Event Parking Space',
+      location: 'Burnaby, BC',
+      description:
+        'Nearby parking for events, appointments, celebrations, and local visits.',
+      price: 11,
+      featured: false,
+      imageClass: 'park-burnaby'
+    },
+
+    {
+      name: 'Residential Parking',
+      location: 'Vancouver, BC',
+      description:
+        'Reserve a private parking space close to where you need to be.',
       price: 15,
-      imageClass: 'image-two',
-      featured: true
-    },
-
-    {
-      name: 'Lakeside Reserve',
-      location: 'WHITE ROCK',
-      description:
-        'Waterfront views and relaxing open parkland.',
-      price: 20,
-      imageClass: 'image-three',
-      featured: false
+      featured: true,
+      imageClass: 'park-vancouver'
     }
 
   ];
 
 
+  // ============================
+  // SEARCH PARKING
+  // ============================
+
+  searchParking(): void {
+
+    console.log('Searching for parking');
+
+    console.log('Location:', this.selectedLocation);
+
+    console.log('Date:', this.selectedDate);
+
+    console.log('Time:', this.selectedTime);
+
+  }
+
+
+  // ============================
+  // SELECT PARKING
+  // ============================
+
   selectPark(name: string): void {
+
     this.selectedPark = name;
+
+    console.log('Selected parking:', name);
+
+  }
+
+
+  // ============================
+  // CLEAR SELECTION
+  // ============================
+
+  clearSelection(): void {
+
+    this.selectedPark = '';
+
   }
 
 }

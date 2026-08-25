@@ -1,20 +1,25 @@
 <div class="page">
 
+  <!-- ================= NAVBAR ================= -->
+
   <nav class="navbar">
 
     <div class="nav-container">
 
       <a routerLink="/home" class="logo">
+
         <div class="logo-mark">
           <span></span>
           <span></span>
           <span></span>
         </div>
 
-        <span>
+        <span class="logo-text">
           NH<span>Park</span>
         </span>
+
       </a>
+
 
       <div class="nav-links">
 
@@ -23,11 +28,11 @@
         </a>
 
         <a routerLink="/parks" class="active">
-          Parks
+          Find Parking
         </a>
 
         <a routerLink="/features">
-          Features
+          How It Works
         </a>
 
         <a routerLink="/about">
@@ -36,14 +41,15 @@
 
       </div>
 
+
       <div class="nav-actions">
 
         <a routerLink="/login" class="sign-in">
           Sign In
         </a>
 
-        <a routerLink="/login" class="book-button">
-          Book a Park
+        <a routerLink="/create-account" class="get-started">
+          Get Started
         </a>
 
       </div>
@@ -53,116 +59,361 @@
   </nav>
 
 
+  <!-- ================= PAGE HEADER ================= -->
+
   <main>
 
-    <section class="parks-header">
+    <section class="parking-header">
 
-      <div class="header-content">
+      <div class="header-container">
 
-        <span>
-          EXPLORE NHPARK
-        </span>
+        <div class="header-content">
 
-        <h1>
-          Find the right park
-          for your next visit.
-        </h1>
+          <span class="eyebrow">
+            FIND PARKING · BRITISH COLUMBIA
+          </span>
 
-        <p>
-          Browse available parks and discover
-          locations for your next outdoor experience.
-        </p>
+          <h1>
+            Find parking
+            <span>near where you're going.</span>
+          </h1>
+
+          <p>
+            Discover private parking spaces offered by
+            local residents near events, businesses,
+            appointments, and other destinations.
+          </p>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <section class="parks-section">
+    <!-- ================= SEARCH ================= -->
 
-      <div class="section-top">
+<section class="search-section">
 
-        <div>
-          <span>
-            AVAILABLE LOCATIONS
-          </span>
+  <div class="search-container">
 
-          <h2>
-            Popular parks
-          </h2>
-        </div>
+    <!-- LOCATION -->
 
-        <div class="park-count">
-          3 Parks Available
-        </div>
+    <div class="search-field">
 
-      </div>
+      <label for="location">
+        LOCATION
+      </label>
+
+      <select id="location" name="location">
+        <option value="" selected disabled>
+          Select a city
+        </option>
+
+        <option value="surrey">
+          Surrey
+        </option>
+
+        <option value="richmond">
+          Richmond
+        </option>
+
+        <option value="langley">
+          Langley
+        </option>
+
+        <option value="delta">
+          Delta
+        </option>
+
+        <option value="burnaby">
+          Burnaby
+        </option>
+
+        <option value="vancouver">
+          Vancouver
+        </option>
+
+      </select>
+
+    </div>
 
 
-      <div class="park-grid">
+    <!-- DATE -->
 
-        <article
-          class="park-card"
-          *ngFor="let park of parks"
-        >
+    <div class="search-field">
 
-          <div
-            class="park-image"
-            [class]="park.imageClass"
-          >
+      <label for="date">
+        DATE
+      </label>
 
-            <span
-              *ngIf="park.featured"
-              class="tag"
-            >
-              Featured
+      <input
+        id="date"
+        name="date"
+        type="date"
+      >
+
+    </div>
+
+
+    <!-- TIME -->
+
+    <div class="search-field">
+
+      <label for="time">
+        TIME
+      </label>
+
+      <input
+        id="time"
+        name="time"
+        type="time"
+      >
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <button
+      type="button"
+      class="search-button"
+      (click)="searchParking()"
+    >
+      Search Parking
+      <span>→</span>
+    </button>
+
+  </div>
+
+</section>
+
+
+    <!-- ================= PARKING RESULTS ================= -->
+
+    <section class="parking-section">
+
+      <div class="section-container">
+
+
+        <div class="section-top">
+
+          <div>
+
+            <span class="section-label">
+              AVAILABLE NEARBY
             </span>
+
+            <h2>
+              Parking spaces
+            </h2>
 
           </div>
 
-          <div class="park-content">
 
-            <small>
-              {{ park.location }}
-            </small>
+          <span class="result-count">
+            {{ parks.length }} spaces available
+          </span>
 
-            <h3>
-              {{ park.name }}
-            </h3>
+        </div>
 
-            <p>
-              {{ park.description }}
-            </p>
 
-            <div class="park-footer">
+        <!-- PARKING GRID -->
 
-              <strong>
-                ${{ park.price }}
-                <small>/ visit</small>
-              </strong>
+        <div class="parking-grid">
 
-              <button
-                type="button"
-                (click)="selectPark(park.name)"
+
+          <article
+            class="parking-card"
+            *ngFor="let park of parks"
+          >
+
+
+            <!-- PARKING IMAGE -->
+
+            <div
+              class="parking-image"
+              [class]="park.imageClass"
+            >
+
+              <span
+                *ngIf="park.featured"
+                class="featured-tag"
               >
-                View Park →
-              </button>
+                Recommended
+              </span>
+
+
+              <div class="parking-type">
+                Private Parking
+              </div>
 
             </div>
 
+
+            <!-- CARD CONTENT -->
+
+            <div class="parking-content">
+
+
+              <div class="location">
+
+                <span class="location-dot"></span>
+
+                {{ park.location }}
+
+              </div>
+
+
+              <h3>
+                {{ park.name }}
+              </h3>
+
+
+              <p>
+                {{ park.description }}
+              </p>
+
+
+              <div class="details">
+
+
+                <div>
+
+                  <span>
+                    SPACE
+                  </span>
+
+                  <strong>
+                    Private driveway
+                  </strong>
+
+                </div>
+
+
+                <div>
+
+                  <span>
+                    AVAILABILITY
+                  </span>
+
+                  <strong>
+                    Available
+                  </strong>
+
+                </div>
+
+
+              </div>
+
+
+              <div class="parking-footer">
+
+
+                <div class="price">
+
+                  <strong>
+                    ${{ park.price }}
+                  </strong>
+
+                  <span>
+                    / visit
+                  </span>
+
+                </div>
+
+
+                <button
+                  type="button"
+                  (click)="selectPark(park.name)"
+                >
+                  View Space
+                  <span>→</span>
+                </button>
+
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+
+        <!-- SELECTED SPACE -->
+
+        <div
+          *ngIf="selectedPark"
+          class="selected-message"
+        >
+
+          <div class="selected-icon">
+            ✓
           </div>
 
-        </article>
+          <div>
+
+            <span>
+              PARKING SPACE SELECTED
+            </span>
+
+            <strong>
+              {{ selectedPark }}
+            </strong>
+
+          </div>
+
+          <button
+            type="button"
+            routerLink="/booking"
+          >
+            Continue to Booking →
+          </button>
+
+        </div>
+
 
       </div>
 
+    </section>
 
-      <div
-        *ngIf="selectedPark"
-        class="selected-message"
-      >
-        Selected:
-        <strong>{{ selectedPark }}</strong>
+
+    <!-- ================= HOST CTA ================= -->
+
+    <section class="host-section">
+
+      <div class="host-container">
+
+        <div>
+
+          <span class="section-label">
+            HAVE AN AVAILABLE SPACE?
+          </span>
+
+          <h2>
+            Turn your unused parking
+            space into an opportunity.
+          </h2>
+
+          <p>
+            Share your driveway or private parking
+            space with people looking for convenient
+            parking in your neighbourhood.
+          </p>
+
+        </div>
+
+
+        <a
+          routerLink="/location"
+          class="host-button"
+        >
+          Offer Your Space
+          <span>→</span>
+        </a>
+
       </div>
 
     </section>
@@ -170,18 +421,50 @@
   </main>
 
 
+  <!-- ================= FOOTER ================= -->
+
   <footer>
 
     <div class="footer-container">
 
-      <strong>
-        NH<span>Park</span>
-      </strong>
+      <div class="footer-brand">
 
-      <div>
-        © 2026 NhPark
+        <strong>
+          NH<span>Park</span>
+        </strong>
+
+        <p>
+          Neighbourhood parking, made simple.
+        </p>
+
       </div>
 
+
+      <div class="footer-links">
+
+        <a routerLink="/home">
+          Home
+        </a>
+
+        <a routerLink="/parks">
+          Find Parking
+        </a>
+
+        <a routerLink="/features">
+          How It Works
+        </a>
+
+        <a routerLink="/about">
+          About
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 NhPark. Neighbourhood Parking Platform.
     </div>
 
   </footer>

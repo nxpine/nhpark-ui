@@ -1,209 +1,445 @@
+/* ==================================================
+   NHPARK - FIND PARKING
+================================================== */
+
 * {
   box-sizing: border-box;
 }
 
 .page {
   min-height: 100vh;
-  background: #f7f8f8;
-  color: #293238;
-  font-family: "Segoe UI", Arial, sans-serif;
+
+  background: #f7f8f7;
+
+  color: #293234;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
 
-/* NAVBAR */
+/* ==================================================
+   NAVBAR
+================================================== */
 
 .navbar {
-  height: 72px;
+  height: 74px;
+
   background: #ffffff;
-  border-bottom: 1px solid #e7eaeb;
+
+  border-bottom: 1px solid #e5e9e7;
 }
 
 .nav-container {
-  width: min(1180px, calc(100% - 40px));
+  max-width: 1240px;
+
   height: 100%;
+
   margin: auto;
 
+  padding: 0 32px;
+
   display: flex;
+
   align-items: center;
-  justify-content: space-between;
 }
+
+
+/* LOGO */
 
 .logo {
   display: flex;
-  align-items: center;
-  gap: 10px;
 
-  color: #263238;
+  align-items: center;
+
+  gap: 11px;
+
+  margin-right: 65px;
+
+  color: #293234;
+
   text-decoration: none;
 
-  font-weight: 700;
   font-size: 20px;
+
+  font-weight: 700;
 }
 
-.logo > span > span {
-  color: #47745b;
+.logo-text span {
+  color: #526d5c;
 }
 
 .logo-mark {
-  width: 34px;
-  height: 34px;
+  width: 35px;
+  height: 35px;
 
   display: flex;
-  align-items: flex-end;
+
+  align-items: center;
   justify-content: center;
-  gap: 2px;
 
-  padding-bottom: 7px;
+  gap: 3px;
 
-  background: #47745b;
   border-radius: 8px;
+
+  background: #526d5c;
 }
 
 .logo-mark span {
-  width: 5px;
-  height: 13px;
+  width: 4px;
+
+  background: #ffffff;
 
   border-radius: 3px;
-  background: white;
 }
 
-.logo-mark span:nth-child(2) {
-  height: 19px;
-}
-
-.logo-mark span:nth-child(3) {
+.logo-mark span:nth-child(1) {
   height: 10px;
 }
 
+.logo-mark span:nth-child(2) {
+  height: 18px;
+}
+
+.logo-mark span:nth-child(3) {
+  height: 13px;
+}
+
+
+/* NAV LINKS */
+
 .nav-links {
   display: flex;
-  gap: 32px;
+
+  align-items: center;
+
+  flex: 1;
+
+  gap: 5px;
 }
 
 .nav-links a {
-  color: #747d82;
+  position: relative;
+
+  padding: 28px 15px;
+
+  color: #747d7b;
+
   text-decoration: none;
 
   font-size: 12px;
+
+  font-weight: 500;
+
+  transition: 0.2s ease;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color: #47745b;
+.nav-links a:hover {
+  color: #293234;
 }
+
+.nav-links a.active {
+  color: #526d5c;
+
+  font-weight: 600;
+}
+
+.nav-links a.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 15px;
+  right: 15px;
+
+  bottom: 0;
+
+  height: 2px;
+
+  background: #526d5c;
+}
+
+
+/* NAV ACTIONS */
 
 .nav-actions {
   display: flex;
+
   align-items: center;
-  gap: 18px;
+
+  gap: 22px;
 }
 
 .sign-in {
-  color: #4e585d;
+  color: #56605e;
+
   text-decoration: none;
+
   font-size: 12px;
+
+  font-weight: 500;
 }
 
-.book-button {
-  padding: 10px 17px;
+.get-started {
+  padding: 10px 18px;
 
-  border-radius: 6px;
+  border-radius: 5px;
 
-  background: #47745b;
-  color: white;
+  background: #526d5c;
+
+  color: #ffffff;
 
   text-decoration: none;
 
   font-size: 11px;
+
   font-weight: 600;
 }
 
+.get-started:hover {
+  background: #42594b;
+}
 
-/* HEADER */
 
-.parks-header {
+/* ==================================================
+   HEADER
+================================================== */
+
+.parking-header {
   background: #ffffff;
 
-  border-bottom: 1px solid #e8ebec;
+  border-bottom: 1px solid #e5e9e7;
+}
+
+.header-container {
+  max-width: 1240px;
+
+  margin: auto;
+
+  padding: 65px 32px 75px;
 }
 
 .header-content {
-  width: min(1180px, calc(100% - 40px));
-
-  margin: auto;
-
-  padding: 75px 0;
+  max-width: 700px;
 }
 
-.header-content > span,
-.section-top > div > span {
-  color: #64816e;
+.eyebrow {
+  display: flex;
 
-  font-size: 8px;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+
+  color: #68736e;
+
+  font-size: 9px;
+
   font-weight: 700;
 
-  letter-spacing: 1.2px;
+  letter-spacing: 1.4px;
+}
+
+.eyebrow::before {
+  content: "";
+
+  width: 20px;
+
+  height: 2px;
+
+  background: #526d5c;
 }
 
 .header-content h1 {
-  max-width: 650px;
+  margin: 0;
 
-  margin: 12px 0 15px;
+  color: #293234;
 
-  color: #263238;
+  font-size: clamp(42px, 5vw, 60px);
 
-  font-size: 48px;
-  line-height: 1.1;
+  line-height: 1.05;
 
-  letter-spacing: -2px;
+  letter-spacing: -2.5px;
+}
+
+.header-content h1 span {
+  display: block;
+
+  color: #526d5c;
 }
 
 .header-content p {
-  max-width: 550px;
+  max-width: 600px;
 
-  margin: 0;
+  margin: 22px 0 0;
 
-  color: #7b858a;
+  color: #747e7b;
 
   font-size: 13px;
-  line-height: 1.7;
+
+  line-height: 1.8;
 }
 
 
-/* PARKS */
+/* ==================================================
+   SEARCH
+================================================== */
 
-.parks-section {
-  width: min(1180px, calc(100% - 40px));
+.search-section {
+  background: #f7f8f7;
+
+  padding: 30px 32px;
+}
+
+.search-container {
+  max-width: 1100px;
 
   margin: auto;
 
-  padding: 70px 0 100px;
+  padding: 20px 24px;
+
+  display: grid;
+
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+
+  align-items: center;
+
+  gap: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e6e3;
+
+  border-radius: 8px;
+
+  box-shadow: 0 8px 25px rgba(40, 50, 45, 0.05);
+}
+
+.search-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding-right: 20px;
+
+  border-right: 1px solid #e7ebe8;
+}
+
+.search-field span {
+  color: #929a97;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.search-field strong {
+  color: #4c5656;
+
+  font-size: 11px;
+
+  font-weight: 500;
+}
+
+.search-button {
+  height: 42px;
+
+  padding: 0 22px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: #526d5c;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background: #42594b;
+}
+
+
+/* ==================================================
+   PARKING SECTION
+================================================== */
+
+.parking-section {
+  padding: 65px 32px 90px;
+
+  background: #f7f8f7;
+}
+
+.section-container {
+  max-width: 1100px;
+
+  margin: auto;
 }
 
 .section-top {
   display: flex;
+
   align-items: flex-end;
+
   justify-content: space-between;
 
   margin-bottom: 28px;
 }
 
-.section-top h2 {
-  margin: 8px 0 0;
+.section-label {
+  display: block;
 
-  font-size: 27px;
-  letter-spacing: -.7px;
+  margin-bottom: 10px;
+
+  color: #526d5c;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.4px;
 }
 
-.park-count {
-  color: #7d878b;
+.section-top h2 {
+  margin: 0;
+
+  color: #293234;
+
+  font-size: 30px;
+
+  letter-spacing: -1px;
+}
+
+.result-count {
+  color: #8a9390;
+
   font-size: 10px;
 }
 
 
-/* GRID */
+/* ==================================================
+   PARKING GRID
+================================================== */
 
-.park-grid {
+.parking-grid {
   display: grid;
 
   grid-template-columns:
@@ -212,232 +448,697 @@
   gap: 20px;
 }
 
-.park-card {
+
+/* CARD */
+
+.parking-card {
   overflow: hidden;
 
   background: #ffffff;
 
-  border: 1px solid #e2e6e7;
-  border-radius: 10px;
+  border: 1px solid #e1e6e3;
 
-  transition: .2s;
+  border-radius: 8px;
+
+  transition: 0.25s ease;
 }
 
-.park-card:hover {
-  transform: translateY(-4px);
+.parking-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #cbd5cf;
 
   box-shadow:
-    0 15px 30px rgba(30, 43, 37, .08);
+    0 14px 35px rgba(35, 50, 42, 0.08);
 }
 
 
-/* IMAGES */
+/* ==================================================
+   IMAGE
+================================================== */
 
-.park-image {
+.parking-image {
   position: relative;
 
-  height: 210px;
-}
+  height: 190px;
 
-.image-one {
+  overflow: hidden;
+
   background:
     linear-gradient(
-      145deg,
-      #dce7df,
-      #a9c1ae
+      135deg,
+      #dce5df,
+      #edf1ee
     );
 }
 
-.image-two {
-  background:
-    linear-gradient(
-      145deg,
-      #e7ede7,
-      #b9cdbd
-    );
-}
 
-.image-three {
-  background:
-    linear-gradient(
-      145deg,
-      #e1e9eb,
-      #b7cbcf
-    );
-}
+/* subtle driveway */
 
-.park-image::after {
+.parking-image::after {
   content: "";
 
   position: absolute;
 
-  right: -60px;
-  bottom: -90px;
+  width: 75%;
 
-  width: 280px;
-  height: 200px;
+  height: 45px;
 
-  border-radius: 50%;
+  left: 13%;
 
-  background: rgba(73, 112, 87, .3);
+  bottom: -5px;
+
+  transform: rotate(-10deg);
+
+  background: #ffffff;
+
+  border-top: 1px solid #d7ded9;
 }
 
-.tag {
+
+/* DIFFERENT CARD BACKGROUNDS */
+
+.park-surrey {
+  background:
+    linear-gradient(
+      135deg,
+      #dfe8e2,
+      #cfdcd3
+    );
+}
+
+.park-richmond {
+  background:
+    linear-gradient(
+      135deg,
+      #e5e9e7,
+      #d5ded9
+    );
+}
+
+.park-langley {
+  background:
+    linear-gradient(
+      135deg,
+      #e1e7e3,
+      #ccd9d0
+    );
+}
+
+
+/* TAG */
+
+.featured-tag {
   position: absolute;
 
-  z-index: 2;
+  top: 15px;
+  left: 15px;
 
-  top: 14px;
-  left: 14px;
+  z-index: 3;
 
   padding: 6px 9px;
 
-  background: white;
+  border-radius: 4px;
+
+  background: #526d5c;
+
+  color: #ffffff;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+
+/* PARKING TYPE */
+
+.parking-type {
+  position: absolute;
+
+  right: 15px;
+  top: 15px;
+
+  z-index: 3;
+
+  padding: 6px 9px;
 
   border-radius: 4px;
 
-  color: #47745b;
+  background: rgba(255, 255, 255, 0.9);
+
+  color: #58635f;
 
   font-size: 8px;
+
+  font-weight: 600;
+}
+
+
+/* ==================================================
+   CONTENT
+================================================== */
+
+.parking-content {
+  padding: 21px;
+}
+
+.location {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 8px;
+
+  color: #82908a;
+
+  font-size: 9px;
+
+  font-weight: 500;
+}
+
+.location-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #526d5c;
+}
+
+.parking-content h3 {
+  margin: 0;
+
+  color: #293234;
+
+  font-size: 18px;
+
+  letter-spacing: -0.3px;
+}
+
+.parking-content > p {
+  min-height: 45px;
+
+  margin: 10px 0 18px;
+
+  color: #7b8582;
+
+  font-size: 10px;
+
+  line-height: 1.7;
+}
+
+
+/* DETAILS */
+
+.details {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+
+  padding: 14px 0;
+
+  border-top: 1px solid #edf0ee;
+
+  border-bottom: 1px solid #edf0ee;
+}
+
+.details div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.details span {
+  color: #9aa29f;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+.details strong {
+  color: #4e5858;
+
+  font-size: 9px;
+
+  font-weight: 600;
+}
+
+
+/* ==================================================
+   CARD FOOTER
+================================================== */
+
+.parking-footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-top: 17px;
+}
+
+.price {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 3px;
+}
+
+.price strong {
+  color: #293234;
+
+  font-size: 19px;
+}
+
+.price span {
+  color: #929a97;
+
+  font-size: 8px;
+}
+
+.parking-footer button {
+  padding: 9px 12px;
+
+  border: 1px solid #dce3df;
+
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  color: #526d5c;
+
+  cursor: pointer;
+
+  font-size: 9px;
+
   font-weight: 700;
 }
 
+.parking-footer button:hover {
+  background: #526d5c;
 
-/* CONTENT */
+  border-color: #526d5c;
 
-.park-content {
-  padding: 20px;
+  color: #ffffff;
 }
 
-.park-content > small {
-  color: #8b9599;
+
+/* ==================================================
+   SELECTED MESSAGE
+================================================== */
+
+.selected-message {
+  margin-top: 30px;
+
+  padding: 18px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce5df;
+
+  border-radius: 7px;
+}
+
+.selected-icon {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #edf4ef;
+
+  color: #526d5c;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.selected-message div:nth-child(2) {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  flex: 1;
+}
+
+.selected-message span {
+  color: #8c9692;
 
   font-size: 7px;
+
   font-weight: 700;
 
   letter-spacing: 1px;
 }
 
-.park-content h3 {
-  margin: 7px 0;
-
-  font-size: 18px;
-}
-
-.park-content p {
-  min-height: 38px;
-
-  margin: 0 0 20px;
-
-  color: #7f898e;
-
-  font-size: 10px;
-  line-height: 1.6;
-}
-
-.park-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding-top: 15px;
-
-  border-top: 1px solid #edf0f1;
-}
-
-.park-footer strong {
-  color: #3d4b45;
-  font-size: 12px;
-}
-
-.park-footer strong small {
-  color: #90999d;
-  font-size: 8px;
-  font-weight: 400;
-}
-
-.park-footer button {
-  border: none;
-
-  background: transparent;
-
-  color: #47745b;
-
-  font-size: 9px;
-  font-weight: 600;
-
-  cursor: pointer;
-}
-
-.selected-message {
-  margin-top: 25px;
-
-  padding: 14px 18px;
-
-  border-radius: 6px;
-
-  background: #edf4ef;
-
-  color: #52715e;
+.selected-message strong {
+  color: #35403d;
 
   font-size: 11px;
 }
 
+.selected-message button {
+  border: none;
 
-/* FOOTER */
+  background: transparent;
 
-footer {
-  background: #26332d;
-  color: #aeb9b3;
+  color: #526d5c;
+
+  cursor: pointer;
+
+  font-size: 9px;
+
+  font-weight: 700;
 }
 
-.footer-container {
-  width: min(1180px, calc(100% - 40px));
+
+/* ==================================================
+   HOST SECTION
+================================================== */
+
+.host-section {
+  padding: 75px 32px;
+
+  background: #ffffff;
+
+  border-top: 1px solid #e4e8e5;
+}
+
+.host-container {
+  max-width: 1100px;
 
   margin: auto;
 
-  padding: 30px 0;
+  padding: 40px 45px;
 
   display: flex;
+
+  align-items: center;
+
   justify-content: space-between;
+
+  gap: 50px;
+
+  background: #f2f5f2;
+
+  border: 1px solid #e0e6e1;
+
+  border-radius: 9px;
+}
+
+.host-container h2 {
+  max-width: 550px;
+
+  margin: 0 0 14px;
+
+  color: #293234;
+
+  font-size: 27px;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.7px;
+}
+
+.host-container p {
+  max-width: 560px;
+
+  margin: 0;
+
+  color: #77817e;
+
+  font-size: 10px;
+
+  line-height: 1.8;
+}
+
+.host-button {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 13px 18px;
+
+  flex-shrink: 0;
+
+  border-radius: 5px;
+
+  background: #526d5c;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+.host-button:hover {
+  background: #42594b;
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer {
+  padding: 45px 32px 25px;
+
+  background: #252d2f;
+
+  color: #ffffff;
+}
+
+.footer-container {
+  max-width: 1100px;
+
+  margin: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.footer-brand strong {
+  font-size: 18px;
+}
+
+.footer-brand strong span {
+  color: #8da998;
+}
+
+.footer-brand p {
+  margin: 7px 0 0;
+
+  color: #9da6a4;
 
   font-size: 9px;
 }
 
-.footer-container strong {
-  color: white;
-  font-size: 17px;
+.footer-links {
+  display: flex;
+
+  gap: 28px;
 }
 
-.footer-container strong span {
-  color: #80a88f;
+.footer-links a {
+  color: #b8c0be;
+
+  text-decoration: none;
+
+  font-size: 9px;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.copyright {
+  max-width: 1100px;
+
+  margin: 35px auto 0;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #394244;
+
+  color: #7e8987;
+
+  font-size: 8px;
 }
 
 
-@media (max-width: 850px) {
+/* ==================================================
+   RESPONSIVE
+================================================== */
 
-  .nav-links {
-    display: none;
+@media (max-width: 950px) {
+
+  .parking-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .park-grid {
+  .search-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-field {
+    border-right: none;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .host-container {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .nav-container {
+    padding: 12px 20px;
+
+    flex-wrap: wrap;
+  }
+
+  .navbar {
+    height: auto;
+  }
+
+  .logo {
+    margin-right: auto;
+  }
+
+  .nav-links {
+    order: 3;
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    margin-top: 10px;
+  }
+
+  .nav-links a {
+    padding: 12px 10px;
+
+    white-space: nowrap;
+  }
+
+  .parking-header {
+    padding: 0;
+  }
+
+  .header-container {
+    padding: 55px 20px;
+  }
+
+  .header-content h1 {
+    font-size: 42px;
+
+    letter-spacing: -2px;
+  }
+
+  .search-section,
+  .parking-section,
+  .host-section {
+    padding-left: 20px;
+
+    padding-right: 20px;
+  }
+
+  .search-container {
     grid-template-columns: 1fr;
   }
 
-  .park-card {
-    max-width: 550px;
-  }
-}
-
-@media (max-width: 600px) {
-
-  .header-content h1 {
-    font-size: 38px;
+  .parking-grid {
+    grid-template-columns: 1fr;
   }
 
   .section-top {
     align-items: flex-start;
+
     flex-direction: column;
-    gap: 12px;
+
+    gap: 10px;
   }
+
+  .host-container {
+    padding: 30px;
+  }
+
+  .footer-container {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 25px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+
+    gap: 18px;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .nav-actions .sign-in {
+    display: none;
+  }
+
+  .header-content h1 {
+    font-size: 36px;
+  }
+
+  .selected-message {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+  .selected-message button {
+    margin-left: 45px;
+  }
+
 }
