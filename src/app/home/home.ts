@@ -7,12 +7,15 @@ import { Auth } from '../services/auth';
   standalone: false,
   templateUrl: './home.html',
   styleUrl: './home.scss'
+  
 })
 export class HomeComponent {
 
   searchLocation: string = '';
   searchDate: string = '';
   searchPurpose: string = '';
+  showUserMenu = true;
+  userMenuOpen = false;
 
   username: string = '';
 
@@ -51,6 +54,9 @@ export class HomeComponent {
     });
   }
 
+toggleUserMenu(): void {
+  this.userMenuOpen = !this.userMenuOpen;
+}
   logout(): void {
     this.auth.logout();
     this.username = '';

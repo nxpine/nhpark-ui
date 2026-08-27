@@ -26,7 +26,7 @@ export class ParksComponent {
   selectedLocation = '';
   selectedDate = '';
   selectedTime = '';
-
+  
   // ============================
   // PARKING SELECTION
   // ============================
