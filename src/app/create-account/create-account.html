@@ -62,96 +62,92 @@
 
         <form (submit)="createAccount()">
 
-          <div class="input-group">
+  <div class="input-group">
 
-            <label>
-              Username
-            </label>
+    <label>
+      Username
+    </label>
 
-            <input
-              type="text"
-              name="username"
-              placeholder="Enter your username"
-              required
-            >
-
-          </div>
-
-
-          <div class="input-group">
-
-            <label>
-              Email
-            </label>
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              required
-            >
-
-          </div>
-
-
-          <div class="input-group">
-
-            <label>
-              Password
-            </label>
-
-            <input
-              type="password"
-              name="password"
-              placeholder="Create a password"
-              required
-            >
-
-          </div>
-
-
-          <div class="input-group">
-
-            <label>
-              Confirm Password
-            </label>
-
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              required
-            >
-
-          </div>
-
-
-          <button type="submit">
-            Create Account
-          </button>
-
-        </form>
-
-
-        <div class="login-link">
-
-          <span>
-            Already have an account?
-          </span>
-
-          <button
-            type="button"
-            (click)="goToLogin()"
-          >
-            Sign in
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
+    <input
+      type="text"
+      name="username"
+      [(ngModel)]="username"
+      placeholder="Enter your username"
+      required
+    >
 
   </div>
 
-</div>
+
+  <div class="input-group">
+
+    <label>
+      Email
+    </label>
+
+    <input
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="Enter your email"
+      required
+    >
+
+  </div>
+
+
+  <div class="input-group">
+
+    <label>
+      Password
+    </label>
+
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="password"
+      placeholder="Create a password"
+      required
+    >
+
+  </div>
+
+
+  <div class="input-group">
+
+    <label>
+      Confirm Password
+    </label>
+
+    <input
+      type="password"
+      name="confirmPassword"
+      [(ngModel)]="confirmPassword"
+      placeholder="Confirm your password"
+      required
+    >
+
+  </div>
+
+
+  @if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (successMessage) {
+    <div class="success-message">
+      {{ successMessage }}
+    </div>
+  }
+
+
+  <button
+    type="submit"
+    [disabled]="loading"
+  >
+    {{ loading ? 'Creating Account...' : 'Create Account' }}
+  </button>
+
+</form>

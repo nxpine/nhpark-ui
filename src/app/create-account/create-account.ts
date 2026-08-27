@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Auth } from '../services/auth';
 
 @Component({
   selector: 'app-create-account',
@@ -18,52 +19,46 @@ export class CreateAccountComponent {
   errorMessage = '';
   successMessage = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: Auth) {}
 
   createAccount(): void {
 
-    this.errorMessage = '';
-    this.successMessage = '';
+  this.errorMessage = '';
+  this.successMessage = '';
 
-    // Check fields
-    if (
-      !this.username ||
-      !this.email ||
-      !this.password ||
-      !this.confirmPassword
-    ) {
-      this.errorMessage = 'Please fill in all fields.';
-      return;
-    }
+  if (
+    !this.username ||
+    !this.email ||
+    !this.password ||
+    !this.confirmPassword
+  ) {
+    this.errorMessage = 'Please fill in all fields.';
+    return;
+  }
 
-    // Check password
-    if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Passwords do not match.';
-      return;
-    }
+  if (this.password !== this.confirmPassword) {
+    this.errorMessage = 'Passwords do not match.';
+    return;
+  }
 
-    this.loading = true;
+  this.loading = true;
 
-    console.log('Username:', this.username);
-    console.log('Email:', this.email);
+  // Save the logged-in user
+  this.auth.login(this.username, this.email);
 
-    // Temporary account creation
+  console.log('Username:', this.username);
+  console.log('Email:', this.email);
+
+  setTimeout(() => {
+
+    this.loading = false;
+
+    this.successMessage = 'Account created successfully!';
+
     setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 1000);
 
-      this.loading = false;
-
-      this.successMessage = 'Account created successfully!';
-
-      // Return to login
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 1000);
-
-    }, 500);
-  }
-
-  goToLogin(): void {
-    this.router.navigate(['/login']);
-  }
-
+  }, 500);
+}
 }

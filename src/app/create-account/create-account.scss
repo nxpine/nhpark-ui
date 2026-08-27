@@ -338,3 +338,44 @@ form button:hover {
   }
 
 }
+/* =====================================================
+   ACCOUNT MESSAGES
+===================================================== */
+
+.error-message {
+  margin-top: 4px;
+  padding: 10px 12px;
+
+  border: 1px solid #e8caca;
+  border-radius: 5px;
+
+  background: #fff5f5;
+  color: #a94442;
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.success-message {
+  margin-top: 4px;
+  padding: 10px 12px;
+
+  border: 1px solid #c9dfd0;
+  border-radius: 5px;
+
+  background: #f2faf4;
+  color: #3f7050;
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+form button:disabled {
+  background: #aab8b0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+form button:disabled:hover {
+  background: #aab8b0;
+}

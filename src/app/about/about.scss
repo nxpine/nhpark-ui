@@ -171,7 +171,7 @@
 
   color: #64816e;
 
-  font-size: 8px;
+  font-size: 30px;
   font-weight: 700;
 
   letter-spacing: 1.2px;
@@ -182,7 +182,7 @@
 
   color: #263238;
 
-  font-size: clamp(34px, 3vw, 56px);
+  font-size: 34px;
 
   line-height: 1.08;
 
@@ -420,9 +420,9 @@ footer {
   display: flex;
   justify-content: space-between;
 
-  background: white;
+  background: #26332d;
 
-  border-top: 1px solid #e5e9ea;
+  border-top: 1px solid #26332d;
 
   color: #8b9498;
 
@@ -430,13 +430,13 @@ footer {
 }
 
 footer strong {
-  color: #303a3f;
+  color: #e5e9eb;
 
   font-size: 17px;
 }
 
 footer strong span {
-  color: #47745b;
+  color: #f8fffb;
 }
 
 

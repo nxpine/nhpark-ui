@@ -1,117 +1,86 @@
 <div class="page">
-
   <!-- ================= NAVBAR ================= -->
 
   <nav class="navbar">
-
     <div class="nav-container">
-
       <a routerLink="/home" class="logo">
-
         <div class="logo-mark">
           <span></span>
           <span></span>
           <span></span>
         </div>
 
-        <span class="logo-text">
-          NH<span>Park</span>
-        </span>
-
+        <span class="logo-text"> NH<span>Park</span> </span>
       </a>
 
-
       <div class="nav-links">
-
-        <a routerLink="/home" class="active">
-          Home
-        </a>
-
-        <a routerLink="/parks">
-          Find Parking
-        </a>
-
-        <a routerLink="/features">
-          How It Works
-        </a>
-
-        <a routerLink="/about">
-          About
-        </a>
-
+        <a routerLink="/home" class="active">Home</a>
+        <a routerLink="/parks">Find Parking</a>
+        <a routerLink="/features">How It Works</a>
+        <a routerLink="/about">About</a>
       </div>
-
 
       <div class="nav-actions">
 
-        <a routerLink="/login" class="sign-in">
-          Sign In
-        </a>
+  @if (username) {
 
-        <a routerLink="/create-account" class="get-started">
-          Get Started
-        </a>
+    <span class="welcome-user">
+      Hi, {{ username }}
+    </span>
 
-      </div>
+    <button
+      type="button"
+      class="logout-button"
+      (click)="logout()"
+    >
+      Sign Out
+    </button>
 
+  } @else {
+
+    <a routerLink="/login" class="sign-in">
+      Sign In
+    </a>
+
+    <a routerLink="/create-account" class="get-started">
+      Get Started
+    </a>
+
+  }
+
+</div>
     </div>
-
   </nav>
 
-
-  <!-- ================= HERO ================= -->
-
   <main>
+    <!-- ================= HERO ================= -->
 
     <section class="hero">
-
       <div class="hero-container">
-
-
-        <!-- LEFT -->
-
         <div class="hero-content">
-
-          
-
+          <span class="eyebrow"> NEIGHBOURHOOD PARKING </span>
 
           <h1>
             Parking that is
             <span>closer to your destination.</span>
           </h1>
 
-
           <p class="hero-description">
-            Find and reserve private parking spaces in
-            local neighbourhoods. Whether you're attending
-            an event, visiting friends, or heading somewhere
-            busy, NhPark helps you park with confidence.
+            Find and reserve private parking spaces in local neighbourhoods. Whether you're
+            attending an event, visiting friends, or heading somewhere busy, NhPark helps you park
+            with confidence.
           </p>
 
-
           <div class="hero-actions">
-
-            <a
-              routerLink="/parks"
-              class="primary-button"
-            >
+            <a routerLink="/parks" class="primary-button">
               Find Parking
               <span>→</span>
             </a>
 
-
-            <a
-              routerLink="/location"
-              class="secondary-button"
-            >
-              Offer Your Space
-            </a>
-
+            <a routerLink="/location" class="secondary-button"> Offer Your Space </a>
           </div>
 
-
           <div class="trust-row">
-
             <div class="trust-item">
               <strong>Local</strong>
               <span>Neighbourhood spaces</span>
@@ -130,21 +99,13 @@
               <strong>Flexible</strong>
               <span>Spaces when you need them</span>
             </div>
-
           </div>
-
         </div>
 
-
-        <!-- RIGHT -->
+        <!-- RIGHT HERO -->
 
         <div class="hero-visual">
-
-
-          <!-- MAP STYLE BACKGROUND -->
-
           <div class="map-background">
-
             <div class="map-line line-1"></div>
             <div class="map-line line-2"></div>
             <div class="map-line line-3"></div>
@@ -168,427 +129,280 @@
             <div class="location-pin pin-main">
               <span></span>
             </div>
-
           </div>
-
-
-          <!-- PARKING CARD -->
 
           <div class="parking-card">
-
             <div class="card-header">
-
               <div>
+                <span class="card-label"> AVAILABLE SPACE </span>
 
-                <span class="card-label">
-                  AVAILABLE SPACE
-                </span>
-
-                <h3>
-                  Surrey, BC
-                </h3>
-
+                <h3>Surrey, BC</h3>
               </div>
 
-              <span class="status">
-                Available
-              </span>
-
+              <span class="status"> Available </span>
             </div>
-
 
             <div class="card-info">
-
               <div class="info-item">
-
-                <span>
-                  PARKING TYPE
-                </span>
-
-                <strong>
-                  Private Driveway
-                </strong>
-
+                <span>PARKING TYPE</span>
+                <strong>Private Driveway</strong>
               </div>
 
-
               <div class="info-item">
-
-                <span>
-                  AVAILABILITY
-                </span>
-
-                <strong>
-                  Today
-                </strong>
-
+                <span>AVAILABILITY</span>
+                <strong>Today</strong>
               </div>
-
             </div>
-
 
             <div class="card-footer">
+              <span>Near your destination</span>
 
-              <span>
-                Near your destination
-              </span>
-
-              <a routerLink="/parks">
-                View Space →
-              </a>
-
+              <a routerLink="/parks"> View Space → </a>
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
-
 
     <!-- ================= SEARCH ================= -->
 
     <section class="search-section">
-
       <div class="search-container">
-
-
         <div class="search-heading">
+          <div>
+            <span class="section-label"> FIND PARKING </span>
 
-          <span>
-            FIND PARKING
-          </span>
+            <h2>Where are you going?</h2>
+          </div>
 
-          <h2>
-            Where are you going?
-          </h2>
-
+          <p>Find a nearby space before you arrive.</p>
         </div>
-
 
         <div class="search-box">
-
+          <!-- LOCATION -->
 
           <div class="search-field">
+            <label for="location" class="field-label"> LOCATION </label>
 
-            <span class="field-label">
-              LOCATION
-            </span>
+            <select id="location" [(ngModel)]="searchLocation">
+              <option value="" disabled>Select a location</option>
 
-            <strong>
-              Surrey, Richmond, Langley
-            </strong>
+              <option value="Surrey">Surrey</option>
 
+              <option value="Richmond">Richmond</option>
+
+              <option value="Langley">Langley</option>
+            </select>
           </div>
-
 
           <div class="search-divider"></div>
 
+          <!-- DATE -->
 
           <div class="search-field">
+            <label for="date" class="field-label"> DATE </label>
 
-            <span class="field-label">
-              DATE
-            </span>
-
-            <strong>
-              Select a date
-            </strong>
-
+            <input id="date" type="date" [(ngModel)]="searchDate" />
           </div>
-
 
           <div class="search-divider"></div>
 
+          <!-- PURPOSE -->
 
           <div class="search-field">
+            <label for="purpose" class="field-label"> PURPOSE </label>
 
-            <span class="field-label">
-              PURPOSE
-            </span>
+            <select id="purpose" [(ngModel)]="searchPurpose">
+              <option value="" disabled>Select purpose</option>
 
-            <strong>
-              Event or visit
-            </strong>
+              <option value="Event">Event</option>
 
+              <option value="Visit">Visit</option>
+
+              <option value="Business">Business</option>
+
+              <option value="Other">Other</option>
+            </select>
           </div>
 
+          <!-- SEARCH -->
 
-          <button
-            type="button"
-            class="search-button"
-          >
+          <button type="button" class="search-button" (click)="searchParking()">
             Search
+            <span>→</span>
           </button>
-
         </div>
-
       </div>
-
     </section>
 
+    <!-- ================= WHY NHPARK ================= -->
 
-    <!-- ================= INTRO ================= -->
-
-    <section class="intro-section">
-
-      <div class="intro-container">
-
-
-        <div class="intro-title">
-
-          <span class="section-label">
-            NHPARK
-          </span>
+    <section class="why-section">
+      <div class="why-container">
+        <div class="why-heading">
+          <span class="section-label"> WHY NHPARK </span>
 
           <h2>
-            Making neighbourhood
-            parking more accessible.
+            Parking made for
+            <span>your destination.</span>
           </h2>
-
         </div>
 
-
-        <div class="intro-text">
-
+        <div class="why-content">
           <p>
-            Parking can become difficult when neighbourhoods
-            get busy. NhPark gives drivers another option by
-            connecting them with private parking spaces offered
-            by local residents.
+            Busy neighbourhoods can make finding parking frustrating. NhPark connects drivers with
+            convenient private spaces close to where they're going.
           </p>
 
-          <p>
-            Find a convenient space, reserve it before you
-            arrive, and spend less time searching for parking.
-          </p>
-
+          <a routerLink="/parks" class="text-link">
+            Explore parking
+            <span>→</span>
+          </a>
         </div>
-
       </div>
-
     </section>
 
+    <!-- ================= TWO OPTIONS ================= -->
 
-    <!-- ================= TWO SIDES ================= -->
+    <section class="options-section">
+      <div class="options-container">
+        <div class="option-card driver-card">
+          <div class="option-top">
+            <span class="option-label">FOR DRIVERS</span>
+          </div>
 
-    <section class="solutions">
 
-      <div class="solutions-container">
+          <h3>Find a space before you arrive.</h3>
 
+          <p>Search neighbourhood parking near events, businesses, homes and other destinations.</p>
 
-        <div class="solution-card">
-
-          <span class="solution-number">
-            01
-          </span>
-
-          <span class="solution-label">
-            FOR DRIVERS
-          </span>
-
-          <h3>
-            Find parking
-            before you arrive.
-          </h3>
-
-          <p>
-            Search for available neighbourhood spaces
-            near weddings, birthdays, events, businesses,
-            and other destinations.
-          </p>
-
-          <a routerLink="/parks">
-            Find Parking →
+          <a routerLink="/parks" class="option-link">
+            Find Parking
+            <span>→</span>
           </a>
-
         </div>
 
+        <div class="option-card owner-card">
+          <div class="option-top">
+            <span class="option-label">FOR SPACE OWNERS</span>
+          </div>
 
-        <div class="solution-card">
-
-          <span class="solution-number">
-            02
-          </span>
-
-          <span class="solution-label">
-            FOR SPACE OWNERS
-          </span>
-
-          <h3>
-            Make your
-            parking space useful.
-          </h3>
+          <h3>Turn unused space into useful parking.</h3>
 
           <p>
-            Have an unused driveway or private parking
-            space? Make it available to people who need
-            convenient parking in your area.
+            Offer your driveway or private parking space to people looking for a convenient place to
+            park.
           </p>
 
-          <a routerLink="/location">
-            Offer Your Space →
+          <a routerLink="/location" class="option-link">
+            Offer Your Space
+            <span>→</span>
           </a>
-
         </div>
-
       </div>
-
     </section>
-
 
     <!-- ================= HOW IT WORKS ================= -->
 
     <section class="how-section">
-
       <div class="how-container">
-
         <div class="how-heading">
-
-          <span class="section-label">
-            HOW IT WORKS
-          </span>
+          <span class="section-label"> HOW IT WORKS </span>
 
           <h2>
-            Simple from search
-            to parking.
+            From search to
+            <span>parked.</span>
           </h2>
-
         </div>
-
 
         <div class="steps">
-
-
           <div class="step">
+            <div class="step-number">01</div>
 
-            <span class="step-number">
-              01
-            </span>
+            <div>
+              <h3>Search</h3>
 
-            <h3>
-              Search
-            </h3>
-
-            <p>
-              Enter the area and date where
-              you need parking.
-            </p>
-
+              <p>Enter where and when you need parking.</p>
+            </div>
           </div>
 
-
           <div class="step">
+            <div class="step-number">02</div>
 
-            <span class="step-number">
-              02
-            </span>
+            <div>
+              <h3>Choose</h3>
 
-            <h3>
-              Choose
-            </h3>
-
-            <p>
-              Review available neighbourhood
-              parking spaces.
-            </p>
-
+              <p>Browse available spaces near your destination.</p>
+            </div>
           </div>
 
-
           <div class="step">
+            <div class="step-number">03</div>
 
-            <span class="step-number">
-              03
-            </span>
+            <div>
+              <h3>Reserve</h3>
 
-            <h3>
-              Reserve
-            </h3>
-
-            <p>
-              Select a space and reserve it
-              for your visit.
-            </p>
-
+              <p>Select a space and reserve it ahead of time.</p>
+            </div>
           </div>
 
-
           <div class="step">
+            <div class="step-number">04</div>
 
-            <span class="step-number">
-              04
-            </span>
+            <div>
+              <h3>Park</h3>
 
-            <h3>
-              Park
-            </h3>
-
-            <p>
-              Arrive at your reserved space
-              and enjoy your destination.
-            </p>
-
+              <p>Arrive, park and enjoy where you're going.</p>
+            </div>
           </div>
-
-
         </div>
-
       </div>
-
     </section>
 
-  </main>
+    <!-- ================= FINAL CTA ================= -->
 
+    <section class="final-cta">
+      <div class="final-cta-container">
+        <div>
+          <span class="section-label"> NHPARK </span>
+
+          <h2>
+            Your destination.
+            <span>Your parking.</span>
+          </h2>
+
+          <p>Find a convenient neighbourhood parking space for your next trip.</p>
+        </div>
+
+        <a routerLink="/parks" class="primary-button">
+          Find Parking
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <!-- ================= FOOTER ================= -->
 
   <footer>
-
     <div class="footer-container">
-
       <div class="footer-brand">
+        <strong> NH<span>Park</span> </strong>
 
-        <strong>
-          NH<span>Park</span>
-        </strong>
-
-        <p>
-          Neighbourhood parking, made simple.
-        </p>
-
+        <p>Neighbourhood parking, made simple.</p>
       </div>
-
 
       <div class="footer-links">
+        <a routerLink="/parks"> Find Parking </a>
 
-        <a routerLink="/parks">
-          Find Parking
-        </a>
+        <a routerLink="/features"> How It Works </a>
 
-        <a routerLink="/features">
-          How It Works
-        </a>
+        <a routerLink="/about"> About </a>
 
-        <a routerLink="/about">
-          About
-        </a>
-
-        <a routerLink="/login">
-          Sign In
-        </a>
-
+        <a routerLink="/login"> Sign In </a>
       </div>
-
     </div>
 
-
-    <div class="copyright">
-      © 2026 NhPark. Neighbourhood Parking Platform.
-    </div>
-
+    <div class="copyright">© 2026 NhPark. Neighbourhood Parking Platform.</div>
   </footer>
-
 </div>
