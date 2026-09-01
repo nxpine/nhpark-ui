@@ -1,0 +1,263 @@
+<div class="account-page">
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+    <div class="nav-container">
+
+  <!-- LOGO -->
+  <a routerLink="/home" class="logo">
+    <div class="logo-mark">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <span class="logo-text">
+      NH<span>Park</span>
+    </span>
+  </a>
+
+  <!-- BACK -->
+  <button
+    type="button"
+    class="back-button"
+    (click)="goBack()"
+  >
+    <span>←</span>
+    Back to Home
+  </button>
+
+</div>
+
+  </nav>
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="account-main">
+
+
+<div class="account-container">
+
+  <!-- ================= PAGE HEADER ================= -->
+  <header class="page-header">
+
+    <div class="header-badge">
+      <span class="badge-dot"></span>
+      
+    </div>
+
+    <h1>
+      <span> Account Settings</span>
+    </h1>
+
+    <p>
+      Manage your account information and preferences.
+    </p>
+
+  </header>
+
+
+  <!-- ================= SETTINGS CARD ================= -->
+  <section class="account-card">
+
+    <!-- ================= PROFILE ================= -->
+    <div class="profile-header">
+
+      <div class="profile-avatar">
+        {{ user?.username?.charAt(0)?.toUpperCase() }}
+      </div>
+
+      <div class="profile-info">
+
+        <div class="profile-title-row">
+          <h2>
+            {{ user?.username }}
+          </h2>
+
+          <span class="account-status">
+            <span></span>
+            Active
+          </span>
+        </div>
+
+        <p>
+          {{ user?.email }}
+        </p>
+
+        <span class="profile-subtitle">
+          NhPark Account
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= PERSONAL INFORMATION ================= -->
+    <div class="settings-section">
+
+      <div class="section-heading">
+
+        <div class="heading-icon">
+          
+        </div>
+
+        <div>
+          <h3>Personal Information</h3>
+
+          <p>
+            Your basic account information.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="settings-grid">
+
+        <!-- USERNAME -->
+        <div class="setting-field">
+
+          <label>USERNAME</label>
+
+          <div class="field-box">
+
+            <div class="field-icon">
+              @
+            </div>
+
+            <span>
+              {{ user?.username }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+        <div class="setting-field">
+
+          <label>EMAIL ADDRESS</label>
+
+          <div class="field-box">
+
+            <div class="field-icon">
+              ✉
+            </div>
+
+            <span>
+              {{ user?.email }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= DIVIDER ================= -->
+    <div class="divider"></div>
+
+
+    <!-- ================= ACCOUNT SECURITY ================= -->
+    <div class="settings-section">
+
+      <div class="section-heading">
+
+        <div class="heading-icon">
+          
+        </div>
+
+        <div>
+          <h3>Account Access</h3>
+
+          <p>
+            Manage your current account session.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- LOGOUT ACTION -->
+      <div class="account-action">
+
+        <div class="action-left">
+
+          <div class="action-icon">
+            ↪
+          </div>
+
+          <div class="action-info">
+
+            <strong>
+              Sign out
+            </strong>
+
+            <span>
+              End your current NhPark session on this device.
+            </span>
+
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="logout-button"
+          (click)="logout()"
+        >
+          Sign Out
+          <span>→</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= SECURITY NOTE ================= -->
+  <div class="security-note">
+
+    <div class="security-icon">
+  
+    </div>
+
+    <div>
+      
+    </div>
+
+  </div>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="account-footer">
+
+    <div class="footer-brand">
+      <strong>
+        <span>NHPark</span>
+      </strong>
+
+      <span>
+        Neighbourhood parking made easier.
+      </span>
+    </div>
+
+    <span class="footer-copy">
+      © 2026 NHPark
+    </span>
+
+  </footer>
+
+</div>
+
+  </main>
+
+</div>

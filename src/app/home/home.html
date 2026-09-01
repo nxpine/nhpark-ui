@@ -19,7 +19,7 @@
       <div class="nav-links">
         <a routerLink="/home" class="active">Home</a>
         <a routerLink="/parks">Find Parking</a>
-        <a routerLink="/features">How It Works</a>
+        <a routerLink="/features">Features</a>
         <a routerLink="/about">About</a>
       </div>
 
@@ -32,20 +32,20 @@
             <button
               type="button"
               class="user-profile"
-              (click)="toggleUserMenu()"
-            >
+              (click)="toggleUserMenu()">
+
               <div class="user-avatar">
                 {{ username.charAt(0).toUpperCase() }}
               </div>
 
               <div class="user-info">
-                <span class="user-label">SIGNED IN</span>
                 <strong>{{ username }}</strong>
               </div>
 
               <span class="user-arrow">
                 {{ userMenuOpen ? '⌃' : '⌄' }}
               </span>
+
             </button>
 
             @if (userMenuOpen) {
@@ -53,6 +53,7 @@
               <div class="user-dropdown">
 
                 <div class="dropdown-user">
+
                   <div class="dropdown-avatar">
                     {{ username.charAt(0).toUpperCase() }}
                   </div>
@@ -61,18 +62,25 @@
                     <strong>{{ username }}</strong>
                     <span>NhPark Account</span>
                   </div>
+
                 </div>
 
                 <div class="dropdown-divider"></div>
 
-                <a routerLink="/customer">
+                <a
+                  routerLink="/account-settings"
+                  (click)="userMenuOpen = false">
+
                   <span>Account Settings</span>
                   <span>→</span>
+
                 </a>
 
                 <a routerLink="/customer-details">
+
                   <span>My Profile</span>
                   <span>→</span>
+
                 </a>
 
                 <div class="dropdown-divider"></div>
@@ -80,9 +88,10 @@
                 <button
                   type="button"
                   class="dropdown-logout"
-                  (click)="logout()"
-                >
+                  (click)="logout()">
+
                   Sign Out
+
                 </button>
 
               </div>
@@ -118,18 +127,20 @@
 
         <div class="hero-content">
 
-          <span class="eyebrow">
-            NEIGHBOURHOOD PARKING
-          </span>
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            PARKING MADE LOCAL
+          </div>
 
           <h1>
-            Parking closer
-            <span>to where you're going.</span>
+            Find a parking spot
+            <span>where you need it.</span>
           </h1>
 
           <p class="hero-description">
-            Find convenient private parking spaces near your destination.
-            Reserve ahead and spend less time searching for a place to park.
+            Discover convenient neighbourhood parking spaces,
+            reserve ahead, and spend less time driving around
+            looking for a spot.
           </p>
 
           <div class="hero-actions">
@@ -145,19 +156,19 @@
 
           </div>
 
-          <div class="trust-row">
+          <div class="hero-trust">
 
-            <div class="trust-item">
+            <div>
               <strong>Local</strong>
-              <span>Nearby spaces</span>
+              <span>Neighbourhood spaces</span>
             </div>
 
-            <div class="trust-item">
+            <div>
               <strong>Simple</strong>
               <span>Easy reservations</span>
             </div>
 
-            <div class="trust-item">
+            <div>
               <strong>Flexible</strong>
               <span>Park when you need</span>
             </div>
@@ -167,74 +178,232 @@
         </div>
 
 
-        <!-- HERO MAP -->
-        <div class="hero-visual">
+        <!-- ================= PARKING VISUAL ================= -->
 
-          <div class="map-background">
+        <div class="parking-visual">
 
-            <div class="map-road road-1"></div>
-            <div class="map-road road-2"></div>
+          <div class="map-card">
 
-            <div class="map-line line-1"></div>
-            <div class="map-line line-2"></div>
-            <div class="map-line line-3"></div>
+            <div class="map-top">
 
-            <div class="map-block block-1"></div>
-            <div class="map-block block-2"></div>
-            <div class="map-block block-3"></div>
-            <div class="map-block block-4"></div>
+              <div>
+                <span>FIND PARKING</span>
+                <strong>Nearby spaces</strong>
+              </div>
 
-            <div class="location-pin pin-1">
-              <span></span>
+              <div class="map-status">
+                <span></span>
+                LIVE
+              </div>
+
             </div>
 
-            <div class="location-pin pin-2">
-              <span></span>
+
+            <div class="map">
+
+              <div class="road road-a"></div>
+              <div class="road road-b"></div>
+              <div class="road road-c"></div>
+
+              <div class="street street-a"></div>
+              <div class="street street-b"></div>
+              <div class="street street-c"></div>
+              <div class="street street-d"></div>
+
+              <div class="building building-a"></div>
+              <div class="building building-b"></div>
+              <div class="building building-c"></div>
+              <div class="building building-d"></div>
+
+              <div class="map-pin pin-one">
+                <span></span>
+              </div>
+
+              <div class="map-pin pin-two">
+                <span></span>
+              </div>
+
+              <div class="map-pin pin-three">
+                <span></span>
+              </div>
+
+              <div class="main-pin">
+                <span>P</span>
+              </div>
+
             </div>
 
-            <div class="location-pin pin-main">
-              <span></span>
+
+            <div class="parking-preview">
+
+              <div class="preview-heading">
+
+                <div>
+                  <span>AVAILABLE SPACE</span>
+                  <h3>Surrey, BC</h3>
+                </div>
+
+                <span class="available">
+                  Available
+                </span>
+
+              </div>
+
+              <div class="preview-info">
+
+                <div>
+                  <span>TYPE</span>
+                  <strong>Private Driveway</strong>
+                </div>
+
+                <div>
+                  <span>AVAILABILITY</span>
+                  <strong>Today</strong>
+                </div>
+
+              </div>
+
+              <a routerLink="/parks" class="preview-link">
+                View available parking
+                <span>→</span>
+              </a>
+
             </div>
 
           </div>
 
+        </div>
 
-          <div class="parking-card">
+      </div>
 
-            <div class="card-top">
+    </section>
 
-              <div>
-                <span class="card-label">
-                  AVAILABLE SPACE
-                </span>
 
-                <h3>Surrey, BC</h3>
-              </div>
+    <!-- ================= STATS ================= -->
 
-              <span class="status">
-                Available
-              </span>
+    <section class="stats-section">
 
+      <div class="stats-container">
+
+        <div class="stat">
+          <strong>3+</strong>
+          <span>BC Communities</span>
+        </div>
+
+        <div class="stat">
+          <strong>Local</strong>
+          <span>Neighbourhood parking</span>
+        </div>
+
+        <div class="stat">
+          <strong>24/7</strong>
+          <span>Flexible availability</span>
+        </div>
+
+        <div class="stat">
+          <strong>Easy</strong>
+          <span>Online reservations</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <section class="process-section">
+
+      <div class="section-container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-label">
+              HOW NHPARK WORKS
+            </span>
+
+            <h2>
+              Parking should be
+              <span>this simple.</span>
+            </h2>
+
+          </div>
+
+          <p>
+            From finding a nearby space to arriving at your
+            destination, NhPark keeps parking simple.
+          </p>
+
+        </div>
+
+
+        <div class="process-grid">
+
+          <div class="process-card">
+
+
+            <div class="process-icon">
+              ⌕
             </div>
 
-            <div class="card-details">
+            <h3>Find a space</h3>
 
-              <div>
-                <span>TYPE</span>
-                <strong>Private Driveway</strong>
-              </div>
+            <p>
+              Search for available neighbourhood parking
+              close to where you're going.
+            </p>
 
-              <div>
-                <span>WHEN</span>
-                <strong>Today</strong>
-              </div>
+          </div>
 
+
+          <div class="process-card">
+
+
+            <div class="process-icon">
+              ✓
             </div>
 
-            <a routerLink="/parks" class="card-link">
-              <span>View parking space</span>
-              <span>→</span>
-            </a>
+            <h3>Choose your spot</h3>
+
+            <p>
+              Compare available spaces and choose the
+              option that works best for you.
+            </p>
+
+          </div>
+
+
+          <div class="process-card">
+
+
+            <div class="process-icon">
+              □
+            </div>
+
+            <h3>Reserve</h3>
+
+            <p>
+              Select your date and time, then reserve
+              your parking space.
+            </p>
+
+          </div>
+
+
+          <div class="process-card">
+
+            <div class="process-icon">
+              →
+            </div>
+
+            <h3>Park & go</h3>
+
+            <p>
+              Arrive at your destination, park your vehicle,
+              and get on with your day.
+            </p>
 
           </div>
 
@@ -246,149 +415,78 @@
 
 
     <!-- ================= VEHICLE ================= -->
-<section class="explore-section">
 
-  <div class="section-container">
-
-    <div class="explore-content">
-
-      <span class="section-label">
-        YOUR VEHICLE
-      </span>
-
-      <h2>
-        Add your vehicle
-        <span>before you park.</span>
-      </h2>
-
-      <p>
-        Add your vehicle details to your NhPark account.
-        Save your vehicle once and use it when making parking reservations.
-      </p>
-
-      <a routerLink="/vehicle" class="primary-button">
-        Add Your Vehicle
-        <span>→</span>
-      </a>
-
-    </div>
-
-    <div class="explore-image">
-
-      <img
-        src="https://www.topgear.com/sites/default/files/news-listicle/image/park_lead.jpg?w=848&h=477"
-        alt="Vehicle parking"
-      />
-
-      <div class="image-card">
-
-        <span class="image-card-label">
-          VEHICLE DETAILS
-        </span>
-
-        <strong>
-          Add your vehicle
-        </strong>
-
-        <span>
-          Make • Model • Year • Licence Plate
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-    <!-- ================= HOW IT WORKS ================= -->
-    <section class="process-section">
+    <section class="vehicle-section">
 
       <div class="section-container">
 
-        <div class="process-header">
+        <div class="vehicle-card">
 
-          <div>
+          <div class="vehicle-content">
 
             <span class="section-label">
-              HOW NHPARK WORKS
+              YOUR VEHICLE
             </span>
 
             <h2>
-              Parking in
-              <span>four simple steps.</span>
+              Your vehicle.
+              <span>Ready when you are.</span>
             </h2>
 
-          </div>
-
-          <p>
-            No complicated process. Find a space,
-            reserve it, and get on with your day.
-          </p>
-
-        </div>
-
-
-        <div class="process-grid">
-
-          <div class="process-card">
-
-            <div class="process-icon">
-              <span>⌕</span>
-            </div>
-
-            <h3>Find</h3>
-
             <p>
-              Search for parking near your destination.
+              Save your vehicle information once and use it
+              when making parking reservations. Keep your
+              make, model, year, colour, and licence plate
+              ready for your next booking.
             </p>
 
-          </div>
-
-
-          <div class="process-card">
-
-            <div class="process-icon">
-              <span>✓</span>
-            </div>
-
-            <h3>Select</h3>
-
-            <p>
-              Compare available spaces and choose what works for you.
-            </p>
-
-          </div>
-
-
-          <div class="process-card">
-
-            <div class="process-icon">
-              <span>□</span>
-            </div>
-
-            <h3>Reserve</h3>
-
-            <p>
-              Reserve your parking before you arrive.
-            </p>
-
-          </div>
-
-
-          <div class="process-card">
-
-            <div class="process-icon">
+            <a routerLink="/vehicle" class="primary-button">
+              Add Your Vehicle
               <span>→</span>
+            </a>
+
+          </div>
+
+
+          <div class="vehicle-preview">
+
+            <div class="vehicle-top">
+
+              <span>MY VEHICLE</span>
+
+              <span class="vehicle-check">
+                ✓
+              </span>
+
             </div>
 
-            <h3>Park</h3>
+            <div class="car-illustration">
+              🚗
+            </div>
 
-            <p>
-              Arrive, park, and enjoy where you're going.
-            </p>
+            <div class="vehicle-name">
+              <span>VEHICLE</span>
+              <strong>My Vehicle</strong>
+            </div>
+
+            <div class="vehicle-details">
+
+              <div>
+                <span>MAKE</span>
+                <strong>Toyota</strong>
+              </div>
+
+              <div>
+                <span>MODEL</span>
+                <strong>Corolla</strong>
+              </div>
+
+              <div>
+                <span>PLATE</span>
+                <strong>ABC 123</strong>
+              </div>
+
+            </div>
 
           </div>
 
@@ -399,132 +497,97 @@
     </section>
 
 
-    <!-- ================= ADD VEHICLE ================= -->
-<section class="vehicle-section">
+    <!-- ================= OFFER PARKING ================= -->
 
-  <div class="section-container">
+    <section class="owner-section">
 
-    <div class="vehicle-card">
+      <div class="section-container">
 
-      <div class="vehicle-content">
-
-        <span class="section-label">
-          YOUR VEHICLE
-        </span>
-
-        <h2>
-          Add your vehicle
-          <span>to NhPark.</span>
-        </h2>
-
-        <p>
-          Save your vehicle information so you can use it
-          when making parking bookings. Add your make, model,
-          year, colour, and licence plate in your vehicle table.
-        </p>
-
-        <a
-          routerLink="/vehicle"
-          class="vehicle-button"
-        >
-          Add Your Vehicle
-          <span>→</span>
-        </a>
-
-      </div>
-
-      <div class="vehicle-visual">
-
-        <div class="vehicle-icon">
-         <img
-            src="https://tse4.mm.bing.net/th/id/OIP.cX31X0x1hDVv1jMI63tLdwHaD-?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-            alt="Vehicle icon"
-          />
-        </div>
-
-        <strong>
-          Vehicle information
-        </strong>
-
-        <span>
-          Keep your vehicle details ready for your next booking.
-        </span>
-
-        <div class="vehicle-details">
+        <div class="owner-card">
 
           <div>
-            <small>MAKE</small>
-            <strong>Toyota</strong>
+
+            <span class="section-label">
+              HAVE AN EMPTY SPACE?
+            </span>
+
+            <h2>
+              Turn unused space
+              <span>into useful parking.</span>
+            </h2>
+
+            <p>
+              Have a driveway or private parking space?
+              Offer it to people looking for convenient
+              parking in your neighbourhood.
+            </p>
+
           </div>
 
-          <div>
-            <small>MODEL</small>
-            <strong>Corolla</strong>
-          </div>
-
-          <div>
-            <small>PLATE</small>
-            <strong>ABC 123</strong>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer>
-
-    <div class="footer-container">
-
-      <div class="footer-brand">
-
-        <strong>
-          NH<span>Park</span>
-        </strong>
-
-        <p>
-          Neighbourhood parking, made simple.
-        </p>
-
-      </div>
-
-
-      <div class="footer-links">
-
-        <a routerLink="/parks">
-          Find Parking
-        </a>
-
-        <a routerLink="/features">
-          How It Works
-        </a>
-
-        <a routerLink="/about">
-          About
-        </a>
-
-        @if (!username) {
-          <a routerLink="/login">
-            Sign In
+          <a routerLink="/location" class="owner-button">
+            Offer Your Space
+            <span>→</span>
           </a>
-        }
+
+        </div>
 
       </div>
 
-    </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+      <div class="footer-container">
+
+        <div class="footer-brand">
+
+          <a routerLink="/home" class="footer-logo">
+            NH<span>Park</span>
+          </a>
+
+          <p>
+            Neighbourhood parking,
+            made simple.
+          </p>
+
+        </div>
 
 
-    <div class="copyright">
-      © 2026 NhPark. Neighbourhood Parking Platform.
-    </div>
+        <div class="footer-links">
 
-  </footer>
+          <a routerLink="/parks">
+            Find Parking
+          </a>
 
-  <div></div>
+          <a routerLink="/features">
+            How It Works
+          </a>
 
+          <a routerLink="/about">
+            About
+          </a>
+
+          @if (!username) {
+
+            <a routerLink="/login">
+              Sign In
+            </a>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="copyright">
+        © 2026 NhPark. Neighbourhood Parking Platform.
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>

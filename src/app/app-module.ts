@@ -24,6 +24,7 @@ import { AboutComponent } from './about/about';
 import { FeaturesComponent } from './features/features';
 import { ParksComponent } from './parks/parks';
 import { CreateAccountComponent } from './create-account/create-account';
+import { AccountSettingsComponent } from './account-settings/account-settings';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CreateAccountComponent } from './create-account/create-account';
     CustomerVehicleCreateComponent,
     CreateAccountComponent,
     ParksComponent,
+    
   ],
 
   imports: [

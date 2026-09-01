@@ -21,6 +21,7 @@ import { AboutComponent } from './about/about';
 import { FeaturesComponent } from './features/features';
 import { ParksComponent } from './parks/parks';
 import { CreateAccountComponent } from './create-account/create-account';
+import { AccountSettingsComponent } from './account-settings/account-settings';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'features', component: FeaturesComponent },
   { path: 'parks', component: ParksComponent },
   { path: 'create-account', component: CreateAccountComponent },
+  { path: 'account-settings', component: AccountSettingsComponent },
   { path: '**', redirectTo: '' },
 ];
 
