@@ -36,20 +36,18 @@
 
   <main class="account-main">
 
-
 <div class="account-container">
 
   <!-- ================= PAGE HEADER ================= -->
+
   <header class="page-header">
 
     <div class="header-badge">
       <span class="badge-dot"></span>
-      
+      ACCOUNT
     </div>
 
-    <h1>
-      <span> Account Settings</span>
-    </h1>
+    <h1>Account Settings</h1>
 
     <p>
       Manage your account information and preferences.
@@ -59,9 +57,11 @@
 
 
   <!-- ================= SETTINGS CARD ================= -->
+
   <section class="account-card">
 
     <!-- ================= PROFILE ================= -->
+
     <div class="profile-header">
 
       <div class="profile-avatar">
@@ -71,6 +71,7 @@
       <div class="profile-info">
 
         <div class="profile-title-row">
+
           <h2>
             {{ user?.username }}
           </h2>
@@ -79,6 +80,7 @@
             <span></span>
             Active
           </span>
+
         </div>
 
         <p>
@@ -86,7 +88,7 @@
         </p>
 
         <span class="profile-subtitle">
-          NhPark Account
+          Member since {{ user?.createdAt }}
         </span>
 
       </div>
@@ -95,12 +97,21 @@
 
 
     <!-- ================= PERSONAL INFORMATION ================= -->
+
     <div class="settings-section">
 
       <div class="section-heading">
 
         <div class="heading-icon">
-          
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="12" cy="8" r="3.5"/>
+            <path d="M5 20a7 7 0 0 1 14 0"/>
+          </svg>
         </div>
 
         <div>
@@ -117,6 +128,7 @@
       <div class="settings-grid">
 
         <!-- USERNAME -->
+
         <div class="setting-field">
 
           <label>USERNAME</label>
@@ -137,6 +149,7 @@
 
 
         <!-- EMAIL -->
+
         <div class="setting-field">
 
           <label>EMAIL ADDRESS</label>
@@ -161,16 +174,27 @@
 
 
     <!-- ================= DIVIDER ================= -->
+
     <div class="divider"></div>
 
 
-    <!-- ================= ACCOUNT SECURITY ================= -->
+    <!-- ================= ACCOUNT ACCESS ================= -->
+
     <div class="settings-section">
 
       <div class="section-heading">
 
         <div class="heading-icon">
-          
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="4" y="5" width="16" height="14" rx="2"/>
+            <path d="M8 9h8"/>
+            <path d="M8 13h5"/>
+          </svg>
         </div>
 
         <div>
@@ -185,6 +209,7 @@
 
 
       <!-- LOGOUT ACTION -->
+
       <div class="account-action">
 
         <div class="action-left">
@@ -224,30 +249,39 @@
 
 
   <!-- ================= SECURITY NOTE ================= -->
+
   <div class="security-note">
 
     <div class="security-icon">
-  
+      ✓
     </div>
 
     <div>
-      
+      <strong>Your account is secure</strong>
+
+      <p>
+        Your NhPark account information is protected and only
+        accessible while you are signed in.
+      </p>
     </div>
 
   </div>
 
 
   <!-- ================= FOOTER ================= -->
+
   <footer class="account-footer">
 
     <div class="footer-brand">
+
       <strong>
-        <span>NHPark</span>
+        NH<span>Park</span>
       </strong>
 
       <span>
         Neighbourhood parking made easier.
       </span>
+
     </div>
 
     <span class="footer-copy">

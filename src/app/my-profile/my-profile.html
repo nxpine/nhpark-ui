@@ -1,0 +1,422 @@
+<div class="account-page">
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <!-- LOGO -->
+      <a routerLink="/home" class="logo">
+        <div class="logo-mark">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <span class="logo-text">
+          NH<span>Park</span>
+        </span>
+      </a>
+
+      <!-- BACK -->
+      <button
+        type="button"
+        class="back-button"
+        (click)="goBack()"
+      >
+        <span>←</span>
+        Back to Account Settings
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="account-main">
+
+    <div class="account-container">
+
+      <!-- ================= PAGE HEADER ================= -->
+
+      <header class="page-header">
+
+        <div class="header-badge">
+          <span class="badge-dot"></span>
+          PROFILE
+        </div>
+
+        <h1>My Profile</h1>
+
+        <p>
+          Manage your personal information and profile details.
+        </p>
+
+      </header>
+
+
+      <!-- ================= PROFILE CARD ================= -->
+
+      <section class="account-card">
+
+        <!-- ================= PROFILE HEADER ================= -->
+
+        <div class="profile-header">
+
+          <div class="profile-avatar">
+            {{ initials }}
+          </div>
+
+          <div class="profile-info">
+
+            <div class="profile-title-row">
+
+              <h2>
+                {{ profile.username || 'Your Profile' }}
+              </h2>
+
+              <span class="account-status">
+                <span></span>
+                Active
+              </span>
+
+            </div>
+
+            <p>
+              {{ profile.email || 'No email available' }}
+            </p>
+
+            <span class="profile-subtitle">
+              NhPark Member
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= DIVIDER ================= -->
+
+        <div class="divider"></div>
+
+
+        <!-- ================= PERSONAL INFORMATION ================= -->
+
+        <div class="settings-section">
+
+          <div class="section-heading">
+
+            <div class="heading-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="8" r="3.5"/>
+                <path d="M5 20a7 7 0 0 1 14 0"/>
+              </svg>
+            </div>
+
+            <div>
+              <h3>Personal Information</h3>
+
+              <p>
+                Update the information associated with your profile.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="settings-grid">
+
+            <!-- FIRST NAME -->
+
+            <div class="setting-field">
+
+              <label>FIRST NAME</label>
+
+              <div class="field-box">
+
+                <div class="field-icon">
+                  A
+                </div>
+
+                <input
+                  type="text"
+                  [(ngModel)]="profile.firstName"
+                  [disabled]="!isEditing"
+                  placeholder="First name"
+                />
+
+              </div>
+
+            </div>
+
+
+            <!-- LAST NAME -->
+
+            <div class="setting-field">
+
+              <label>LAST NAME</label>
+
+              <div class="field-box">
+
+                <div class="field-icon">
+                  A
+                </div>
+
+                <input
+                  type="text"
+                  [(ngModel)]="profile.lastName"
+                  [disabled]="!isEditing"
+                  placeholder="Last name"
+                />
+
+              </div>
+
+            </div>
+
+
+            <!-- USERNAME -->
+
+            <div class="setting-field">
+
+              <label>USERNAME</label>
+
+              <div class="field-box">
+
+                <div class="field-icon">
+                  @
+                </div>
+
+                <input
+                  type="text"
+                  [(ngModel)]="profile.username"
+                  [disabled]="!isEditing"
+                  placeholder="Username"
+                />
+
+              </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="setting-field">
+
+              <label>EMAIL ADDRESS</label>
+
+              <div class="field-box">
+
+                <div class="field-icon">
+                  ✉
+                </div>
+
+                <input
+                  type="email"
+                  [(ngModel)]="profile.email"
+                  [disabled]="!isEditing"
+                  placeholder="Email address"
+                />
+
+              </div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="setting-field full-width">
+
+              <label>PHONE NUMBER</label>
+
+              <div class="field-box">
+
+                <div class="field-icon">
+                  ☎
+                </div>
+
+                <input
+                  type="tel"
+                  [(ngModel)]="profile.phone"
+                  [disabled]="!isEditing"
+                  placeholder="Phone number (optional)"
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= EDIT ACTIONS ================= -->
+
+          <div class="profile-actions">
+
+            <button
+              *ngIf="!isEditing"
+              type="button"
+              class="edit-button"
+              (click)="editProfile()"
+            >
+              Edit Profile
+              <span>→</span>
+            </button>
+
+
+            <div
+              *ngIf="isEditing"
+              class="editing-actions"
+            >
+
+              <button
+                type="button"
+                class="cancel-button"
+                (click)="cancelEdit()"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                class="save-button"
+                (click)="saveProfile()"
+              >
+                Save Changes
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================= ACCOUNT INFORMATION ================= -->
+
+        <div class="divider"></div>
+
+        <div class="settings-section">
+
+          <div class="section-heading">
+
+            <div class="heading-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <circle cx="12" cy="12" r="8"/>
+                <path d="M12 8v4"/>
+                <circle cx="12" cy="16" r=".5"/>
+              </svg>
+            </div>
+
+            <div>
+              <h3>Profile Information</h3>
+
+              <p>
+                Information associated with your NhPark account.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="profile-summary">
+
+            <div class="summary-item">
+
+              <span>USERNAME</span>
+
+              <strong>
+                {{ profile.username || 'Not provided' }}
+              </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+              <span>EMAIL</span>
+
+              <strong>
+                {{ profile.email || 'Not provided' }}
+              </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+              <span>PHONE</span>
+
+              <strong>
+                {{ profile.phone || 'Not provided' }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= SECURITY NOTE ================= -->
+
+      <div class="security-note">
+
+        <div class="security-icon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong>Your profile is protected</strong>
+
+          <p>
+            Your personal information is only accessible
+            while you are signed in to your NhPark account.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= FOOTER ================= -->
+
+      <footer class="account-footer">
+
+        <div class="footer-brand">
+
+          <strong>
+            NH<span>Park</span>
+          </strong>
+
+          <span>
+            Neighbourhood parking made easier.
+          </span>
+
+        </div>
+
+        <span class="footer-copy">
+          © 2026 NHPark
+        </span>
+
+      </footer>
+
+    </div>
+
+  </main>
+
+</div>

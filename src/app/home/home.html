@@ -27,90 +27,87 @@
 
         @if (username) {
 
-          <div class="user-menu">
+  <div class="user-menu">
 
-            <button
-              type="button"
-              class="user-profile"
-              (click)="toggleUserMenu()">
+    <button
+      type="button"
+      class="user-profile"
+      (click)="toggleUserMenu()">
 
-              <div class="user-avatar">
-                {{ username.charAt(0).toUpperCase() }}
-              </div>
+      <div class="user-avatar">
+        {{ username.charAt(0).toUpperCase() }}
+      </div>
 
-              <div class="user-info">
-                <strong>{{ username }}</strong>
-              </div>
+      <span class="user-name">
+        {{ username }}
+      </span>
 
-              <span class="user-arrow">
-                {{ userMenuOpen ? '⌃' : '⌄' }}
-              </span>
+      <span class="user-arrow">
+        {{ userMenuOpen ? '⌃' : '⌄' }}
+      </span>
 
-            </button>
+    </button>
 
-            @if (userMenuOpen) {
+    @if (userMenuOpen) {
 
-              <div class="user-dropdown">
+      <div class="user-dropdown">
 
-                <div class="dropdown-user">
+        <div class="dropdown-user">
 
-                  <div class="dropdown-avatar">
-                    {{ username.charAt(0).toUpperCase() }}
-                  </div>
-
-                  <div>
-                    <strong>{{ username }}</strong>
-                    <span>NhPark Account</span>
-                  </div>
-
-                </div>
-
-                <div class="dropdown-divider"></div>
-
-                <a
-                  routerLink="/account-settings"
-                  (click)="userMenuOpen = false">
-
-                  <span>Account Settings</span>
-                  <span>→</span>
-
-                </a>
-
-                <a routerLink="/customer-details">
-
-                  <span>My Profile</span>
-                  <span>→</span>
-
-                </a>
-
-                <div class="dropdown-divider"></div>
-
-                <button
-                  type="button"
-                  class="dropdown-logout"
-                  (click)="logout()">
-
-                  Sign Out
-
-                </button>
-
-              </div>
-
-            }
-
+          <div class="dropdown-avatar">
+            {{ username.charAt(0).toUpperCase() }}
           </div>
 
-        } @else {
+          <div class="dropdown-user-info">
+            <strong>{{ username }}</strong>
+            <span>NhPark Account</span>
+          </div>
 
-          <a routerLink="/login" class="sign-in">
-            Sign In
-          </a>
+        </div>
 
-          <a routerLink="/create-account" class="get-started">
-            Get Started
-          </a>
+        <div class="dropdown-divider"></div>
 
-        }
+        <a
+          routerLink="/my-profile"
+          (click)="userMenuOpen = false">
+          <span>My Profile</span>
+          <span>→</span>
+        </a>
+
+        <a
+          routerLink="/account-settings"
+          (click)="userMenuOpen = false">
+          <span>Account Settings</span>
+          <span>→</span>
+        </a>
+
+        <div class="dropdown-divider"></div>
+
+        <button
+          type="button"
+          class="dropdown-logout"
+          (click)="logout()">
+          <span>Sign Out</span>
+          <span>→</span>
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+} @else {
+
+  <a routerLink="/login" class="sign-in">
+    Sign In
+  </a>
+
+  <a routerLink="/create-account" class="get-started">
+    Get Started
+  </a>
+
+}
 
       </div>
 

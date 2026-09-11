@@ -25,6 +25,7 @@ import { FeaturesComponent } from './features/features';
 import { ParksComponent } from './parks/parks';
 import { CreateAccountComponent } from './create-account/create-account';
 import { AccountSettingsComponent } from './account-settings/account-settings';
+import { MyProfileComponent } from './my-profile/my-profile';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,6 @@ import { AccountSettingsComponent } from './account-settings/account-settings';
     CustomerVehicleCreateComponent,
     CreateAccountComponent,
     ParksComponent,
-    
   ],
 
   imports: [
@@ -55,6 +55,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings';
     CustomerDetailsComponent,
     AboutComponent,
     FeaturesComponent,
+    AccountSettingsComponent,
+    MyProfileComponent,
   ],
   providers: [],
   bootstrap: [App],

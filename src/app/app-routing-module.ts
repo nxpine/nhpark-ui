@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { authGuard } from './auth-guard';
 
 import { CustomerComponent } from './customer/customer';
 import { HomeComponent } from './home/home';
@@ -22,29 +21,68 @@ import { FeaturesComponent } from './features/features';
 import { ParksComponent } from './parks/parks';
 import { CreateAccountComponent } from './create-account/create-account';
 import { AccountSettingsComponent } from './account-settings/account-settings';
+import { MyProfileComponent } from './my-profile/my-profile';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'customer', component: CustomerComponent },
-  { path: 'address', component: AddressComponent },
-  { path: 'customer-address/:id', component: CustomerAddressComponent },
-  { path: 'create-address/:id', component: CustomerAddressCreateComponent },
-  { path: 'customer-booking/:id', component: CustomerBookingComponent },
-  { path: 'customer-vehicle/:id', component: CustomerVehicleComponent },
-  { path: 'location', component: LocationComponent },
-  { path: 'booking', component: BookingComponent},
-  { path: 'vehicle', component: VehicleComponent },
-  { path: 'customer-details/:id', component: CustomerDetailsComponent },
+
+  // =========================
+  // PUBLIC
+  // =========================
+
   { path: 'login', component: LoginComponent },
-  { path: 'customer-address-create/:id', component: CustomerAddressCreateComponent },
-  { path: 'customer-booking-create/:id', component: CustomerBookingCreateComponent },
-  { path: 'customer-vehicle-create/:id', component: CustomerVehicleCreateComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'features', component: FeaturesComponent },
-  { path: 'parks', component: ParksComponent },
+
   { path: 'create-account', component: CreateAccountComponent },
-  { path: 'account-settings', component: AccountSettingsComponent },
-  { path: '**', redirectTo: '' },
+
+
+  // =========================
+  // PROTECTED
+  // =========================
+
+  { path: '', component: HomeComponent, canActivate: [authGuard] },
+
+  { path: 'customer', component: CustomerComponent, canActivate: [authGuard] },
+
+  { path: 'address', component: AddressComponent, canActivate: [authGuard] },
+
+  { path: 'customer-address/:id', component: CustomerAddressComponent, canActivate: [authGuard] },
+
+  { path: 'create-address/:id', component: CustomerAddressCreateComponent, canActivate: [authGuard] },
+
+  { path: 'customer-booking/:id', component: CustomerBookingComponent, canActivate: [authGuard] },
+
+  { path: 'customer-vehicle/:id', component: CustomerVehicleComponent, canActivate: [authGuard] },
+
+  { path: 'location', component: LocationComponent, canActivate: [authGuard] },
+
+  { path: 'booking', component: BookingComponent, canActivate: [authGuard] },
+
+  { path: 'vehicle', component: VehicleComponent, canActivate: [authGuard] },
+
+  { path: 'customer-details/:id', component: CustomerDetailsComponent, canActivate: [authGuard] },
+
+  { path: 'customer-address-create/:id', component: CustomerAddressCreateComponent, canActivate: [authGuard] },
+
+  { path: 'customer-booking-create/:id', component: CustomerBookingCreateComponent, canActivate: [authGuard] },
+
+  { path: 'customer-vehicle-create/:id', component: CustomerVehicleCreateComponent, canActivate: [authGuard] },
+
+  { path: 'about', component: AboutComponent, canActivate: [authGuard] },
+
+  { path: 'features', component: FeaturesComponent, canActivate: [authGuard] },
+
+  { path: 'parks', component: ParksComponent, canActivate: [authGuard] },
+
+  { path: 'account-settings', component: AccountSettingsComponent, canActivate: [authGuard] },
+
+  { path: 'my-profile', component: MyProfileComponent, canActivate: [authGuard] },
+  
+
+  // =========================
+  // UNKNOWN ROUTE
+  // =========================
+
+  { path: '**', redirectTo: '' }
+
 ];
 
 @NgModule({

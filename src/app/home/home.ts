@@ -25,9 +25,9 @@ export class HomeComponent {
   ) {
     const user = this.auth.getUser();
 
-    if (user) {
-      this.username = user.username;
-    }
+if (user) {
+  this.username = user.username;
+}
   }
 
   searchParking(): void {
@@ -58,8 +58,8 @@ toggleUserMenu(): void {
   this.userMenuOpen = !this.userMenuOpen;
 }
   logout(): void {
-    this.auth.logout();
-    this.username = '';
-    this.router.navigate(['/home']);
-  }
+  this.auth.logout();
+  this.username = '';
+  this.router.navigate(['/login']);
+}
 }

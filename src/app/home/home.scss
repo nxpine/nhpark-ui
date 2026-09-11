@@ -514,37 +514,35 @@ main {
 }
 
 .hero h1 {
-  margin: 22px 0 22px;
+  margin: 18px 0 18px;
 
   color: #1f2c25;
 
-  font-size: clamp(48px, 5.2vw, 70px);
+  font-size: clamp(40px, 4vw, 54px);
 
-  line-height: 0.99;
+  line-height: 1.03;
 
-  letter-spacing: -3.5px;
+  letter-spacing: -2.2px;
 
-  font-weight: 800;
+  font-weight: 750;
 }
 
 .hero h1 span {
   display: block;
-
   color: #3b8757;
 }
 
 .hero-description {
-  max-width: 520px;
+  max-width: 480px;
 
-  margin: 0 0 31px;
+  margin: 0 0 30px;
 
   color: #68746d;
 
-  font-size: 15px;
+  font-size: 13px;
 
-  line-height: 1.75;
+  line-height: 1.7;
 }
-
 
 /* =========================================================
    HERO BUTTONS
@@ -1539,87 +1537,185 @@ main {
   font-size: 10px;
 }
 
-
 /* =========================================================
    OFFER YOUR SPACE
 ========================================================= */
 
 .owner-section {
-  padding: 0 0 105px;
-
+  padding: 0 0 75px;
   background: #ffffff;
 }
 
 .owner-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
 
-  gap: 50px;
+  min-height: 360px;
 
-  padding: 52px 58px;
+  overflow: hidden;
 
   border: 1px solid #dfe8e2;
+  border-radius: 19px;
 
-  border-radius: 20px;
+  background: #f4f8f5;
+
+  box-shadow: 0 12px 30px rgba(27, 59, 39, 0.06);
+}
+
+
+/* IMAGE */
+
+.owner-image {
+  position: relative;
+
+  min-height: 320px;
+
+  overflow: hidden;
+
+  background: #dfe9e1;
+}
+
+.owner-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.owner-image:hover img {
+  transform: scale(1.03);
+}
+
+.owner-image::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
 
   background:
     linear-gradient(
-      135deg,
-      #f8faf8,
-      #edf5ef
+      to top,
+      rgba(24, 55, 36, 0.48),
+      transparent 55%
     );
 }
 
-.owner-card h2 {
-  max-width: 670px;
+
+/* IMAGE LABEL */
+
+.owner-image-label {
+  position: absolute;
+
+  left: 20px;
+  bottom: 20px;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 7px 10px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  color: #315f42;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  backdrop-filter: blur(8px);
+}
+
+.owner-dot {
+  width: 6px;
+  height: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #43a463;
+}
+
+
+/* CONTENT */
+
+.owner-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 42px 48px;
+}
+
+.owner-content .section-label {
+  margin-bottom: 10px;
+}
+
+.owner-content h2 {
+  max-width: 500px;
 
   margin: 0;
 
   color: #1f2c25;
 
-  font-size: 38px;
+  font-size: 32px;
 
   line-height: 1.08;
 
-  letter-spacing: -1.6px;
+  letter-spacing: -1.2px;
 }
 
-.owner-card h2 span {
+.owner-content h2 span {
+  display: block;
+
   color: #398457;
 }
 
-.owner-card p {
-  max-width: 620px;
+.owner-content p {
+  max-width: 500px;
 
-  margin: 17px 0 0;
+  margin: 15px 0 23px;
 
   color: #77837b;
 
-  font-size: 13px;
+  font-size: 12px;
 
   line-height: 1.7;
 }
 
 .owner-button {
+  width: fit-content;
+
   flex-shrink: 0;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  gap: 20px;
+  gap: 18px;
 
-  min-height: 44px;
+  min-height: 42px;
 
-  padding: 0 19px;
+  padding: 0 18px;
 
   border-radius: 8px;
 
   background: #214d35;
+
   color: #ffffff;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 
   box-shadow: 0 8px 18px rgba(33, 77, 53, 0.14);
@@ -1633,9 +1729,55 @@ main {
 }
 
 .owner-button span {
-  font-size: 17px;
+  font-size: 16px;
 }
 
+
+/* =========================================================
+   OWNER TABLET / MOBILE
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .owner-card {
+    grid-template-columns: 1fr;
+  }
+
+  .owner-image {
+    min-height: 270px;
+  }
+
+  .owner-content {
+    padding: 38px 42px;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .owner-section {
+    padding-bottom: 55px;
+  }
+
+  .owner-image {
+    min-height: 220px;
+  }
+
+  .owner-content {
+    padding: 30px 25px;
+  }
+
+  .owner-content h2 {
+    font-size: 27px;
+    letter-spacing: -0.8px;
+  }
+
+  .owner-content p {
+    font-size: 11px;
+  }
+
+}
 
 /* =========================================================
    FINAL CTA
