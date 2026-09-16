@@ -1,69 +1,110 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-
-interface Feature {
-  number: string;
-  title: string;
-  description: string;
-}
+import { Router } from '@angular/router';
+import { Auth } from '../services/auth';
 
 @Component({
-  selector: 'app-features',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink
-  ],
-  templateUrl: './features.html',
-  styleUrl: './features.scss'
+selector: 'app-features',
+standalone: false,
+templateUrl: './features.html',
+styleUrl: './features.scss'
 })
 export class FeaturesComponent {
 
-  features: Feature[] = [
+username = 'User';
+userEmail = '';
+userInitials = 'U';
 
-    {
-      number: '01',
-      title: 'Discover Parks',
-      description:
-        'Browse available parks and find locations that fit your plans.'
-    },
+userMenuOpen = false;
 
-    {
-      number: '02',
-      title: 'Easy Reservations',
-      description:
-        'Select a date and create a reservation through a simple process.'
-    },
+currentYear = new Date().getFullYear();
 
-    {
-      number: '03',
-      title: 'Booking Management',
-      description:
-        'Keep track of upcoming reservations and manage your visits.'
-    },
+constructor(
+private auth: Auth,
+private router: Router
+) {
+this.loadUser();
+}
 
-    {
-      number: '04',
-      title: 'Customer Management',
-      description:
-        'Keep customer information organized and easily accessible.'
-    },
+/* ================= USER ================= */
 
-    {
-      number: '05',
-      title: 'Vehicle Management',
-      description:
-        'Store and manage vehicle information associated with customers.'
-    },
+loadUser(): void {
 
-    {
-      number: '06',
-      title: 'Address Management',
-      description:
-        'Maintain customer addresses in one centralized system.'
-    }
+const user = this.auth.getUser();
 
-  ];
+if (user) {
+
+  this.username =
+    user.username ||
+    user.email?.split('@')[0] ||
+    'User';
+
+  this.userEmail = user.email || '';
+
+  this.userInitials =
+    this.getInitials(this.username);
+}
+}
+
+getInitials(name: string): string {
+
+if (!name) {
+  return 'U';
+}
+
+const parts = name
+  .trim()
+  .split(/\s+/);
+
+if (parts.length === 1) {
+  return parts[0]
+    .substring(0, 2)
+    .toUpperCase();
+}
+
+return (
+  parts[0].charAt(0) +
+  parts[parts.length - 1].charAt(0)
+).toUpperCase();
+}
+
+/* ================= ACCOUNT MENU ================= */
+
+toggleUserMenu(): void {
+this.userMenuOpen = !this.userMenuOpen;
+}
+
+closeUserMenu(): void {
+this.userMenuOpen = false;
+}
+
+/* ================= LOGOUT ================= */
+
+logout(): void {
+
+this.userMenuOpen = false;
+
+this.auth.logout();
+
+this.router.navigate(
+  ['/login'],
+  { replaceUrl: true }
+);
+
+
+}
+
+/* ================= OFFER SPACE ================= */
+
+offerSpace(): void {
+
+
+this.userMenuOpen = false;
+
+// Change this route later if you create
+// a dedicated Offer Your Space page.
+this.router.navigate(['/offer-space']);
+
+
+}
 
 }

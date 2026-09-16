@@ -1,123 +1,375 @@
-<div class="page">
+<div class="features-page">
+
+  <!-- ================= NAVBAR ================= -->
 
   <nav class="navbar">
-
     <div class="nav-container">
 
-      <a routerLink="/home" class="logo">
+  <a routerLink="/home" class="logo">
+    <div class="logo-mark">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
-        <div class="logo-mark">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+    <span class="logo-text">
+      NH<span>Park</span>
+    </span>
+  </a>
 
-        <span>
-          NH<span>Park</span>
-        </span>
+  <div class="nav-links">
+    <a routerLink="/home">Home</a>
+    <a routerLink="/find-parking">Find Parking</a>
+    <a routerLink="/features" class="active">Features</a>
+    <a routerLink="/about">About</a>
+  </div>
 
-      </a>
+  <!-- USER ACCOUNT -->
+  <div class="account-area">
 
+    <button
+      class="account-button"
+      type="button"
+      (click)="toggleUserMenu()">
 
-      <div class="nav-links">
-
-        <a routerLink="/home">
-          Home
-        </a>
-
-        <a routerLink="/parks">
-          Parks
-        </a>
-
-        <a routerLink="/features" class="active">
-          Features
-        </a>
-
-        <a routerLink="/about">
-          About
-        </a>
-
+      <div class="avatar">
+        {{ userInitials }}
       </div>
 
+      <span class="account-name">
+        {{ username }}
+      </span>
 
-      <a routerLink="/login" class="book-button">
-        Book a Park
+      <span class="arrow" [class.open]="userMenuOpen">
+        ▾
+      </span>
+
+    </button>
+
+    <div
+      class="account-menu"
+      *ngIf="userMenuOpen">
+
+      <div class="menu-user">
+        <div class="menu-avatar">
+          {{ userInitials }}
+        </div>
+
+        <div>
+          <strong>{{ username }}</strong>
+          <span>{{ userEmail }}</span>
+        </div>
+      </div>
+
+      <div class="menu-divider"></div>
+
+      <a routerLink="/my-profile" (click)="closeUserMenu()">
+        My Profile
       </a>
 
+      <a routerLink="/account-settings" (click)="closeUserMenu()">
+        Account Settings
+      </a>
+
+      <button type="button" (click)="logout()">
+        Sign Out
+      </button>
+
     </div>
+
+  </div>
+
+</div>
 
   </nav>
 
+  <!-- ================= PAGE INTRO ================= -->
 
-  <main>
+  <section class="features-intro">
 
-    <section class="features-header">
+<div class="intro-content">
 
-      <span>
-        NHPARK FEATURES
-      </span>
-      
-      <h1>
-        Everything you need to
-        manage your park visits.
-      </h1>
+  <span class="eyebrow">NHPARK FEATURES</span>
 
-      <p>
-        NhPark brings park discovery,
-        reservations and account management
-        together in one simple platform.
-      </p>
+  <h1>
+    Parking that works
+    <span>around your plans.</span>
+  </h1>
 
-    </section>
+  <p>
+    NhPark connects people looking for convenient parking with
+    available private spaces near local events and destinations.
+  </p>
+
+</div>
 
 
-    <section class="features-section">
+  </section>
 
-      <div class="features-grid">
+  <!-- ================= FEATURES ================= -->
 
-        <div
-          class="feature-card"
-          *ngFor="let feature of features"
-        >
+  <section class="feature-section">
 
-          <div class="feature-number">
-            {{ feature.number }}
-          </div>
+<div class="section-heading">
+  <span class="eyebrow">WHAT YOU CAN DO</span>
 
-          <h2>
-            {{ feature.title }}
-          </h2>
-
-          <p>
-            {{ feature.description }}
-          </p>
-
-          <div class="feature-arrow">
-            →
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
+  <h2>
+    Everything you need to find
+    and manage parking.
+  </h2>
+</div>
 
 
-    
-  </main>
+<div class="feature-grid">
 
+  <!-- FIND PARKING -->
+  <article class="feature-card">
 
-  <footer>
-
-    <div>
-      <strong>
-        NHPark
-      </strong>
+    <div class="feature-icon">
+      <span>⌖</span>
     </div>
 
-    <span>
-      © 2026 NHPark
+    <h3>Find Parking</h3>
+
+    <p>
+      Search for available parking spaces based on where
+      you're going, when you need parking, and the purpose
+      of your visit.
+    </p>
+
+    <a routerLink="/find-parking">
+      Find a space
+      <span>→</span>
+    </a>
+
+  </article>
+
+
+  <!-- EVENT PARKING -->
+  <article class="feature-card">
+
+    <div class="feature-icon">
+      <span>◷</span>
+    </div>
+
+    <h3>Plan Around Events</h3>
+
+    <p>
+      Choose a date and time that matches your plans so
+      you can look for parking close to where your event
+      is taking place.
+    </p>
+
+    <span class="feature-label">
+      Date & time based
     </span>
+
+  </article>
+
+
+  <!-- PRIVATE SPACES -->
+  <article class="feature-card">
+
+    <div class="feature-icon">
+      <span>⌂</span>
+    </div>
+
+    <h3>Private Parking Spaces</h3>
+
+    <p>
+      Discover parking offered by local residents who
+      have an available driveway or parking space.
+    </p>
+
+    <span class="feature-label">
+      Local spaces
+    </span>
+
+  </article>
+
+
+  <!-- ACCOUNT -->
+  <article class="feature-card">
+
+    <div class="feature-icon">
+      <span>◎</span>
+    </div>
+
+    <h3>Your Account</h3>
+
+    <p>
+      Keep your profile information and account details
+      organized in one place while using NhPark.
+    </p>
+
+    <a routerLink="/my-profile">
+      View profile
+      <span>→</span>
+    </a>
+
+  </article>
+
+
+  <!-- BOOKINGS -->
+  <article class="feature-card">
+
+    <div class="feature-icon">
+      <span>✓</span>
+    </div>
+
+    <h3>Manage Bookings</h3>
+
+    <p>
+      Keep track of your parking arrangements and the
+      details connected to your bookings.
+    </p>
+
+    <span class="feature-label">
+      Organized & accessible
+    </span>
+
+  </article>
+
+
+  <!-- OFFER SPACE -->
+  <article class="feature-card">
+
+    <div class="feature-icon">
+      <span>+</span>
+    </div>
+
+    <h3>Offer Your Space</h3>
+
+    <p>
+      Have an available driveway or parking space?
+      Make it available to people looking for parking
+      in your area.
+    </p>
+
+    <button
+      type="button"
+      class="text-button"
+      (click)="offerSpace()">
+      Offer your space
+      <span>→</span>
+    </button>
+
+  </article>
+
+</div>
+
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+
+  <section class="process-section">
+
+<div class="process-intro">
+
+  <span class="eyebrow">HOW IT WORKS</span>
+
+  <h2>
+    Parking made simple.
+  </h2>
+
+  <p>
+    From searching for a space to getting where you need
+    to go, NhPark keeps the process straightforward.
+  </p>
+
+</div>
+
+
+<div class="steps">
+
+  <div class="step">
+    <div class="step-content">
+      <h3>Choose your location</h3>
+
+      <p>
+        Select the area where you need parking.
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="step">
+
+    <div class="step-content">
+      <h3>Set your date and time</h3>
+
+      <p>
+        Tell NhPark when you need the parking space.
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="step">
+
+    <div class="step-content">
+      <h3>Find a suitable space</h3>
+
+      <p>
+        Explore available spaces that fit your plans.
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="step">
+
+    <div class="step-content">
+      <h3>Park and enjoy your plans</h3>
+
+      <p>
+        Use your selected space and get on with your day.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer">
+
+<div class="footer-inner">
+
+  <div class="footer-brand">
+    <span class="logo-text">
+      NH<span>Park</span>
+    </span>
+
+    <p>
+      Making local event parking easier.
+    </p>
+  </div>
+
+  <div class="footer-links">
+
+    <a routerLink="/home">Home</a>
+    <a routerLink="/find-parking">Find Parking</a>
+    <a routerLink="/features">Features</a>
+    <a routerLink="/about">About</a>
+
+  </div>
+
+</div>
+
+<div class="footer-bottom">
+  <span>© {{ currentYear }} NhPark</span>
+  <span>Local parking, made simpler.</span>
+</div>
+
 
   </footer>
 

@@ -44,6 +44,7 @@ import { MyProfileComponent } from './my-profile/my-profile';
     CustomerVehicleCreateComponent,
     CreateAccountComponent,
     ParksComponent,
+    FeaturesComponent,
   ],
 
   imports: [
@@ -54,7 +55,6 @@ import { MyProfileComponent } from './my-profile/my-profile';
     CustomerComponent,
     CustomerDetailsComponent,
     AboutComponent,
-    FeaturesComponent,
     AccountSettingsComponent,
     MyProfileComponent,
   ],
